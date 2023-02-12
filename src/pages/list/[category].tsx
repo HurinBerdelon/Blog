@@ -1,6 +1,7 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ListOfPosts } from "@/components/Posts/ListOfPosts";
+import { mockPosts } from "@/mock/posts";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 
@@ -18,11 +19,7 @@ export default function Category({ category }: CategoryProps): JSX.Element {
                 <Header />
                 <ListOfPosts
                     title={category}
-                    posts={[
-                        { bannerImage: { alt: '#', src: '#' }, title: 'post_1' },
-                        { bannerImage: { alt: '#', src: '#' }, title: 'post_1' },
-                        { bannerImage: { alt: '#', src: '#' }, title: 'post_2' },
-                    ]}
+                    posts={mockPosts}
                     showPagination={true}
                 />
                 <Footer />

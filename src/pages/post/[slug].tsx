@@ -1,6 +1,7 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Post } from "@/components/Posts/Post";
+import { mockPosts } from "@/mock/posts";
 import { PostType } from "@/types/Post";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
@@ -31,6 +32,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         paths: [
             { params: { slug: 'post_1' } },
             { params: { slug: 'post_2' } },
+            { params: { slug: 'post_3' } },
         ],
         fallback: false
     }
@@ -39,13 +41,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
 
     const slug = context.params?.slug as string
-    const post: PostType = {
-        bannerImage: {
-            alt: '#',
-            src: '#'
-        },
-        title: slug
-    }
+    const post = mockPosts.find(post => post.slug === slug)
 
     return {
         props: {

@@ -18,7 +18,7 @@ export function ListOfPosts({ posts, title, showPagination = false }: ListOfPost
                     <PostCard post={post} key={post.title} />
                 ))}
             </ul>
-            {showPagination ? <Pagination /> : null}
+            {/* {showPagination ? <Pagination /> : null} */}
 
         </section>
     )
