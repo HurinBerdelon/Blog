@@ -1,0 +1,22 @@
+{
+  "_cts": {
+    "blog_post": {}
+  },
+  "slices": {
+    "TextAndImage": {
+      "default": {
+        "primary": {}
+      }
+    },
+    "TextOnly": {
+      "default": {
+        "primary": {}
+      }
+    },
+    "ImageOnly": {
+      "default": {
+        "primary": {}
+      }
+    }
+  }
+}
