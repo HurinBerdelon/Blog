@@ -7,7 +7,68 @@ type Simplify<T> = {
     [KeyType in keyof T]: T[KeyType];
 };
 /** Content for BlogPost documents */
-type BlogPostDocumentData = Record<string, never>;
+interface BlogPostDocumentData {
+    /**
+     * Title of the Post field in *BlogPost*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: blog_post.title_of_the_post
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    title_of_the_post: prismicT.KeyTextField;
+    /**
+     * Banner field in *BlogPost*
+     *
+     * - **Field Type**: Image
+     * - **Placeholder**: *None*
+     * - **API ID Path**: blog_post.banner
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/image
+     *
+     */
+    banner: prismicT.ImageField<never>;
+    /**
+     * subjects field in *BlogPost*
+     *
+     * - **Field Type**: Rich Text
+     * - **Placeholder**: Use each subject in a line
+     * - **API ID Path**: blog_post.subjects
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    subjects: prismicT.RichTextField;
+    /**
+     * Author field in *BlogPost*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: blog_post.author
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    author: prismicT.KeyTextField;
+    /**
+     * Slice Zone field in *BlogPost*
+     *
+     * - **Field Type**: Slice Zone
+     * - **Placeholder**: *None*
+     * - **API ID Path**: blog_post.slices[]
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/slices
+     *
+     */
+    slices: prismicT.SliceZone<BlogPostDocumentDataSlicesSlice>;
+}
+/**
+ * Slice for *BlogPost → Slice Zone*
+ *
+ */
+type BlogPostDocumentDataSlicesSlice = ImageOnlySlice | TextAndImageSlice | TextOnlySlice;
 /**
  * BlogPost document from Prismic
  *
@@ -17,7 +78,7 @@ type BlogPostDocumentData = Record<string, never>;
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type BlogPostDocument<Lang extends string = string> = prismicT.PrismicDocumentWithoutUID<Simplify<BlogPostDocumentData>, "blog_post", Lang>;
+export type BlogPostDocument<Lang extends string = string> = prismicT.PrismicDocumentWithUID<Simplify<BlogPostDocumentData>, "blog_post", Lang>;
 export type AllDocumentTypes = BlogPostDocument;
 /**
  * Primary content in ImageOnly → Primary
@@ -171,6 +232,6 @@ declare module "@prismicio/client" {
         (repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
     }
     namespace Content {
-        export type { BlogPostDocumentData, BlogPostDocument, AllDocumentTypes, ImageOnlySliceDefaultPrimary, ImageOnlySliceDefault, ImageOnlySliceVariation, ImageOnlySlice, TextAndImageSliceDefaultPrimary, TextAndImageSliceDefault, TextAndImageSliceVariation, TextAndImageSlice, TextOnlySliceDefaultPrimary, TextOnlySliceDefault, TextOnlySliceVariation, TextOnlySlice };
+        export type { BlogPostDocumentData, BlogPostDocumentDataSlicesSlice, BlogPostDocument, AllDocumentTypes, ImageOnlySliceDefaultPrimary, ImageOnlySliceDefault, ImageOnlySliceVariation, ImageOnlySlice, TextAndImageSliceDefaultPrimary, TextAndImageSliceDefault, TextAndImageSliceVariation, TextAndImageSlice, TextOnlySliceDefaultPrimary, TextOnlySliceDefault, TextOnlySliceVariation, TextOnlySlice };
     }
 }

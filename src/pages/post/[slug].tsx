@@ -17,11 +17,11 @@ export default function PostPage({ post }: PostPageProps): JSX.Element {
             <Head>
                 <title>Create Next App</title>
             </Head>
+            <Header />
             <main>
-                <Header />
                 <Post post={post} />
-                <Footer />
             </main>
+            <Footer />
         </>
     )
 }

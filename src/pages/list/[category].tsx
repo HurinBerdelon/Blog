@@ -15,15 +15,15 @@ export default function Category({ category }: CategoryProps): JSX.Element {
             <Head>
                 <title>{category} | Hurin Blog</title>
             </Head>
+            <Header />
             <main>
-                <Header />
                 <ListOfPosts
                     title={category}
                     posts={mockPosts}
                     showPagination={true}
                 />
-                <Footer />
             </main>
+            <Footer />
         </>
     )
 }

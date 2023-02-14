@@ -11,11 +11,11 @@ export function IdiomSwitcher(): JSX.Element {
 
     return (
         <Popover>
-            <Popover.Button>
+            <Popover.Button className="text-3xl">
                 <Globe />
             </Popover.Button>
-            <Popover.Panel>
-                <ul className="availableIdioms">
+            <Popover.Panel className="absolute right-2 rounded bg-greenBrand py-4 px-2">
+                <ul className="flex flex-col text-white font-medium gap-1">
                     {/* {i18n.locales.map(locale => (
                         <li key={locale}>
                             <Link href={router.asPath} locale={locale}>
