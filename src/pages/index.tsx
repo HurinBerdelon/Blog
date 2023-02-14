@@ -3,6 +3,8 @@ import { Banner } from '@/components/Banner'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { ListOfPosts } from '@/components/Posts/ListOfPosts'
+import { axiosAPI } from '@/services/axios'
+import { Category } from '@/types/Category'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { createClient } from 'prismicio'
@@ -10,15 +12,16 @@ import { createClient } from 'prismicio'
 
 interface HomeProps {
 	lastFourPosts: AllDocumentTypes[]
+	sortedCategories: Category[]
 }
 
-export default function Home({ lastFourPosts }: HomeProps) {
+export default function Home({ lastFourPosts, sortedCategories }: HomeProps) {
 	return (
 		<>
 			<Head>
 				<title>Hurin Blog</title>
 			</Head>
-			<Header />
+			<Header sortedCategories={sortedCategories} />
 			<main className="flex-1">
 				<Banner image={{ alt: 'homeBanner', src: '' }} text="Hurin Blog" />
 				<ListOfPosts
@@ -28,10 +31,10 @@ export default function Home({ lastFourPosts }: HomeProps) {
 				<ListOfPosts
 					title='Recent Posts'
 					posts={lastFourPosts}
-					showPagination={true}
+					seeAllPosts={true}
 				/>
 			</main>
-			<Footer />
+			<Footer sortedCategories={sortedCategories} />
 		</>
 	)
 }
@@ -41,9 +44,12 @@ export const getStaticProps: GetStaticProps = async () => {
 
 	const lastFourPosts = await client.getAllByType('blog_post', { limit: 4 })
 
+	const { data: sortedCategories } = await axiosAPI.get('/api/categories')
+
 	return {
 		props: {
-			lastFourPosts
+			lastFourPosts,
+			sortedCategories
 		}
 	}
 }

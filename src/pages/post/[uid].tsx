@@ -2,26 +2,29 @@ import { AllDocumentTypes } from ".slicemachine/prismicio";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Post } from "@/components/Posts/Post";
+import { axiosAPI } from "@/services/axios";
+import { Category } from "@/types/Category";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { createClient } from "prismicio";
 
 interface PostPageProps {
     post: AllDocumentTypes
+    sortedCategories: Category[]
 }
 
-export default function PostPage({ post }: PostPageProps): JSX.Element {
+export default function PostPage({ post, sortedCategories }: PostPageProps): JSX.Element {
 
     return (
         <>
             <Head>
                 <title>{`${post.data.title_of_the_post} | HurinBlog`}</title>
             </Head>
-            <Header />
+            <Header sortedCategories={sortedCategories} />
             <main className="flex-1">
                 <Post post={post} />
             </main>
-            <Footer />
+            <Footer sortedCategories={sortedCategories} />
         </>
     )
 }
@@ -41,9 +44,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     const post = await client.getByUID('blog_post', uid)
 
+    const { data: sortedCategories } = await axiosAPI.get('/api/categories')
+
     return {
         props: {
-            post
+            post,
+            sortedCategories
         }
     }
 }
