@@ -1,24 +1,31 @@
-import { PostType } from "@/types/Post"
+import { AllDocumentTypes } from ".slicemachine/prismicio"
 import Link from "next/link"
+import { useState } from "react"
 
 interface PostCardProps {
-    post: PostType
+    post: AllDocumentTypes
 }
 
 export function PostCard({ post }: PostCardProps): JSX.Element {
 
+    const [textPreview] = useState(() => {
+        const textPreview = post.data.slices[0]?.primary.text_content[0]?.text as string
+        if (textPreview?.length > 150) return `${textPreview.slice(0, 150)}...`
+        return textPreview
+    })
+
     return (
         <li className="border-[1px] border-black w-[80vw] self-center rounded">
-            <Link href={`post/${post.title}`} className="flex flex-col gap-2">
-                <h3 className="self-center text-xl font-semibold py-2">{post.title}</h3>
+            <Link href={`/post/${post.uid}`} className="flex flex-col gap-2">
+                <h3 className="self-center text-xl font-semibold py-2">{post.data.title_of_the_post}</h3>
                 <div className="w-full">
-                    <img src={post.bannerImage.src} alt={post.bannerImage.alt} className="cover" />
+                    <img src={post.data.banner.url as string} alt={post.data.banner.alt as string} className="cover" />
                 </div>
                 <div className="py-2 px-3 text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam commodi, sequi consequatur neque dolorem molestiae quam harum! Non sed maxime, possimus facilis eligendi velit delectus excepturi magnam enim dolorum quis.
+                    {textPreview}
                 </div>
                 <div className="pb-2 px-3">
-                    author surname
+                    {post.data.author}
                 </div>
             </Link>
         </li>

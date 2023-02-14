@@ -4,7 +4,7 @@ import { LinkedinLogo, EnvelopeSimple } from "phosphor-react";
 export function Footer(): JSX.Element {
 
     return (
-        <footer className="flex justify-between p-2 bg-greenBrand">
+        <footer className="flex justify-between p-2 bg-greenBrand justify-self-end">
             <div className="w-10">
                 <img src="/images/logo.svg" alt="blog logo" className="cover" />
             </div>

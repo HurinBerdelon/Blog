@@ -68,7 +68,7 @@ interface BlogPostDocumentData {
  * Slice for *BlogPost → Slice Zone*
  *
  */
-type BlogPostDocumentDataSlicesSlice = ImageOnlySlice | TextAndImageSlice | TextOnlySlice;
+type BlogPostDocumentDataSlicesSlice = TextAndImageSlice | TextOnlySlice;
 /**
  * BlogPost document from Prismic
  *

@@ -1,13 +1,13 @@
+import { AllDocumentTypes } from ".slicemachine/prismicio";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Post } from "@/components/Posts/Post";
-import { mockPosts } from "@/mock/posts";
-import { PostType } from "@/types/Post";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
+import { createClient } from "prismicio";
 
 interface PostPageProps {
-    post: PostType
+    post: AllDocumentTypes
 }
 
 export default function PostPage({ post }: PostPageProps): JSX.Element {
@@ -15,10 +15,10 @@ export default function PostPage({ post }: PostPageProps): JSX.Element {
     return (
         <>
             <Head>
-                <title>Create Next App</title>
+                <title>{`${post.data.title_of_the_post} | HurinBlog`}</title>
             </Head>
             <Header />
-            <main>
+            <main className="flex-1">
                 <Post post={post} />
             </main>
             <Footer />
@@ -29,19 +29,17 @@ export default function PostPage({ post }: PostPageProps): JSX.Element {
 export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
-        paths: [
-            { params: { slug: 'post_1' } },
-            { params: { slug: 'post_2' } },
-            { params: { slug: 'post_3' } },
-        ],
-        fallback: false
+        paths: [],
+        fallback: "blocking"
     }
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
 
-    const slug = context.params?.slug as string
-    const post = mockPosts.find(post => post.slug === slug)
+    const client = createClient()
+    const uid = context.params?.uid as string
+
+    const post = await client.getByUID('blog_post', uid)
 
     return {
         props: {
