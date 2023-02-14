@@ -12,9 +12,9 @@ export default function Home() {
 			<Head>
 				<title>Hurin Blog</title>
 			</Head>
+			<Header />
 			<main>
-				<Header />
-				<Banner image={{ alt: 'homeBanner', src: '#' }} text="Hurin Blog" />
+				<Banner image={{ alt: 'homeBanner', src: '' }} text="Hurin Blog" />
 				<ListOfPosts
 					title='popular posts'
 					posts={mockPosts.slice(2)}
@@ -24,8 +24,8 @@ export default function Home() {
 					posts={mockPosts}
 					showPagination={true}
 				/>
-				<Footer />
 			</main>
+			<Footer />
 		</>
 	)
 }
