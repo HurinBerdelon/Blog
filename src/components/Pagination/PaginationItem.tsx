@@ -8,15 +8,14 @@ export function PaginationItem({ number, onPageChange, isCurrent = false }: Pagi
 
     if (isCurrent) {
         return (
-            <button className="currentPage" disabled={true}>
+            <button className="bg-greenBrand text-white font-medium py-1 px-2 rounded" disabled={true}>
                 {number}
             </button>
         )
     }
 
-
     return (
-        <button className="pages" onClick={() => onPageChange(number)}>
+        <button className=" py-1 px-2 rounded" onClick={() => onPageChange(number)}>
             {number}
         </button>
     )

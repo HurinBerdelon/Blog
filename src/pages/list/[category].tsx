@@ -2,19 +2,21 @@ import { AllDocumentTypes } from ".slicemachine/prismicio";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ListOfPosts } from "@/components/Posts/ListOfPosts";
+import { pageSize } from "@/config/pageSize";
 import { axiosAPI } from "@/services/axios";
 import { Category } from "@/types/Category";
+import { Query } from "@prismicio/types";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { createClient } from "prismicio";
 
 interface CategoryProps {
-    posts: AllDocumentTypes[]
+    postsResponse: Query<AllDocumentTypes>
     category: string
     sortedCategories: Category[]
 }
 
-export default function Category({ posts, category, sortedCategories }: CategoryProps): JSX.Element {
+export default function CategoryPage({ postsResponse, category, sortedCategories }: CategoryProps): JSX.Element {
     return (
         <>
             <Head>
@@ -24,7 +26,7 @@ export default function Category({ posts, category, sortedCategories }: Category
             <main className="flex-1">
                 <ListOfPosts
                     title={category}
-                    posts={posts}
+                    posts={postsResponse}
                     showPagination={true}
                 />
             </main>
@@ -38,25 +40,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const category = context.params?.category as string
 
-    let posts: AllDocumentTypes[]
     const { data: sortedCategories } = await axiosAPI.get('/api/categories')
 
-    try {
-        const response = await client.getByTag(category, {
-            page: context.query.page ? Number(context.query.page) : 1,
-            pageSize: 1,
-        })
-        posts = response.results
-    } catch {
-        posts = []
-    }
+    const postsResponse = await client.getByTag(category, {
+        page: context.query.page ? Number(context.query.page) : 1,
+        pageSize: pageSize
+    })
 
     return {
         props: {
-            posts,
+            postsResponse,
             category,
             sortedCategories
         }
     }
-
 }

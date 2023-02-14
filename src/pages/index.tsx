@@ -5,13 +5,14 @@ import { Header } from '@/components/Header'
 import { ListOfPosts } from '@/components/Posts/ListOfPosts'
 import { axiosAPI } from '@/services/axios'
 import { Category } from '@/types/Category'
+import { Query } from '@prismicio/types'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { createClient } from 'prismicio'
 
 
 interface HomeProps {
-	lastFourPosts: AllDocumentTypes[]
+	lastFourPosts: Query<AllDocumentTypes>
 	sortedCategories: Category[]
 }
 
@@ -42,7 +43,7 @@ export default function Home({ lastFourPosts, sortedCategories }: HomeProps) {
 export const getStaticProps: GetStaticProps = async () => {
 	const client = createClient()
 
-	const lastFourPosts = await client.getAllByType('blog_post', { limit: 4 })
+	const lastFourPosts = await client.getByType('blog_post', { pageSize: 4 })
 
 	const { data: sortedCategories } = await axiosAPI.get('/api/categories')
 

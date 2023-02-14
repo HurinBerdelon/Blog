@@ -10,7 +10,7 @@ interface HeaderProps {
 export function Header({ sortedCategories }: HeaderProps): JSX.Element {
 
     return (
-        <header className="flex justify-between p-2">
+        <header className="flex justify-between p-2 shadow-lg">
             <Link href='/' className="w-10">
                 <img src="/images/logo.svg" alt="blog logo" className="cover" />
                 <span className="sr-only">Link to Home Page</span>

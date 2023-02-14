@@ -1,3 +1,4 @@
+import { pageSize } from "@/config/pageSize";
 import { useState } from "react";
 import { PaginationItem } from "./PaginationItem";
 // import { PaginationItem } from "../PaginationItem";
@@ -9,7 +10,7 @@ interface PaginationProps {
     onPageChange: (page: number) => void
 }
 
-const siblingsCount = 3
+const siblingsCount = 2
 
 function generatePagesArray(from: number, to: number) {
     return [...new Array(to - from)].map((_, index) => {
@@ -21,7 +22,7 @@ export function Pagination({
     totalCountOfRegisters,
     onPageChange,
     currentPage = 1,
-    registerPerPage = 20,
+    registerPerPage = pageSize,
 }: PaginationProps): JSX.Element {
 
     const [showing, _] = useState({
@@ -42,11 +43,11 @@ export function Pagination({
 
     return (
         <>
-            <div className="amountOfTotal">
+            <div className="italic">
                 Showing <strong>{showing.from}</strong> - <strong> {showing.to} </strong> of <strong> {showing.total} </strong>
             </div>
 
-            <div className="buttonsContainer">
+            <div className="flex gap-2">
                 {currentPage > (1 + siblingsCount)
                     && <>
                         <PaginationItem number={1} onPageChange={onPageChange} />
