@@ -10,22 +10,22 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { createClient } from "prismicio";
 
-interface CategoryProps {
+interface AllPostsProps {
     postsResponse: Query<AllDocumentTypes>
-    category: string
     sortedCategories: Category[]
 }
 
-export default function CategoryPage({ postsResponse, category, sortedCategories }: CategoryProps): JSX.Element {
+export default function AllPosts({ postsResponse, sortedCategories }: AllPostsProps): JSX.Element {
+
     return (
         <>
             <Head>
-                <title>{`${category} | Hurin Blog`}</title>
+                <title>{`All Posts | Hurin Blog`}</title>
             </Head>
             <Header sortedCategories={sortedCategories} />
             <main className="flex-1">
                 <ListOfPosts
-                    title={category}
+                    title="All Posts"
                     posts={postsResponse}
                     showPagination={true}
                 />
@@ -38,20 +38,19 @@ export default function CategoryPage({ postsResponse, category, sortedCategories
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const client = createClient()
 
-    const category = context.params?.category as string
-
     const { data: sortedCategories } = await axiosAPI.get('/api/categories')
 
-    const postsResponse = await client.getByTag(category, {
-        page: context.query.page ? Number(context.query.page) : 1,
-        pageSize: pageSize
-    })
+    const postsResponse = await client.getByType("blog_post",
+        {
+            page: context.query.page ? Number(context.query.page) : 1,
+            pageSize: pageSize,
+        })
 
     return {
         props: {
             postsResponse,
-            category,
             sortedCategories
         }
     }
+
 }

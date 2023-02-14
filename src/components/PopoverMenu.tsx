@@ -1,8 +1,13 @@
+import { Category } from "@/types/Category";
 import { Popover } from "@headlessui/react";
 import Link from "next/link";
 import { List } from "phosphor-react";
 
-export function PopoverMenu(): JSX.Element {
+interface PopoverMenuProps {
+    sortedCategories: Category[]
+}
+
+export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element {
 
     return (
         <menu>
@@ -11,7 +16,7 @@ export function PopoverMenu(): JSX.Element {
                     <List />
                     <span className="sr-only">Button to Open Menu</span>
                 </Popover.Button>
-                <Popover.Panel className="absolute right-2 rounded bg-greenBrand p-4 min-w-[80px]">
+                <Popover.Panel className="absolute right-2 rounded bg-greenBrand p-4 min-w-[120px]">
                     {/* <div>
                         <div>
                         <img src="#" alt="profile" />
@@ -19,8 +24,10 @@ export function PopoverMenu(): JSX.Element {
                     </div> */}
                     <nav className="flex flex-col gap-1 text-white font-medium">
                         <Link href='/'>Home</Link>
-                        <Link href='/list/react'>React</Link>
-                        <Link href='/list/next'>Next</Link>
+                        <div className="text-sm italic border-b-[1px]">Categories</div>
+                        {sortedCategories.map(category => (
+                            <Link key={category.tag} className="capitalize" href={`/list/${category.tag}`}>{category.tag}</Link>
+                        ))}
                     </nav>
                 </Popover.Panel>
             </Popover>
