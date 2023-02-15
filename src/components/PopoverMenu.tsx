@@ -13,16 +13,16 @@ export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element
         <menu>
             <Popover className="relative">
                 <Popover.Button className="text-3xl">
-                    <List />
+                    <List className="text-backgroundDark hover:text-greenBrandDark" />
                     <span className="sr-only">Button to Open Menu</span>
                 </Popover.Button>
-                <Popover.Panel className="absolute right-0 rounded bg-greenBrand p-4 min-w-[120px] md:text-lg">
+                <Popover.Panel className="absolute right-0 rounded bg-greenBrand p-4 min-w-[120px] md:text-lg text-textLight">
                     {/* <div>
                         <div>
                         <img src="#" alt="profile" />
                         </div>
                     </div> */}
-                    <nav className="flex flex-col gap-1 text-white font-medium">
+                    <nav className="flex flex-col gap-1 font-medium">
                         <Link href='/'>Home</Link>
                         <div className="text-sm italic mt-2 border-b-[1px]">Categories</div>
                         {sortedCategories.map(category => (

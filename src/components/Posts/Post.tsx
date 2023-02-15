@@ -11,7 +11,7 @@ interface PostProps {
 export function Post({ post }: PostProps): JSX.Element {
 
     return (
-        <article className="flex flex-col mx-auto w-full md:w-[720px] xl:w-[1120px]">
+        <article className="flex flex-col mx-auto w-full md:w-[720px] xl:w-[1120px] text-greenBrandDark">
             <div className="bg-zinc-200">
                 {post.data.banner.url
                     ? (
@@ -23,7 +23,7 @@ export function Post({ post }: PostProps): JSX.Element {
                         <div className="w-full h-60 lg:h-96 bg-gradient-to-br from-greenBrand to-zinc-200" />
                     )}
             </div>
-            <h1 className="mt-6 self-center text-2xl font-medium">{post.data.title_of_the_post}</h1>
+            <h1 className="my-6 self-center text-2xl font-medium">{post.data.title_of_the_post}</h1>
             <div className="flex flex-col">
                 <SliceZone slices={post.data.slices} components={components} />
             </div>

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import {
     FacebookShareButton,
     FacebookIcon,
@@ -21,36 +22,46 @@ export function Share({ postLink }: ShareProps): JSX.Element {
         <section>
             <span className='font-semibold text-sm mb-2 block'>Share this Post</span>
             <ul className='flex gap-2'>
-                <li>
+                <motion.li
+                    whileHover={{ scale: 1.1 }}
+                >
                     <FacebookShareButton url={postLink}>
                         <FacebookIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>Share on Facebook</span>
                     </FacebookShareButton>
-                </li>
-                <li>
+                </motion.li>
+                <motion.li
+                    whileHover={{ scale: 1.1 }}
+                >
                     <TwitterShareButton url={postLink}>
                         <TwitterIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>Share on Twitter</span>
                     </TwitterShareButton>
-                </li>
-                <li>
+                </motion.li>
+                <motion.li
+                    whileHover={{ scale: 1.1 }}
+                >
                     <EmailShareButton url={postLink}>
                         <EmailIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>Share on Email</span>
                     </EmailShareButton>
-                </li>
-                <li>
+                </motion.li>
+                <motion.li
+                    whileHover={{ scale: 1.1 }}
+                >
                     <LinkedinShareButton url={postLink}>
                         <LinkedinIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>Share on LinkedIn</span>
                     </LinkedinShareButton>
-                </li>
-                <li>
+                </motion.li>
+                <motion.li
+                    whileHover={{ scale: 1.1 }}
+                >
                     <WhatsappShareButton url={postLink}>
                         <WhatsappIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>Share on WhatsApp</span>
                     </WhatsappShareButton>
-                </li>
+                </motion.li>
             </ul>
         </section>
     )

@@ -43,11 +43,11 @@ export function Pagination({
 
     return (
         <>
-            <div className="italic">
+            <div className="italic text-backgroundDark">
                 Showing <strong>{showing.from}</strong> - <strong> {showing.to} </strong> of <strong> {showing.total} </strong>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex gap-2 mt-2">
                 {currentPage > (1 + siblingsCount)
                     && <>
                         <PaginationItem number={1} onPageChange={onPageChange} />

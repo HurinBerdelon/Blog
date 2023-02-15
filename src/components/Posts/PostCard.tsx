@@ -1,4 +1,5 @@
 import { AllDocumentTypes } from ".slicemachine/prismicio"
+import { motion } from "framer-motion"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -15,7 +16,12 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
     })
 
     return (
-        <li className="border-[1px] border-black w-[80vw] self-center rounded max-w-xs">
+        <motion.li
+            className="border-[1px] border-backgroundDark w-[80vw] self-center rounded max-w-xs hover:border-greenBrandDark hover:text-greenBrandDark"
+            whileHover={{
+                scale: 1.025
+            }}
+        >
             <Link href={`/post/${post.uid}`} className="flex flex-col gap-2">
                 <h3 className="self-center text-xl font-semibold py-2">{post.data.title_of_the_post}</h3>
                 <div className="w-full">
@@ -28,6 +34,6 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
                     {post.data.author}
                 </div>
             </Link>
-        </li>
+        </motion.li>
     )
 }

@@ -19,7 +19,7 @@ export function Banner({ image, text, link = '' }: BannerProps): JSX.Element {
                 )
                 : (
                     <div className="w-full h-60 lg:h-96 bg-gradient-to-br from-greenBrand to-zinc-200 flex justify-center items-center">
-                        <h1 className="font-bold text-3xl text-white">{text}</h1>
+                        <h1 className="font-bold text-3xl text-textLight">{text}</h1>
                     </div>
                 )}
         </section>
