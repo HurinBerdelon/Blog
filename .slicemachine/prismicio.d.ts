@@ -81,45 +81,6 @@ type BlogPostDocumentDataSlicesSlice = TextAndImageSlice | TextOnlySlice;
 export type BlogPostDocument<Lang extends string = string> = prismicT.PrismicDocumentWithUID<Simplify<BlogPostDocumentData>, "blog_post", Lang>;
 export type AllDocumentTypes = BlogPostDocument;
 /**
- * Primary content in ImageOnly → Primary
- *
- */
-interface ImageOnlySliceDefaultPrimary {
-    /**
-     * Image field in *ImageOnly → Primary*
-     *
-     * - **Field Type**: Image
-     * - **Placeholder**: *None*
-     * - **API ID Path**: image_only.primary.image
-     * - **Documentation**: https://prismic.io/docs/core-concepts/image
-     *
-     */
-    image: prismicT.ImageField<never>;
-}
-/**
- * Default variation for ImageOnly Slice
- *
- * - **API ID**: `default`
- * - **Description**: `ImageOnly`
- * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
- *
- */
-export type ImageOnlySliceDefault = prismicT.SharedSliceVariation<"default", Simplify<ImageOnlySliceDefaultPrimary>, never>;
-/**
- * Slice variation for *ImageOnly*
- *
- */
-type ImageOnlySliceVariation = ImageOnlySliceDefault;
-/**
- * ImageOnly Shared Slice
- *
- * - **API ID**: `image_only`
- * - **Description**: `ImageOnly`
- * - **Documentation**: https://prismic.io/docs/core-concepts/reusing-slices
- *
- */
-export type ImageOnlySlice = prismicT.SharedSlice<"image_only", ImageOnlySliceVariation>;
-/**
  * Primary content in TextAndImage → Primary
  *
  */
@@ -144,16 +105,6 @@ interface TextAndImageSliceDefaultPrimary {
      *
      */
     text_content: prismicT.RichTextField;
-    /**
-     * External Link field in *TextAndImage → Primary*
-     *
-     * - **Field Type**: Link
-     * - **Placeholder**: *None*
-     * - **API ID Path**: text_and_image.primary.external_link
-     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
-     *
-     */
-    external_link: prismicT.LinkField;
 }
 /**
  * Default variation for TextAndImage Slice
@@ -193,16 +144,6 @@ interface TextOnlySliceDefaultPrimary {
      *
      */
     text_content: prismicT.RichTextField;
-    /**
-     * External Link field in *TextOnly → Primary*
-     *
-     * - **Field Type**: Link
-     * - **Placeholder**: *None*
-     * - **API ID Path**: text_only.primary.external_link
-     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
-     *
-     */
-    external_link: prismicT.LinkField;
 }
 /**
  * Default variation for TextOnly Slice
@@ -232,6 +173,6 @@ declare module "@prismicio/client" {
         (repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
     }
     namespace Content {
-        export type { BlogPostDocumentData, BlogPostDocumentDataSlicesSlice, BlogPostDocument, AllDocumentTypes, ImageOnlySliceDefaultPrimary, ImageOnlySliceDefault, ImageOnlySliceVariation, ImageOnlySlice, TextAndImageSliceDefaultPrimary, TextAndImageSliceDefault, TextAndImageSliceVariation, TextAndImageSlice, TextOnlySliceDefaultPrimary, TextOnlySliceDefault, TextOnlySliceVariation, TextOnlySlice };
+        export type { BlogPostDocumentData, BlogPostDocumentDataSlicesSlice, BlogPostDocument, AllDocumentTypes, TextAndImageSliceDefaultPrimary, TextAndImageSliceDefault, TextAndImageSliceVariation, TextAndImageSlice, TextOnlySliceDefaultPrimary, TextOnlySliceDefault, TextOnlySliceVariation, TextOnlySlice };
     }
 }

@@ -28,7 +28,7 @@ export function ListOfPosts({ posts, title, showPagination = false, seeAllPosts 
             <h2 className="text-2xl my-4 capitalize self-center font-semibold">{title}</h2>
             {posts.results.length > 0 ? (
                 <>
-                    <ul className="list-none flex flex-col gap-4 md:flex-row md:flex-wrap md:gap-8 md:justify-center flex-1">
+                    <ul className="list-none flex flex-col gap-4 md:flex-row md:flex-wrap md:gap-16 md:justify-center flex-1">
                         {posts.results.map(post => (
                             <PostCard post={post} key={post.id} />
                         ))}

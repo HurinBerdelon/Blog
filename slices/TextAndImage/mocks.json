@@ -4,15 +4,16 @@
     "variation": "default",
     "primary": {
       "image": {
+        "__TYPE__": "ImageContent",
         "origin": {
           "id": "main",
-          "url": "https://images.unsplash.com/photo-1600804931749-2da4ce26c869",
-          "width": 3199,
-          "height": 3199
+          "url": "https://images.unsplash.com/photo-1587905069134-008460d7a636",
+          "width": 3935,
+          "height": 5894
         },
-        "url": "https://images.unsplash.com/photo-1600804931749-2da4ce26c869",
-        "width": 3199,
-        "height": 3199,
+        "url": "https://images.unsplash.com/photo-1587905069134-008460d7a636",
+        "width": 3935,
+        "height": 5894,
         "edit": {
           "zoom": 1,
           "crop": {
@@ -21,9 +22,6 @@
           },
           "background": "transparent"
         },
-        "credits": null,
-        "alt": null,
-        "__TYPE__": "ImageContent",
         "thumbnails": {}
       },
       "text_content": {
@@ -32,17 +30,10 @@
           {
             "type": "paragraph",
             "content": {
-              "text": "Cupidatat magna nisi aute in veniam ut sint eu ex."
+              "text": "Ex ullamco commodo cillum est. Commodo et in aute dolor proident dolor tempor aute eu veniam non eu nulla exercitation."
             }
           }
         ]
-      },
-      "external_link": {
-        "__TYPE__": "LinkContent",
-        "value": {
-          "__TYPE__": "ExternalLink",
-          "url": "http://google.com"
-        }
       }
     },
     "items": [
