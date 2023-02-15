@@ -4,6 +4,7 @@ module.exports = {
 		'./src/**/*.tsx',
 		'./slices/**/*.tsx'
 	],
+	darkMode: 'class',
 	theme: {
 		extend: {
 			colors: {
@@ -12,7 +13,7 @@ module.exports = {
 				textDark: '#2B332C',
 				textLight: '#FFF9F2',
 				backgroundDark: '#242525',
-				grayBrand: '#525254'
+				grayBrand: '#DDD8D1'
 			},
 			fontFamily: {
 				poppins: 'Poppins'

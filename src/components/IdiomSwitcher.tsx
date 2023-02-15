@@ -10,15 +10,15 @@ export function IdiomSwitcher(): JSX.Element {
     const router = useRouter()
 
     return (
-        <Popover className="relative">
+        <Popover className="relative flex">
             <Popover.Button className="text-3xl">
-                <Globe className='text-backgroundDark hover:text-greenBrandDark' />
+                <Globe className='text-backgroundDark hover:text-greenBrandDark dark:text-textLight dark:hover:text-grayBrand' />
             </Popover.Button>
-            <Popover.Panel className="absolute right-0 rounded bg-greenBrand p-4 md:text-lg">
+            <Popover.Panel className="absolute right-0 top-10 rounded bg-greenBrand p-4 md:text-lg dark:bg-greenBrandDark">
                 <ul className="flex flex-col text-textLight font-medium gap-1 ">
                     {i18n.locales.map(locale => (
                         <li key={locale}>
-                            <Link className='flex gap-2 capitalize items-center hover:text-white transition-all' href={router.asPath} locale={locale}>
+                            <Link className='flex gap-2 capitalize items-center hover:text-white transition-all dark:hover:text-grayBrand' href={router.asPath} locale={locale}>
                                 <span className={router.locale === locale ? 'cursor-default ' : ''}>
                                     {languages[locale].flag}
                                 </span>

@@ -46,7 +46,7 @@ export function Pagination({
 
     return (
         <>
-            <div className="italic text-backgroundDark">
+            <div className="italic text-backgroundDark dark:text-textLight">
                 {t('common:showing')} <strong>{showing.from}</strong> - <strong> {showing.to} </strong> {t('common:of')} <strong> {showing.total} </strong>
             </div>
 

@@ -10,7 +10,7 @@ export function PaginationItem({ number, onPageChange, isCurrent = false }: Pagi
 
     if (isCurrent) {
         return (
-            <button className="bg-greenBrand text-textLight min-w-[28px] font-medium py-1 px-2 rounded" disabled={true}>
+            <button className="bg-greenBrand dark:bg-greenBrandDark text-textLight min-w-[28px] font-medium py-1 px-2 rounded" disabled={true}>
                 {number}
             </button>
         )
@@ -18,7 +18,7 @@ export function PaginationItem({ number, onPageChange, isCurrent = false }: Pagi
 
     return (
         <button
-            className=" py-1 px-2 rounded border-[1px] border-transparent hover:border-backgroundDark"
+            className=" py-1 px-2 rounded border-[1px] border-transparent hover:border-backgroundDark dark:hover:border-textLight"
             onClick={() => onPageChange(number)}
         >
             {number}
