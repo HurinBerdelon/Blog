@@ -1,10 +1,10 @@
 import { AllDocumentTypes } from ".slicemachine/prismicio"
 import { formatDate } from "@/services/dayjs"
-import { PostType } from "@/types/Post"
 import { SliceZone } from "@prismicio/react"
 import Link from "next/link"
 import { components } from "slices"
 import { Share } from "../Share"
+import Image from 'next/image'
 
 interface PostProps {
     post: AllDocumentTypes
@@ -18,7 +18,13 @@ export function Post({ post }: PostProps): JSX.Element {
                 {post.data.banner.url
                     ? (
                         <div className="w-full">
-                            <img src={post.data.banner.url} alt={post.data.banner.alt as string} className="cover" />
+                            <Image
+                                width={post.data.banner.dimensions.width}
+                                height={post.data.banner.dimensions.height}
+                                src={post.data.banner.url}
+                                alt={post.data.banner.alt as string}
+                                className="cover w-full"
+                            />
                         </div>
                     )
                     : (
@@ -29,7 +35,7 @@ export function Post({ post }: PostProps): JSX.Element {
 
             <div className="px-4 flex gap-3 italic font-medium capitalize text-sm">
                 {post.tags.map(tag => (
-                    <Link className="hover:text-greenBrandDark" href={`/list/${tag}`}>{tag}</Link>
+                    <Link key={tag} className="hover:text-greenBrandDark" href={`/list/${tag}`}>{tag}</Link>
                 ))}
             </div>
 
