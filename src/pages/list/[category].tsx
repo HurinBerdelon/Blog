@@ -9,6 +9,7 @@ import { Query } from "@prismicio/types";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { createClient } from "prismicio";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 interface CategoryProps {
     postsResponse: Query<AllDocumentTypes>
@@ -47,11 +48,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         pageSize: pageSize
     })
 
+    const locale = context.locale ?? 'en'
+
     return {
         props: {
             postsResponse,
             category,
-            sortedCategories
+            sortedCategories,
+            ...(await serverSideTranslations(locale, ['common']))
         }
     }
 }

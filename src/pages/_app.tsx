@@ -1,12 +1,13 @@
 import { PrismicPreview } from '@prismicio/next'
 import { PrismicProvider } from '@prismicio/react'
+import { appWithTranslation } from 'next-i18next'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Link from 'next/link'
 import { repositoryName } from 'prismicio'
 import '../styles/global.css'
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
 	return (
 		<PrismicProvider internalLinkComponent={(props) => <Link {...props} />}>
 			<PrismicPreview repositoryName={repositoryName}>
@@ -20,3 +21,5 @@ export default function App({ Component, pageProps }: AppProps) {
 		</PrismicProvider>
 	)
 }
+
+export default appWithTranslation(App)

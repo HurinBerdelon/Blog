@@ -9,6 +9,8 @@ import { Query } from "@prismicio/types";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { createClient } from "prismicio";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 interface AllPostsProps {
     postsResponse: Query<AllDocumentTypes>
@@ -17,15 +19,17 @@ interface AllPostsProps {
 
 export default function AllPosts({ postsResponse, sortedCategories }: AllPostsProps): JSX.Element {
 
+    const { t } = useTranslation()
+
     return (
         <>
             <Head>
-                <title>{`All Posts | Hurin Blog`}</title>
+                <title>{`${t('common:allPosts')} | Hurin Blog`}</title>
             </Head>
             <Header sortedCategories={sortedCategories} />
             <main className="flex-1">
                 <ListOfPosts
-                    title="All Posts"
+                    title={t('common:allPosts')}
                     posts={postsResponse}
                     showPagination={true}
                 />
@@ -46,10 +50,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             pageSize: pageSize,
         })
 
+    const locale = context.locale ?? 'en'
+
     return {
         props: {
             postsResponse,
-            sortedCategories
+            sortedCategories,
+            ...(await serverSideTranslations(locale, ['common']))
         }
     }
 

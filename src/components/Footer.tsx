@@ -2,12 +2,15 @@ import { Category } from "@/types/Category";
 import Image from "next/image";
 import Link from "next/link";
 import { LinkedinLogo, EnvelopeSimple } from "phosphor-react";
+import { useTranslation } from "next-i18next";
 
 interface FooterProps {
     sortedCategories: Category[]
 }
 
 export function Footer({ sortedCategories }: FooterProps): JSX.Element {
+
+    const { t } = useTranslation()
 
     return (
         <footer className="bg-greenBrand justify-self-end text-backgroundDark">
@@ -20,7 +23,7 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
                         <Link className="hover:text-greenBrandDark hover:underline transition-all" href={'/'}>Home</Link>
                     </div>
                     <div className="flex flex-col">
-                        <div className="font-medium">Categories</div>
+                        <div className="font-medium">{t('common:categories')}</div>
                         {sortedCategories.map(category => (
                             <Link
                                 className="capitalize italic hover:text-greenBrandDark hover:underline transition-all"

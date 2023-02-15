@@ -7,6 +7,7 @@ import { Category } from "@/types/Category";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { createClient } from "prismicio";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 interface PostPageProps {
     post: AllDocumentTypes
@@ -46,10 +47,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     const { data: sortedCategories } = await axiosAPI.get('/api/categories')
 
+    const locale = context.locale ?? 'en'
+
     return {
         props: {
             post,
-            sortedCategories
+            sortedCategories,
+            ...(await serverSideTranslations(locale, ['common']))
         }
     }
 }
