@@ -28,10 +28,10 @@ export function IdiomSwitcher(): JSX.Element {
                             </Link>
                         </li>
                     ))} */}
-                    <Link href={router.asPath} locale={'en'}>
+                    <Link className='hover:text-white hover:underline transition-all' href={router.asPath} locale={'en'}>
                         English
                     </Link>
-                    <Link href={router.asPath} locale={'pt-BR'}>
+                    <Link className='hover:text-white hover:underline transition-all' href={router.asPath} locale={'pt-BR'}>
                         Português
                     </Link>
                 </ul>

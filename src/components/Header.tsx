@@ -19,7 +19,11 @@ export function Header({ sortedCategories }: HeaderProps): JSX.Element {
                 <div className="flex items-center gap-3">
                     <div className="flex gap-3">
                         {sortedCategories.slice(0, 3).map(category => (
-                            <Link key={category.tag} href={`/list/${category.tag}`} className="capitalize hover:text-greenBrandDark">
+                            <Link
+                                key={category.tag}
+                                href={`/list/${category.tag}`}
+                                className="capitalize hover:text-greenBrandDark hover:underline transition-all"
+                            >
                                 {category.tag}
                             </Link>
                         ))}
