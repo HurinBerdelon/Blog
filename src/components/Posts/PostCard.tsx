@@ -1,6 +1,7 @@
 import { AllDocumentTypes } from ".slicemachine/prismicio"
 import { formatDate } from "@/services/dayjs"
 import { motion } from "framer-motion"
+import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -26,11 +27,17 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
             <Link href={`/post/${post.uid}`} className="flex flex-col gap-2">
                 <h3 className="self-center text-xl font-semibold py-2">{post.data.title_of_the_post}</h3>
                 <div className="w-full">
-                    <img src={post.data.banner.url as string} alt={post.data.banner.alt as string} className="cover" />
+                    <Image
+                        width={post.data.banner.dimensions?.width}
+                        height={post.data.banner.dimensions?.height}
+                        src={post.data.banner.url as string}
+                        alt={post.data.banner.alt as string}
+                        className="cover w-full"
+                    />
                 </div>
                 <div className="px-3 flex gap-3 italic font-medium capitalize text-sm">
                     {post.tags.map(tag => (
-                        <span>{tag}</span>
+                        <span key={tag}>{tag}</span>
                     ))}
                 </div>
                 <div className="py-2 px-3 text-justify">

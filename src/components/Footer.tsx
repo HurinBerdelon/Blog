@@ -1,4 +1,5 @@
 import { Category } from "@/types/Category";
+import Image from "next/image";
 import Link from "next/link";
 import { LinkedinLogo, EnvelopeSimple } from "phosphor-react";
 
@@ -12,7 +13,7 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
         <footer className="bg-greenBrand justify-self-end text-backgroundDark">
             <div className="flex justify-between p-2 mx-auto w-full md:w-[720px] xl:w-[1120px]">
                 <div className="w-10">
-                    <img src="/images/logo.svg" alt="blog logo" className="cover" />
+                    <Image width={50} height={50} src="/images/logo.svg" alt="blog logo" className="cover w-full" />
                 </div>
                 <div className="grid grid-cols-2 w-3/4">
                     <div className="flex flex-col items-center">

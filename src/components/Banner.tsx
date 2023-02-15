@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 interface BannerProps {
     text: string
     image: {
@@ -14,7 +16,7 @@ export function Banner({ image, text, link = '' }: BannerProps): JSX.Element {
             {image.src
                 ? (
                     <div className="w-full">
-                        <img src={image.src} alt={image.alt} className="cover" />
+                        <Image width={1920} height={1920} src={image.src} alt={image.alt} className="cover w-full" />
                     </div>
                 )
                 : (
