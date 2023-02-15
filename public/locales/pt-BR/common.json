@@ -1,1 +1,13 @@
-{}
+{
+    "allPosts": "Todos os Posts",
+    "shareThisPost": "Compartilhe essa publicação",
+    "shareOn": "Compartilhar no",
+    "menuButton": "Botão para abrir o menu",
+    "categories": "categorias",
+    "homeLink": "Link para a página home",
+    "showing": "Mostrando",
+    "of": "de",
+    "noPostsHere": "Nenhum post aqui.",
+    "popularPosts": "Publicações Populares",
+    "recentPosts": "Publicações Recentes"
+}

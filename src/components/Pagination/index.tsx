@@ -1,5 +1,6 @@
 import { pageSize } from "@/config/pageSize";
 import { useState } from "react";
+import { useTranslation } from "next-i18next";
 import { PaginationItem } from "./PaginationItem";
 // import { PaginationItem } from "../PaginationItem";
 
@@ -25,6 +26,8 @@ export function Pagination({
     registerPerPage = pageSize,
 }: PaginationProps): JSX.Element {
 
+    const { t } = useTranslation()
+
     const [showing, _] = useState({
         from: (currentPage - 1) * registerPerPage + 1,
         to: Math.min(currentPage * registerPerPage, totalCountOfRegisters),
@@ -44,7 +47,7 @@ export function Pagination({
     return (
         <>
             <div className="italic text-backgroundDark">
-                Showing <strong>{showing.from}</strong> - <strong> {showing.to} </strong> of <strong> {showing.total} </strong>
+                {t('common:showing')} <strong>{showing.from}</strong> - <strong> {showing.to} </strong> {t('common:of')} <strong> {showing.total} </strong>
             </div>
 
             <div className="flex gap-2 mt-2">

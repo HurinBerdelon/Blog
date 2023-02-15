@@ -1,1 +1,13 @@
-{}
+{
+    "allPosts": "All Posts",
+    "shareThisPost": "Share this Post",
+    "shareOn": "Share on",
+    "menuButton": "Button to Open Menu",
+    "categories": "categories",
+    "homeLink": "Link to Home Page",
+    "showing": "Showing",
+    "of": "of",
+    "noPostsHere": "No Posts Here.",
+    "popularPosts": "Popular Posts",
+    "recentPosts": "Recent Posts"
+}

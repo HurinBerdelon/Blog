@@ -9,6 +9,8 @@ import { Query } from '@prismicio/types'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { createClient } from 'prismicio'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 
 
 interface HomeProps {
@@ -17,6 +19,9 @@ interface HomeProps {
 }
 
 export default function Home({ lastFourPosts, sortedCategories }: HomeProps) {
+
+	const { t } = useTranslation()
+
 	return (
 		<>
 			<Head>
@@ -26,11 +31,11 @@ export default function Home({ lastFourPosts, sortedCategories }: HomeProps) {
 			<main className="flex-1">
 				<Banner image={{ alt: 'homeBanner', src: '' }} text="Hurin Blog" />
 				<ListOfPosts
-					title='popular posts'
+					title={t('common:popularPosts')}
 					posts={lastFourPosts}
 				/>
 				<ListOfPosts
-					title='Recent Posts'
+					title={t('common:recentPosts')}
 					posts={lastFourPosts}
 					seeAllPosts={true}
 				/>
@@ -40,17 +45,20 @@ export default function Home({ lastFourPosts, sortedCategories }: HomeProps) {
 	)
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
 	const client = createClient()
 
 	const lastFourPosts = await client.getByType('blog_post', { pageSize: 4 })
 
 	const { data: sortedCategories } = await axiosAPI.get('/api/categories')
 
+	if (!locale) locale = 'en'
+
 	return {
 		props: {
 			lastFourPosts,
-			sortedCategories
+			sortedCategories,
+			...(await serverSideTranslations(locale, ['common']))
 		}
 	}
 }

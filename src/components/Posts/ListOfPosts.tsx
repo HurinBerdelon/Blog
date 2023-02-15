@@ -2,6 +2,7 @@ import { AllDocumentTypes } from ".slicemachine/prismicio"
 import { Query } from "@prismicio/types"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { useTranslation } from "next-i18next"
 import { Pagination } from "../Pagination"
 import { PostCard } from "./PostCard"
 
@@ -15,6 +16,7 @@ interface ListOfPostsProps {
 export function ListOfPosts({ posts, title, showPagination = false, seeAllPosts = false }: ListOfPostsProps): JSX.Element {
 
     const router = useRouter()
+    const { t } = useTranslation()
 
     function onPageChange(page: number) {
         const path = router.asPath.split('?')[0]
@@ -42,7 +44,7 @@ export function ListOfPosts({ posts, title, showPagination = false, seeAllPosts 
                         </div>
                     ) : null}
                 </>
-            ) : <div className="self-center justify-self-center">No Posts Here.</div>
+            ) : <div className="self-center justify-self-center">{t('common:noPostsHere')}</div>
             }
         </section>
     )
