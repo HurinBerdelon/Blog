@@ -10,7 +10,7 @@ const TextAndImage = ({ slice }: TextAndImageProps) => (
 		<div className='my-6'>
 			<PrismicImage field={slice.primary.image} />
 		</div>
-		<div className='flex flex-col gap-4 text-justify px-4'>
+		<div className='flex flex-col gap-4 text-justify px-4 md:text-lg'>
 			<PrismicRichText field={slice.primary.text_content} />
 		</div>
 	</section>

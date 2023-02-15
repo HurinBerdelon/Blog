@@ -7,7 +7,7 @@ export type TextOnlyProps = SliceComponentProps<Content.TextOnlySlice>
 const TextOnly = ({ slice }: TextOnlyProps) => {
 	return (
 		<section>
-			<div className='flex flex-col gap-4 text-justify px-4'>
+			<div className='flex flex-col gap-4 text-justify px-4 md:text-lg'>
 				<PrismicRichText field={slice.primary.text_content} />
 			</div>
 		</section>
