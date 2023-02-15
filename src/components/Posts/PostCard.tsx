@@ -15,7 +15,7 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
     })
 
     return (
-        <li className="border-[1px] border-black w-[80vw] self-center rounded">
+        <li className="border-[1px] border-black w-[80vw] self-center rounded max-w-xs">
             <Link href={`/post/${post.uid}`} className="flex flex-col gap-2">
                 <h3 className="self-center text-xl font-semibold py-2">{post.data.title_of_the_post}</h3>
                 <div className="w-full">

@@ -23,7 +23,7 @@ export default function CategoryPage({ postsResponse, category, sortedCategories
                 <title>{`${category} | Hurin Blog`}</title>
             </Head>
             <Header sortedCategories={sortedCategories} />
-            <main className="flex-1">
+            <main className="flex-1 flex">
                 <ListOfPosts
                     title={category}
                     posts={postsResponse}

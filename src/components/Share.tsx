@@ -19,35 +19,35 @@ export function Share({ postLink }: ShareProps): JSX.Element {
 
     return (
         <section>
-            <span className='font-semibold mb-2 block'>Share this Post</span>
+            <span className='font-semibold text-sm mb-2 block'>Share this Post</span>
             <ul className='flex gap-2'>
                 <li>
                     <FacebookShareButton url={postLink}>
-                        <FacebookIcon className='w-10 h-10 rounded' />
+                        <FacebookIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>Share on Facebook</span>
                     </FacebookShareButton>
                 </li>
                 <li>
                     <TwitterShareButton url={postLink}>
-                        <TwitterIcon className='w-10 h-10 rounded' />
+                        <TwitterIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>Share on Twitter</span>
                     </TwitterShareButton>
                 </li>
                 <li>
                     <EmailShareButton url={postLink}>
-                        <EmailIcon className='w-10 h-10 rounded' />
+                        <EmailIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>Share on Email</span>
                     </EmailShareButton>
                 </li>
                 <li>
                     <LinkedinShareButton url={postLink}>
-                        <LinkedinIcon className='w-10 h-10 rounded' />
+                        <LinkedinIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>Share on LinkedIn</span>
                     </LinkedinShareButton>
                 </li>
                 <li>
                     <WhatsappShareButton url={postLink}>
-                        <WhatsappIcon className='w-10 h-10 rounded' />
+                        <WhatsappIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>Share on WhatsApp</span>
                     </WhatsappShareButton>
                 </li>

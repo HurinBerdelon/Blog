@@ -11,7 +11,7 @@ interface PostProps {
 export function Post({ post }: PostProps): JSX.Element {
 
     return (
-        <article className="flex flex-col">
+        <article className="flex flex-col mx-auto w-full md:w-[720px] xl:w-[1120px]">
             <div className="bg-zinc-200">
                 {post.data.banner.url
                     ? (
