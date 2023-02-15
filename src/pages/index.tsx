@@ -3,7 +3,6 @@ import { Banner } from '@/components/Banner'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { ListOfPosts } from '@/components/Posts/ListOfPosts'
-import { axiosAPI } from '@/services/axios'
 import { Category } from '@/types/Category'
 import { Query } from '@prismicio/types'
 import { GetStaticProps } from 'next'
@@ -11,6 +10,7 @@ import Head from 'next/head'
 import { createClient } from 'prismicio'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
+import { fetchCategories } from '@/services/fetchCategories'
 
 
 interface HomeProps {
@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
 	const lastFourPosts = await client.getByType('blog_post', { pageSize: 4 })
 
-	const { data: sortedCategories } = await axiosAPI.get('/api/categories')
+	const sortedCategories = await fetchCategories()
 
 	if (!locale) locale = 'en'
 

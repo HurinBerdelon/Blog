@@ -30,9 +30,13 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "./.slicemachine/prismicio.d.ts"
+    "./.slicemachine/prismicio.d.ts",
+    "next-i18next.config.js"
   ],
   "exclude": [
     "node_modules"
+  ],
+  "files": [
+    "./.slicemachine/prismicio.d.ts"
   ]
 }

@@ -1,7 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { createClient } from 'prismicio'
+import { createClient } from "prismicio"
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function fetchCategories() {
     const client = createClient()
 
     const posts = await client.getAllByType('blog_post')
@@ -16,5 +15,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return b.count - a.count
     })
 
-    res.status(200).json(sortedCategories)
+    return sortedCategories
 }

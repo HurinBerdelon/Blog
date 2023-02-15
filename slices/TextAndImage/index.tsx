@@ -16,7 +16,7 @@ const TextAndImage = ({ slice }: TextAndImageProps) => (
 				components={{
 					hyperlink: ({ children, node }) => (
 						<Link
-							className='underline hover:text-greenBrandDark italic'
+							className='underline hover:text-greenBrandDark italic dark:hover:text-grayBrand'
 							href={node.data.url}
 						>
 							{children}
