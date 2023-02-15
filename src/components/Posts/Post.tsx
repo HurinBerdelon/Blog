@@ -36,7 +36,7 @@ export function Post({ post }: PostProps): JSX.Element {
 
             <div className="px-4 flex gap-3 italic font-medium capitalize text-sm">
                 {post.tags.map(tag => (
-                    <Link key={tag} className="hover:text-greenBrandDark" href={`/list/${tag}`}>{tag}</Link>
+                    <Link key={tag} className="hover:text-greenBrandDark dark:hover:text-grayBrand" href={`/list/${tag}`}>{tag}</Link>
                 ))}
             </div>
 

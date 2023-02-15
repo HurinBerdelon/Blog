@@ -2,12 +2,12 @@ import { AllDocumentTypes } from ".slicemachine/prismicio";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Post } from "@/components/Posts/Post";
-import { axiosAPI } from "@/services/axios";
 import { Category } from "@/types/Category";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { createClient } from "prismicio";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { fetchCategories } from "@/services/fetchCategories";
 
 interface PostPageProps {
     post: AllDocumentTypes
@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     const post = await client.getByUID('blog_post', uid)
 
-    const { data: sortedCategories } = await axiosAPI.get('/api/categories')
+    const sortedCategories = await fetchCategories()
 
     const locale = context.locale ?? 'en'
 
