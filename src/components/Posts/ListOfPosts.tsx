@@ -24,7 +24,7 @@ export function ListOfPosts({ posts, title, showPagination = false, seeAllPosts 
     }
 
     return (
-        <section className="flex flex-col my-4 mx-auto w-full md:w-[720px] xl:w-[1120px] text-backgroundDark">
+        <section className="flex flex-col my-4 mx-auto w-full md:w-[720px] xl:w-[1120px] text-backgroundDark dark:text-textLight">
             <h2 className="text-2xl my-4 capitalize self-center font-semibold">{title}</h2>
             {posts.results.length > 0 ? (
                 <>
@@ -40,7 +40,7 @@ export function ListOfPosts({ posts, title, showPagination = false, seeAllPosts 
                     ) : null}
                     {seeAllPosts ? (
                         <div className="flex justify-center mt-4">
-                            <Link className="underline underline-offset-2 hover:text-greenBrandDark" href="/list/all">See all posts</Link>
+                            <Link className="underline underline-offset-2 hover:text-greenBrandDark dark:hover:text-grayBrand" href="/list/all">See all posts</Link>
                         </div>
                     ) : null}
                 </>

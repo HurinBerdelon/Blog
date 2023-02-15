@@ -19,7 +19,7 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
 
     return (
         <motion.li
-            className="border-[1px] border-backgroundDark w-[80vw] self-center rounded max-w-xs hover:border-greenBrandDark hover:text-greenBrandDark"
+            className="border-[1px] border-backgroundDark dark:border-textLight w-[80vw] self-center rounded max-w-xs hover:border-greenBrandDark hover:text-greenBrandDark dark:hover:text-grayBrand dark:hover:border-grayBrand"
             whileHover={{
                 scale: 1.025
             }}

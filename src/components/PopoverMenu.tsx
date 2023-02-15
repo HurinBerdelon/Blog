@@ -14,22 +14,22 @@ export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element
 
     return (
         <menu>
-            <Popover className="relative">
+            <Popover className="relative flex">
                 <Popover.Button className="text-3xl">
-                    <List className="text-backgroundDark hover:text-greenBrandDark" />
+                    <List className="text-backgroundDark hover:text-greenBrandDark dark:text-textLight dark:hover:text-grayBrand" />
                     <span className="sr-only">{t('common:menuButton')}</span>
                 </Popover.Button>
-                <Popover.Panel className="absolute right-0 rounded bg-greenBrand p-4 min-w-[120px] md:text-lg text-textLight">
+                <Popover.Panel className="absolute top-10 right-0 rounded bg-greenBrand dark:bg-greenBrandDark p-4 min-w-[120px] md:text-lg text-textLight">
                     {/* <div>
                         <div>
                         <img src="#" alt="profile" />
                         </div>
                     </div> */}
                     <nav className="flex flex-col gap-1 font-medium">
-                        <Link className="hover:text-white hover:underline transition-all" href='/'>Home</Link>
+                        <Link className="hover:text-white hover:underline transition-all dark:hover:text-grayBrand" href='/'>Home</Link>
                         <div className="text-sm italic mt-2 border-b-[1px]">{t('common:categories')}</div>
                         {sortedCategories.map(category => (
-                            <Link key={category.tag} className="capitalize hover:text-white hover:underline transition-all" href={`/list/${category.tag}`}>{category.tag}</Link>
+                            <Link key={category.tag} className="capitalize hover:text-white dark:hover:text-grayBrand hover:underline transition-all" href={`/list/${category.tag}`}>{category.tag}</Link>
                         ))}
                     </nav>
                 </Popover.Panel>
