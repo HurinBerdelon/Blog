@@ -45,8 +45,8 @@ export default function Home({ lastFourPosts, sortedCategories }: HomeProps) {
 	)
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-	const client = createClient()
+export const getStaticProps: GetStaticProps = async ({ previewData, locale }) => {
+	const client = createClient({ previewData })
 
 	const lastFourPosts = await client.getByType('blog_post', { pageSize: 4 })
 

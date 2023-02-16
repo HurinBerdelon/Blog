@@ -40,7 +40,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
 
-    const client = createClient()
+    const client = createClient({ previewData: context.previewData })
     const uid = context.params?.uid as string
 
     const post = await client.getByUID('blog_post', uid)

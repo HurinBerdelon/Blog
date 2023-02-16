@@ -37,7 +37,7 @@ export default function CategoryPage({ postsResponse, category, sortedCategories
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const client = createClient()
+    const client = createClient({ previewData: context.previewData })
 
     const category = context.params?.category as string
 
