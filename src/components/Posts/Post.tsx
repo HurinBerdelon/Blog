@@ -11,7 +11,6 @@ interface PostProps {
 }
 
 export function Post({ post }: PostProps): JSX.Element {
-
     return (
         <article className="flex flex-col mx-auto w-full md:w-[720px] xl:w-[1120px] text-backgroundDark dark:text-textLight">
             <div>
@@ -32,7 +31,7 @@ export function Post({ post }: PostProps): JSX.Element {
                     )
                 }
             </div >
-            <h1 className="mt-6 self-center text-2xl font-medium">{post.data.title_of_the_post}</h1>
+            <h1 className="mt-6 self-center text-4xl font-medium">{post.data.title_of_the_post}</h1>
 
             <div className="px-4 flex gap-3 italic font-medium capitalize text-sm">
                 {post.tags.map(tag => (
@@ -49,7 +48,9 @@ export function Post({ post }: PostProps): JSX.Element {
                 <SliceZone slices={post.data.slices} components={components} />
             </div>
 
-            <div className='px-4 my-4'>
+            <div className="self-center mt-8 w-3/4 border-b-[1px] border-double border-greenBrandDark dark:border-textLight" />
+
+            <div className='px-4 my-8'>
                 <Share postLink={`${process.env.NEXT_PUBLIC_BLOG_URL}/post/${post.uid}`} />
             </div>
         </article >

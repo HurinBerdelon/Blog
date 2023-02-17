@@ -6,4 +6,24 @@
     html {
         font-family: 'Poppins', sans-serif;
     }
+    
+    .scrollbar-light::-webkit-scrollbar {
+        width: 0.45rem;
+        background-color: #FFF9F2;
+    }
+
+    .scrollbar-dark::-webkit-scrollbar {
+        width: 0.45rem;
+        background-color: #242525;
+    }
+
+    .scrollbar-light::-webkit-scrollbar-thumb {
+        background: #3D4D3E;
+        border-radius: 0.25rem;
+    }
+
+    .scrollbar-dark::-webkit-scrollbar-thumb {
+        background: #6D8B74;
+        border-radius: 0.25rem;
+    }
 }

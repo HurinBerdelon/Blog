@@ -11,7 +11,7 @@ export default function Document() {
 				<link rel="icon" href="/images/logo.svg" />
 				<meta name="description" content="Fernando Cardozo's blog to talk about technology and programming, with focus on frontend development. Talking about React, NextJS, Typescript and some other tech subjects." />
 			</Head>
-			<body className='min-h-full'>
+			<body className='min-h-full scrollbar-light dark:scrollbar-dark'>
 				<Main />
 				<NextScript />
 				<script async defer src="https://static.cdn.prismic.io/prismic.js?new=true&repo=hurinberdelon-blog"></script>
