@@ -30,10 +30,10 @@ export default function Home({ lastFourPosts, sortedCategories }: HomeProps) {
 			<Header sortedCategories={sortedCategories} />
 			<main className="flex-1">
 				<Banner image={{ alt: 'homeBanner', src: '' }} text="Hurin Blog" />
-				<ListOfPosts
+				{/* <ListOfPosts
 					title={t('common:popularPosts')}
 					posts={lastFourPosts}
-				/>
+				/> */}
 				<ListOfPosts
 					title={t('common:recentPosts')}
 					posts={lastFourPosts}

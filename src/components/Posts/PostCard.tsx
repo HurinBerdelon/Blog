@@ -26,7 +26,7 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
         >
             <Link href={`/post/${post.uid}`} className="flex flex-col gap-2">
                 <h3 className="self-center text-xl font-semibold py-2">{post.data.title_of_the_post}</h3>
-                <div className="w-full">
+                <div className="w-full h-[240px] flex items-center">
                     <Image
                         width={post.data.banner.dimensions?.width}
                         height={post.data.banner.dimensions?.height}
@@ -44,7 +44,7 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
                     {textPreview}
                 </div>
                 <div className="pb-2 px-3 flex justify-between items-center">
-                    <span>{post.data.author}</span>
+                    <span className="font-medium">{post.data.author}</span>
                     <span className="italic text-sm">{formatDate(post.first_publication_date)}</span>
                 </div>
             </Link>
