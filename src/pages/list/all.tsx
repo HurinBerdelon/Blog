@@ -11,6 +11,7 @@ import { createClient } from "prismicio";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { fetchCategories } from "@/services/fetchCategories";
+import { languages } from "@/config/languages";
 
 interface AllPostsProps {
     postsResponse: Query<AllDocumentTypes>
@@ -48,6 +49,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         {
             page: context.query.page ? Number(context.query.page) : 1,
             pageSize: pageSize,
+            lang: languages[context.locale].prismic_code
         })
 
     const locale = context.locale ?? 'en'

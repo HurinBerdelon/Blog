@@ -10,6 +10,7 @@ import Head from "next/head";
 import { createClient } from "prismicio";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { fetchCategories } from "@/services/fetchCategories";
+import { languages } from "@/config/languages";
 
 interface CategoryProps {
     postsResponse: Query<AllDocumentTypes>
@@ -45,7 +46,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const postsResponse = await client.getByTag(category, {
         page: context.query.page ? Number(context.query.page) : 1,
-        pageSize: pageSize
+        pageSize: pageSize,
+        lang: languages[context.locale].prismic_code
     })
 
     const locale = context.locale ?? 'en'
