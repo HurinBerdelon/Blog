@@ -11,6 +11,7 @@ import { createClient } from 'prismicio'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import { fetchCategories } from '@/services/fetchCategories'
+import { languages } from '@/config/languages'
 
 
 interface HomeProps {
@@ -48,7 +49,7 @@ export default function Home({ lastFourPosts, sortedCategories }: HomeProps) {
 export const getStaticProps: GetStaticProps = async ({ previewData, locale }) => {
 	const client = createClient({ previewData })
 
-	const lastFourPosts = await client.getByType('blog_post', { pageSize: 4 })
+	const lastFourPosts = await client.getByType('blog_post', { pageSize: 4, lang: languages[locale].prismic_code })
 
 	const sortedCategories = await fetchCategories()
 
