@@ -11,10 +11,7 @@ import { useTranslation } from 'next-i18next'
 import { fetchCategories } from '@/services/fetchCategories'
 import { languages } from '@/config/languages'
 import { Category } from '@/schema/Category'
-import { api } from '@/services/api'
 import { AllDocumentTypesExtended } from '@/schema/AllDocumentTypesExtended'
-import { PostType } from '@/schema/Post'
-
 
 interface HomeProps {
 	lastFourPosts: Query<AllDocumentTypesExtended>
@@ -54,15 +51,6 @@ export const getStaticProps: GetStaticProps = async ({ previewData, locale }) =>
 	const lastFourPosts: Query<AllDocumentTypesExtended> = await client.getByType('blog_post', { pageSize: 4, lang: languages[locale].prismic_code })
 
 	const sortedCategories = await fetchCategories()
-
-	const uids = lastFourPosts.results.map(result => result.uid)
-	const { data } = await api.post<PostType[]>('/post/many', { uids })
-
-	lastFourPosts.results.forEach(result => {
-		const post = data.find(post => post.uid === result.uid)
-		result.comments = post.comment.length
-		result.likes = post.likes.length
-	})
 
 	if (!locale) locale = 'en'
 

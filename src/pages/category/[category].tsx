@@ -1,4 +1,3 @@
-import { AllDocumentTypes } from ".slicemachine/prismicio";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ListOfPosts } from "@/components/Posts/ListOfPosts";
@@ -11,14 +10,16 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { fetchCategories } from "@/services/fetchCategories";
 import { languages } from "@/config/languages";
 import { Category } from "@/schema/Category";
+import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended";
 
 interface CategoryProps {
-    postsResponse: Query<AllDocumentTypes>
+    postsResponse: Query<AllDocumentTypesExtended>
     category: string
     sortedCategories: Category[]
 }
 
 export default function CategoryPage({ postsResponse, category, sortedCategories }: CategoryProps): JSX.Element {
+
     return (
         <>
             <Head>

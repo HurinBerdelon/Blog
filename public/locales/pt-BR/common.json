@@ -20,5 +20,7 @@
     "welcome": "Bem Vindo ao HurinBlog",
     "loginToInteract": "Faça login com sua conta do Google para interagir com as publicações, deixando curtidas e comentários",
     "loginWithGoogle": "Login com Google",
-    "redirecting": "Aguarde, redirecionando ..."
+    "redirecting": "Aguarde, redirecionando ...",
+    "all": "Todos",
+    "comments": "Comentários"
 }

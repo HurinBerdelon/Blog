@@ -1,4 +1,4 @@
-import { Heart, Chat } from "phosphor-react"
+import { Heart, Chat, Spinner } from "phosphor-react"
 
 interface Likes {
     interactions: { likes: number, comments: number }
@@ -12,13 +12,17 @@ export function Likes({ interactions, className = '', showComments = false }: Li
             <div className="flex flex-col items-center gap-1">
                 <span className="sr-only">Number of Likes</span>
                 <Heart weight="bold" />
-                <span className="text-base">{interactions.likes}</span>
+                <span className="text-base">
+                    {interactions ? interactions?.likes : <Spinner className="animate-spin" />}
+                </span>
             </div>
             {showComments ? (
                 <div className="flex flex-col items-center gap-1">
                     <span className="sr-only">Number of Comments</span>
                     <Chat weight="bold" />
-                    <span className="text-base">{interactions.comments}</span>
+                    <span className="text-base">
+                        {interactions ? interactions?.comments : <Spinner className="animate-spin" />}
+                    </span>
                 </div>
             ) : null}
         </div>

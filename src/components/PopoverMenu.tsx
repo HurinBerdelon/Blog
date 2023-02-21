@@ -26,7 +26,7 @@ export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element
                     <List className="text-backgroundDark hover:text-greenBrandDark dark:text-textLight dark:hover:text-grayBrand" />
                     <span className="sr-only">{t('common:menuButton')}</span>
                 </Popover.Button>
-                <Popover.Panel className="absolute top-10 right-0 rounded bg-greenBrand dark:bg-greenBrandDark p-4 min-w-[160px] md:text-lg text-textLight">
+                <Popover.Panel className="absolute top-10 right-0 rounded bg-greenBrand dark:bg-greenBrandDark p-4 min-w-[160px] md:text-lg text-textLight z-10">
                     <div className="pb-2 mb-2 border-b-[1px] border-textLight flex flex-col items-center">
                         <Profile />
                     </div>
@@ -47,6 +47,12 @@ export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element
                                 {category.tag}
                             </Link>
                         ))}
+                        <Link
+                            className="capitalize hover:text-white dark:hover:text-grayBrand hover:underline transition-all"
+                            href={`/category/all`}
+                        >
+                            {t('common:all')}
+                        </Link>
                     </nav>
                     <div className="border-t-[1px] border-textLight mt-2 pt-2 flex justify-center">
                         {user ? (
