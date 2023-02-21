@@ -4,6 +4,8 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
+import { AuthorCard } from "../AuthorCard"
+import { Likes } from "../Likes"
 
 interface PostCardProps {
     post: AllDocumentTypes
@@ -43,9 +45,9 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
                 <div className="py-2 px-3 text-justify">
                     {textPreview}
                 </div>
-                <div className="pb-2 px-3 flex justify-between items-center">
-                    <span className="font-medium">{post.data.author}</span>
-                    <span className="italic text-sm">{formatDate(post.first_publication_date)}</span>
+                <div className="px-2 pb-2 flex justify-between">
+                    <AuthorCard author={post} />
+                    <Likes showComments={true} />
                 </div>
             </Link>
         </motion.li>

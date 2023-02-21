@@ -26,10 +26,21 @@ export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element
                         </div>
                     </div> */}
                     <nav className="flex flex-col gap-1 font-medium">
-                        <Link className="hover:text-white hover:underline transition-all dark:hover:text-grayBrand" href='/'>Home</Link>
+                        <Link
+                            className="hover:text-white hover:underline transition-all dark:hover:text-grayBrand"
+                            href='/'
+                        >
+                            Home
+                        </Link>
                         <div className="text-sm italic mt-2 border-b-[1px] capitalize">{t('common:categories')}</div>
                         {sortedCategories.map(category => (
-                            <Link key={category.tag} className="capitalize hover:text-white dark:hover:text-grayBrand hover:underline transition-all" href={`/list/${category.tag}`}>{category.tag}</Link>
+                            <Link
+                                key={category.tag}
+                                className="capitalize hover:text-white dark:hover:text-grayBrand hover:underline transition-all"
+                                href={`/category/${category.tag}`}
+                            >
+                                {category.tag}
+                            </Link>
                         ))}
                     </nav>
                 </Popover.Panel>

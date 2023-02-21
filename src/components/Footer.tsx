@@ -27,7 +27,7 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
                         {sortedCategories.map(category => (
                             <Link
                                 className="capitalize italic hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline transition-all"
-                                href={`/list/${category.tag}`}
+                                href={`/category/${category.tag}`}
                                 key={category.tag}
                             >
                                 {category.tag}

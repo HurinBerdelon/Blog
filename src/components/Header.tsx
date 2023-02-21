@@ -26,7 +26,7 @@ export function Header({ sortedCategories }: HeaderProps): JSX.Element {
                         {sortedCategories.slice(0, 3).map(category => (
                             <Link
                                 key={category.tag}
-                                href={`/list/${category.tag}`}
+                                href={`/category/${category.tag}`}
                                 className="capitalize hover:text-greenBrandDark hover:underline transition-all dark:hover:text-grayBrand"
                             >
                                 {category.tag}

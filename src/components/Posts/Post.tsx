@@ -5,6 +5,9 @@ import Link from "next/link"
 import { components } from "slices"
 import { Share } from "../Share"
 import Image from 'next/image'
+import { Likes } from "../Likes"
+import { CommentInput } from "../Comments/CommentInput"
+import { Comment } from "../Comments/Comment"
 
 interface PostProps {
     post: AllDocumentTypes
@@ -50,8 +53,19 @@ export function Post({ post }: PostProps): JSX.Element {
 
             <div className="self-center mt-8 w-3/4 border-b-[1px] border-double border-greenBrandDark dark:border-textLight" />
 
-            <div className='px-4 my-8'>
+            <div className='px-4 my-8 flex justify-between'>
+                <Likes className="text-xl" />
                 <Share postLink={`${process.env.NEXT_PUBLIC_BLOG_URL}/post/${post.uid}`} />
+            </div>
+
+            <div className="flex flex-col px-4 gap-5 mb-8">
+                <div className="font-medium">
+                    Comments
+                    <span className="ml-2 text-sm">(12)</span>
+                </div>
+                <CommentInput />
+                <Comment />
+                <Comment />
             </div>
         </article >
     )
