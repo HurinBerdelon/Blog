@@ -7,6 +7,7 @@ import { Answer } from "./Answer"
 import { useUser } from "@/hooks/useUser"
 import { useInteraction } from "@/hooks/useInteractions"
 import { CommentInput } from "./CommentInput"
+import { LikeIcon } from "./LikeIcon"
 
 interface CommentProps {
     comment: Comment
@@ -60,13 +61,13 @@ export function Comment({ comment }: CommentProps): JSX.Element {
                                 className="text-sm mx-1 hover:underline"
                                 onClick={() => setIsUpdating(true)}
                             >
-                                Edit
+                                {t('common:edit')}
                             </button>
                             <button
                                 className="text-sm mx-1 hover:underline"
                                 onClick={() => deleteComment(comment.id)}
                             >
-                                Delete
+                                {t('common:delete')}
                             </button>
                         </>
                     ) : null}
@@ -74,14 +75,14 @@ export function Comment({ comment }: CommentProps): JSX.Element {
                         className="text-sm mx-1 hover:underline"
                         onClick={() => setShowAnswerInput(state => !state)}
                     >
-                        Reply
+                        {t('common:reply')}
                     </button>
                     <button
                         className="flex gap-1 items-center text-lg"
                         onClick={handleLike}
                     >
                         <span className="sr-only">Like this comment</span>
-                        <Heart weight={`${userLike ? 'fill' : 'bold'}`} className={`hover:brightness-90 ${userLike ? 'text-red-700' : ''}`} />
+                        <LikeIcon isLiked={userLike ? true : false} />
                         <span>{comment.likes.length}</span>
                     </button>
                 </div>

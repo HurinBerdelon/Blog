@@ -28,5 +28,8 @@
     "likeThisComment": "Like this comment",
     "numberOfLikes": "Number of Likes",
     "updateYourContent": "Update Your Comment",
-    "giveAComment": "Give a Comment"
+    "giveAComment": "Give a Comment",
+    "edit": "Edit",
+    "delete": "Delete",
+    "reply": "Reply"
 }

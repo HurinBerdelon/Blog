@@ -28,5 +28,8 @@
     "likeThisComment": "Curta esse comentário",
     "numberOfLikes": "Número de Curtidas",
     "updateYourContent": "Atualize seu comentário",
-    "giveAComment": "Deixe um comentário"
+    "giveAComment": "Deixe um comentário",
+    "edit": "Editar",
+    "delete": "Deletar",
+    "reply": "Responder"
 }

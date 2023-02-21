@@ -5,7 +5,6 @@ import Link from "next/link"
 import { components } from "slices"
 import { Share } from "../Share"
 import Image from 'next/image'
-import { Likes } from "../Likes"
 import { CommentInput } from "../Comments/CommentInput"
 import { Comment } from "../Comments/Comment"
 import { useTranslation } from "next-i18next"

@@ -6,6 +6,7 @@ import { useUser } from "@/hooks/useUser"
 import { useEffect, useState } from "react"
 import { useInteraction } from "@/hooks/useInteractions"
 import { CommentInput } from "./CommentInput"
+import { LikeIcon } from "./LikeIcon"
 
 interface AnswerProps {
     answer: Answer
@@ -56,13 +57,13 @@ export function Answer({ answer }: AnswerProps): JSX.Element {
                             className="text-sm mx-1 hover:underline"
                             onClick={() => setIsUpdating(true)}
                         >
-                            Edit
+                            {t('common:edit')}
                         </button>
                         <button
                             className="text-sm mx-1 hover:underline"
                             onClick={() => deleteAnswer(answer.id)}
                         >
-                            Delete
+                            {t('common:delete')}
                         </button>
                     </>
                 ) : null}
@@ -71,7 +72,7 @@ export function Answer({ answer }: AnswerProps): JSX.Element {
                     className="flex gap-1 items-center text-lg"
                 >
                     <span className="sr-only">{t('common:likeThisComment')}</span>
-                    <Heart weight={`${userLike ? 'fill' : 'bold'}`} className={`hover:brightness-90 ${userLike ? 'text-red-700' : ''}`} />
+                    <LikeIcon isLiked={userLike ? true : false} />
                     <span>{answer.likes.length}</span>
                 </button>
             </div>

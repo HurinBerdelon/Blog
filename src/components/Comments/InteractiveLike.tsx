@@ -4,6 +4,7 @@ import { Like } from "@/schema/Interactions"
 import { useTranslation } from "next-i18next"
 import { Heart, Spinner } from "phosphor-react"
 import { useEffect, useState } from "react"
+import { LikeIcon } from "./LikeIcon"
 
 interface InteractiveLikeProps {
     likes: Like[]
@@ -34,7 +35,7 @@ export function InteractiveLike({ likes, className = '' }: InteractiveLikeProps)
                 onClick={handleLike}
             >
                 <span className="sr-only">{t('common:numberOfLikes')}</span>
-                <Heart weight={`${userLike ? 'fill' : 'bold'}`} className={`hover:brightness-90 ${userLike ? 'text-red-700' : ''}`} />
+                <LikeIcon isLiked={userLike ? true : false} />
                 <span className="text-base">
                     {likes ? likes.length : <Spinner className="animate-spin" />}
                 </span>
