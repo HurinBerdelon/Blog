@@ -21,6 +21,10 @@ export function Post({ post }: PostProps): JSX.Element {
     const { t } = useTranslation()
     const { interactions, getInteractions } = useInteraction()
 
+    const numberOfComments = interactions?.comments.reduce((acc, comment) => {
+        return acc + comment.answers.length + 1
+    }, 0)
+
     useEffect(() => {
         getInteractions(post.uid)
     }, [post])
@@ -72,7 +76,7 @@ export function Post({ post }: PostProps): JSX.Element {
             <div className="flex flex-col px-4 gap-5 mb-8">
                 <div className="font-medium">
                     {t('common:comments')}
-                    <span className="ml-2 text-sm">{`(${interactions?.comments.length})`}</span>
+                    <span className="ml-2 text-sm">{`(${numberOfComments})`}</span>
                 </div>
                 <CommentInput />
                 {interactions?.comments.map(comment => (

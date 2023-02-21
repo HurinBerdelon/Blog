@@ -13,10 +13,11 @@ interface CommentProps {
 }
 
 export function Comment({ comment }: CommentProps): JSX.Element {
-    const { LikeComment, UnlikeComment, updateComment, deleteComment } = useInteraction()
+    const { LikeComment, UnlikeComment, updateComment, deleteComment, saveAnswer } = useInteraction()
     const [userLike, setUserLike] = useState<Like>(null)
     const [showAnswer, setShowAnswer] = useState(false)
     const [isUpdating, setIsUpdating] = useState(false)
+    const [showAnswerInput, setShowAnswerInput] = useState(false)
     const { t } = useTranslation()
     const { user } = useUser()
 
@@ -53,7 +54,7 @@ export function Comment({ comment }: CommentProps): JSX.Element {
                     </p>
                 )}
                 <div className="flex gap-2 items-center absolute right-2 bg-textLight dark:bg-backgroundDark z-10 -bottom-2 px-2 rounded border-2 border-grayBrand dark:border-greenBrandDark">
-                    {comment.author.id === user.id ? (
+                    {comment.author.id === user?.id ? (
                         <>
                             <button
                                 className="text-sm mx-1 hover:underline"
@@ -70,6 +71,12 @@ export function Comment({ comment }: CommentProps): JSX.Element {
                         </>
                     ) : null}
                     <button
+                        className="text-sm mx-1 hover:underline"
+                        onClick={() => setShowAnswerInput(state => !state)}
+                    >
+                        Reply
+                    </button>
+                    <button
                         className="flex gap-1 items-center text-lg"
                         onClick={handleLike}
                     >
@@ -79,9 +86,9 @@ export function Comment({ comment }: CommentProps): JSX.Element {
                     </button>
                 </div>
             </div>
-            {
-                comment.answers.length > 0 ? (
-                    <div className="mt-2 flex flex-col gap-3 items-start pl-12">
+            <div className="mt-2 flex flex-col gap-3 items-start pl-12">
+                {comment.answers.length > 0 ? (
+                    <>
                         <button
                             className="hover:underline text-sm"
                             onClick={() => setShowAnswer(state => !state)}
@@ -91,14 +98,23 @@ export function Comment({ comment }: CommentProps): JSX.Element {
                                 : `${t('common:showAnswer')} (${comment.answers.length})`}
                         </button>
                         {showAnswer ? (
-                            comment.answers.map(answer => (
-                                <Answer key={answer.id} answer={answer} />
-                            ))
+                            <>
+                                {comment.answers.map(answer => (
+                                    <Answer key={answer.id} answer={answer} />
+                                ))}
+                            </>
 
                         ) : null}
-                    </div>
-                ) : null
-            }
+                    </>
+                ) : null}
+                {showAnswerInput ? (
+                    <CommentInput
+                        commentId={comment.id}
+                        saveAnswer={saveAnswer}
+                        setShowAnswerInput={setShowAnswerInput}
+                    />
+                ) : null}
+            </div>
         </div >
     )
 }

@@ -10,18 +10,18 @@ interface InteractionProviderProps {
 interface InteractionContextData {
     interactions: Interaction
     getInteractions: (uid: string) => Promise<void>
-    likePost: () => void
-    unlikePost: (likeId: string) => void
-    saveComment: (content: string) => void
+    likePost: () => Promise<void>
+    unlikePost: (likeId: string) => Promise<void>
+    saveComment: (content: string) => Promise<void>
     updateComment: (content: string, commentId: string) => Promise<void>
-    deleteComment: (commentId: string) => void
-    LikeComment: (commentId: string) => void
-    UnlikeComment: (likeId: string) => void
-    saveAnswer: (content: string, commentId: string) => void
+    deleteComment: (commentId: string) => Promise<void>
+    LikeComment: (commentId: string) => Promise<void>
+    UnlikeComment: (likeId: string) => Promise<void>
+    saveAnswer: (content: string, commentId: string) => Promise<void>
     updateAnswer: (content: string, answerId: string) => Promise<void>
-    deleteAnswer: (answerId: string) => void
-    LikeAnswer: (answerId: string) => void
-    UnlikeAnswer: (likeId: string) => void
+    deleteAnswer: (answerId: string) => Promise<void>
+    LikeAnswer: (answerId: string) => Promise<void>
+    UnlikeAnswer: (likeId: string) => Promise<void>
 }
 
 const InteractionContext = createContext<InteractionContextData>({} as InteractionContextData)
@@ -86,7 +86,7 @@ export function InteractionProvider({ children }: InteractionProviderProps): JSX
     }
 
     async function saveAnswer(content: string, commentId: string) {
-        await api.post('/comment', {
+        await api.post('/answer', {
             content,
             commentId: commentId
         })
