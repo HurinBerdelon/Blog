@@ -1,8 +1,8 @@
 export interface PostType {
-    title: string
-    slug: string
-    bannerImage: {
-        src: string
-        alt: string
-    }
+    id: string,
+    uid: string,
+    createdAt: string,
+    updatedAt: string,
+    comment: [],
+    likes: []
 }

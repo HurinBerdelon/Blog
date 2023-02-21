@@ -1,23 +1,24 @@
 import { Heart, Chat } from "phosphor-react"
 
 interface Likes {
+    interactions: { likes: number, comments: number }
     className?: string
     showComments?: boolean
 }
 
-export function Likes({ className = '', showComments = false }: Likes): JSX.Element {
+export function Likes({ interactions, className = '', showComments = false }: Likes): JSX.Element {
     return (
         <div className={`flex gap-2 items-center ${className}`}>
             <div className="flex flex-col items-center gap-1">
                 <span className="sr-only">Number of Likes</span>
                 <Heart weight="bold" />
-                <span className="text-base">3000</span>
+                <span className="text-base">{interactions.likes}</span>
             </div>
             {showComments ? (
                 <div className="flex flex-col items-center gap-1">
                     <span className="sr-only">Number of Comments</span>
                     <Chat weight="bold" />
-                    <span className="text-base">2355</span>
+                    <span className="text-base">{interactions.comments}</span>
                 </div>
             ) : null}
         </div>
