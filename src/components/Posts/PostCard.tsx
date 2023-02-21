@@ -1,5 +1,4 @@
-import { AllDocumentTypes } from ".slicemachine/prismicio"
-import { formatDate } from "@/services/dayjs"
+import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
@@ -8,7 +7,7 @@ import { AuthorCard } from "../AuthorCard"
 import { Likes } from "../Likes"
 
 interface PostCardProps {
-    post: AllDocumentTypes
+    post: AllDocumentTypesExtended
 }
 
 export function PostCard({ post }: PostCardProps): JSX.Element {
@@ -46,8 +45,8 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
                     {textPreview}
                 </div>
                 <div className="px-2 pb-2 flex justify-between">
-                    <AuthorCard author={post} />
-                    <Likes showComments={true} />
+                    <AuthorCard post={post} />
+                    <Likes showComments={true} interactions={{ likes: post.likes, comments: post.comments }} />
                 </div>
             </Link>
         </motion.li>

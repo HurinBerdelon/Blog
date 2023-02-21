@@ -1,8 +1,9 @@
-import { Category } from "@/types/Category";
 import Image from "next/image";
 import Link from "next/link";
 import { LinkedinLogo, EnvelopeSimple } from "phosphor-react";
 import { useTranslation } from "next-i18next";
+import { Category } from "@/schema/Category";
+import { useUser } from "@/hooks/useUser";
 
 interface FooterProps {
     sortedCategories: Category[]
@@ -11,6 +12,7 @@ interface FooterProps {
 export function Footer({ sortedCategories }: FooterProps): JSX.Element {
 
     const { t } = useTranslation()
+    const { user } = useUser()
 
     return (
         <footer className="bg-greenBrand justify-self-end text-backgroundDark dark:bg-greenBrandDark dark:text-textLight">
@@ -21,6 +23,9 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
                 <div className="grid grid-cols-2 w-3/4">
                     <div className="flex flex-col items-center">
                         <Link className="hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline transition-all" href={'/'}>Home</Link>
+                        {user ? (
+                            <Link className="hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline transition-all" href={'/user-settings'}>{t('common:profile')}</Link>
+                        ) : null}
                     </div>
                     <div className="flex flex-col">
                         <div className="font-medium capitalize">{t('common:categories')}</div>

@@ -1,10 +1,10 @@
-import { Category } from "@/types/Category";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { IdiomSwitcher } from "./IdiomSwitcher";
 import { PopoverMenu } from "./PopoverMenu";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import { Category } from "@/schema/Category";
 
 interface HeaderProps {
     sortedCategories: Category[]
