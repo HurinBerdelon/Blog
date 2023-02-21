@@ -2,12 +2,12 @@ import { AllDocumentTypes } from ".slicemachine/prismicio";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Post } from "@/components/Posts/Post";
-import { Category } from "@/types/Category";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { createClient } from "prismicio";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { fetchCategories } from "@/services/fetchCategories";
+import { Category } from "@/schema/Category";
 
 interface PostPageProps {
     post: AllDocumentTypes
