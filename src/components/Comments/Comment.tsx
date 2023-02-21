@@ -11,7 +11,7 @@ export function Comment({ }: CommentProps): JSX.Element {
     return (
         <div>
 
-            <div className="border-2 border-grayBrand relative rounded p-2 pb-6">
+            <div className="border-2 border-grayBrand relative rounded p-2 pb-6 dark:border-greenBrandDark">
                 <div className="flex gap-2 items-center">
                     <span className="font-medium">Name</span>
                     <span>-</span>
@@ -21,7 +21,7 @@ export function Comment({ }: CommentProps): JSX.Element {
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo eum molestiae cupiditate saepe. Eaque assumenda odio vero unde, pariatur doloremque, consequuntur in eveniet modi quod adipisci fugiat quas temporibus repudiandae.
                     hasudhausdhhas
                 </p>
-                <div className="flex gap-2 items-center absolute right-2 bg-textLight z-10 -bottom-2 px-2 rounded border-2 border-grayBrand">
+                <div className="flex gap-2 items-center absolute right-2 bg-textLight dark:bg-backgroundDark z-10 -bottom-2 px-2 rounded border-2 border-grayBrand dark:border-greenBrandDark">
                     <button className="flex gap-1 items-center text-lg">
                         <span className="sr-only">Like this comment</span>
                         <Heart />

@@ -1,4 +1,4 @@
-
+import { FormikValues } from "formik"
 import { Session } from "next-auth"
 import { signOut } from "next-auth/react"
 import { useRouter } from "next/router"
@@ -18,7 +18,7 @@ interface UserContextData {
     isAuthenticating: boolean
     authenticate: (session: Session) => void
     revokeAuthentication: () => void
-    updateUserImage: (values: any) => void //TODO: remove any
+    updateUserImage: (values: FormikValues) => void
     deleteUserAccount: () => void
     setPath: () => void
 }
