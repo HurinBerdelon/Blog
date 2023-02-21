@@ -20,9 +20,9 @@ export function Answer({ answer }: AnswerProps): JSX.Element {
     const { LikeAnswer, UnlikeAnswer, updateAnswer, deleteAnswer } = useInteraction()
 
     useEffect(() => {
-        const like = answer.likes.find(like => like.userId === user.id)
+        const like = answer.likes.find(like => like.userId === user?.id)
         setUserLike(like)
-    }, [answer])
+    }, [answer, user?.id])
 
     function handleLike() {
         if (!user) return

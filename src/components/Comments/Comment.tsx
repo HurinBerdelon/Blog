@@ -25,7 +25,7 @@ export function Comment({ comment }: CommentProps): JSX.Element {
     useEffect(() => {
         const like = comment.likes.find(like => like.userId === user?.id)
         setUserLike(like)
-    }, [comment])
+    }, [comment, user?.id])
 
     function handleLike() {
         if (!user) return

@@ -23,7 +23,7 @@ export default function LoginCallback({ sortedCategories }: Pagerops) {
         if (session && !isAuthenticating && !isAuthenticated) {
             authenticate(session)
         }
-    }, [session, isAuthenticating])
+    }, [session, isAuthenticating, authenticate, isAuthenticated])
 
     return (
         <>

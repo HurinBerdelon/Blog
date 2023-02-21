@@ -1,6 +1,7 @@
 import { useUser } from "@/hooks/useUser";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
+import Image from "next/image";
 
 export function Profile(): JSX.Element {
 
@@ -12,17 +13,23 @@ export function Profile(): JSX.Element {
             <div className="w-20 h-20 rounded-full border-2 border-textLight overflow-hidden">
                 {user
                     ? user.avatarURL
-                        ? <img
+                        ? <Image
+                            width={80}
+                            height={80}
                             referrerPolicy="no-referrer" src={user.avatarURL}
                             alt={`${user.name} ${t('common:profile')}`}
                             className="p-1 rounded-full cover w-full"
                         />
-                        : <img
+                        : <Image
+                            width={80}
+                            height={80}
                             src="/avatar/user.png"
                             alt="profile template"
                             className="p-1 rounded-full cover w-full"
                         />
-                    : <img
+                    : <Image
+                        width={80}
+                        height={80}
                         src="/avatar/user.png"
                         alt="profile template"
                         className="p-1 rounded-full cover w-full"

@@ -2,7 +2,7 @@ import { useInteraction } from "@/hooks/useInteractions"
 import { useUser } from "@/hooks/useUser"
 import { Like } from "@/schema/Interactions"
 import { useTranslation } from "next-i18next"
-import { Heart, Spinner } from "phosphor-react"
+import { Spinner } from "phosphor-react"
 import { useEffect, useState } from "react"
 import { LikeIcon } from "./LikeIcon"
 
@@ -18,9 +18,9 @@ export function InteractiveLike({ likes, className = '' }: InteractiveLikeProps)
     const { user } = useUser()
 
     useEffect(() => {
-        const like = likes?.find(like => like.userId === user.id)
+        const like = likes?.find(like => like.userId === user?.id)
         setUserLike(like)
-    }, [likes])
+    }, [likes, user?.id])
 
     function handleLike() {
         if (!user) return

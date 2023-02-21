@@ -26,7 +26,7 @@ export function Post({ post }: PostProps): JSX.Element {
 
     useEffect(() => {
         getInteractions(post.uid)
-    }, [post])
+    }, [post, getInteractions])
 
     return (
         <article className="flex flex-col mx-auto w-full md:w-[720px] xl:w-[1120px] text-backgroundDark dark:text-textLight">

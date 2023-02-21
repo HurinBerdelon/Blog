@@ -12,9 +12,10 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { fetchCategories } from "@/services/fetchCategories";
 import { languages } from "@/config/languages";
 import { Category } from "@/schema/Category";
+import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended";
 
 interface AllPostsProps {
-    postsResponse: Query<AllDocumentTypes>
+    postsResponse: Query<AllDocumentTypesExtended>
     sortedCategories: Category[]
 }
 
