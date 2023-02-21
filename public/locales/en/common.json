@@ -22,5 +22,9 @@
     "loginWithGoogle": "Login with Google",
     "redirecting": "Please await, redirecting ...",
     "all": "All",
-    "comments": "Comments"
+    "comments": "Comments",
+    "hideAnswer": "Hide Answer",
+    "showAnswer": "Show Answer",
+    "likeThisComment": "Like this comment",
+    "numberOfLikes": "Number of Likes"
 }

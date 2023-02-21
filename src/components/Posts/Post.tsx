@@ -9,10 +9,9 @@ import { Likes } from "../Likes"
 import { CommentInput } from "../Comments/CommentInput"
 import { Comment } from "../Comments/Comment"
 import { useTranslation } from "next-i18next"
-import { useEffect, useState } from "react"
-import { api } from "@/services/api"
-import { PostType } from "@/schema/Post"
-import { Interaction } from "@/schema/Interactions"
+import { useEffect } from "react"
+import { useInteraction } from "@/hooks/useInteractions"
+import { InteractiveLike } from "../Comments/InteractiveLike"
 
 interface PostProps {
     post: AllDocumentTypes
@@ -20,14 +19,10 @@ interface PostProps {
 
 export function Post({ post }: PostProps): JSX.Element {
     const { t } = useTranslation()
-    const [interactions, setInteractions] = useState<Interaction>()
+    const { interactions, getInteractions } = useInteraction()
 
     useEffect(() => {
-        api.get<PostType>(`/post/single/${post.uid}`)
-            .then(response => setInteractions({
-                comments: response.data.comment,
-                likes: response.data.likes
-            }))
+        getInteractions(post.uid)
     }, [post])
 
     return (
@@ -70,18 +65,19 @@ export function Post({ post }: PostProps): JSX.Element {
             <div className="self-center mt-8 w-3/4 border-b-[1px] border-double border-greenBrandDark dark:border-textLight" />
 
             <div className='px-4 my-8 flex justify-between'>
-                <Likes className="text-xl" interactions={{ likes: interactions?.likes.length, comments: null }} />
+                <InteractiveLike className="text-xl" likes={interactions?.likes} />
                 <Share postLink={`${process.env.NEXT_PUBLIC_BLOG_URL}/post/${post.uid}`} />
             </div>
 
             <div className="flex flex-col px-4 gap-5 mb-8">
                 <div className="font-medium">
                     {t('common:comments')}
-                    <span className="ml-2 text-sm">(12)</span>
+                    <span className="ml-2 text-sm">{`(${interactions?.comments.length})`}</span>
                 </div>
                 <CommentInput />
-                <Comment />
-                <Comment />
+                {interactions?.comments.map(comment => (
+                    <Comment comment={comment} key={comment.id} />
+                ))}
             </div>
         </article >
     )

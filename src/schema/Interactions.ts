@@ -17,7 +17,7 @@ export interface Comment {
     content: string
     createdAt: string
     author: Author
-    answer: Answer[]
+    answers: Answer[]
     likes: Like[]
 }
 

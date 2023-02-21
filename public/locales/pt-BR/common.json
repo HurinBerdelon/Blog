@@ -22,5 +22,9 @@
     "loginWithGoogle": "Login com Google",
     "redirecting": "Aguarde, redirecionando ...",
     "all": "Todos",
-    "comments": "Comentários"
+    "comments": "Comentários",
+    "hideAnswer": "Esconder Respostas",
+    "showAnswer": "Mostrar Respostas",
+    "likeThisComment": "Curta esse comentário",
+    "numberOfLikes": "Número de Curtidas"
 }

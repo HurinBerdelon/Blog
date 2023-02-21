@@ -33,6 +33,7 @@ export default function LoginCallback({ sortedCategories }: Pagerops) {
 
             <Header sortedCategories={sortedCategories} />
             <h1 className="m-auto text-lg">{t('common:redirecting')}</h1>
+            {/* TODO: Create animation */}
             <Footer sortedCategories={sortedCategories} />
         </>
     )

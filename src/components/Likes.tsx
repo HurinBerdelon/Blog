@@ -1,12 +1,12 @@
 import { Heart, Chat, Spinner } from "phosphor-react"
 
-interface Likes {
+interface LikesProps {
     interactions: { likes: number, comments: number }
     className?: string
     showComments?: boolean
 }
 
-export function Likes({ interactions, className = '', showComments = false }: Likes): JSX.Element {
+export function Likes({ interactions, className = '', showComments = false }: LikesProps): JSX.Element {
     return (
         <div className={`flex gap-2 items-center ${className}`}>
             <div className="flex flex-col items-center gap-1">
