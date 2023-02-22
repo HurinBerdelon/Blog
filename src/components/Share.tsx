@@ -5,8 +5,6 @@ import {
     FacebookIcon,
     TwitterShareButton,
     TwitterIcon,
-    EmailShareButton,
-    EmailIcon,
     LinkedinShareButton,
     LinkedinIcon,
     WhatsappShareButton,
@@ -40,14 +38,6 @@ export function Share({ postLink }: ShareProps): JSX.Element {
                         <TwitterIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>{`${t('common:shareOn')} Twitter`}</span>
                     </TwitterShareButton>
-                </motion.li>
-                <motion.li
-                    whileHover={{ scale: 1.1 }}
-                >
-                    <EmailShareButton url={postLink}>
-                        <EmailIcon className='w-8 h-8 rounded' />
-                        <span className='sr-only'>{`${t('common:shareOn')} Email`}</span>
-                    </EmailShareButton>
                 </motion.li>
                 <motion.li
                     whileHover={{ scale: 1.1 }}
