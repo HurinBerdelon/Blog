@@ -25,8 +25,6 @@ export function ListOfPosts({ posts, title, showPagination = false, seeAllPosts 
         fetchLikesAndComments(posts).then(response => setRecentPosts(response))
     }, [posts])
 
-    console.log(recentPosts)
-
     function onPageChange(page: number) {
         const path = router.asPath.split('?')[0]
         router.push(`${path}?page=${page}`)
