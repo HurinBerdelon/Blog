@@ -24,7 +24,7 @@ export default function NotFound({ sortedCategories }: NotFoundProps) {
 	return (
 		<>
 			<Head>
-				<title>Not Found | Hurin Blog</title>
+				<title>{`${t('common:notFound')} | Hurin Blog`}</title>
 				<meta name="description" content={t('common:generalMetaDescription')} />
 			</Head>
 			<Header sortedCategories={sortedCategories} />
@@ -34,7 +34,7 @@ export default function NotFound({ sortedCategories }: NotFoundProps) {
 					href="/category/all"
 					className='hover:underline text-backgroundDark dark:text-textLight'
 				>
-					{t('common:notFound')}
+					{t('common:notFoundText')}
 				</Link>
 				<LoginModal isOpen={isLoginModalOpen} onRequestClose={() => setIsLoginModalOpen(false)} />
 			</main>
