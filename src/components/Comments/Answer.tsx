@@ -1,33 +1,48 @@
 import { Answer, Like } from "@/schema/Interactions"
 import { formatDate } from "@/services/dayjs"
-import { Heart } from "phosphor-react"
 import { useTranslation } from "next-i18next"
 import { useUser } from "@/hooks/useUser"
 import { useEffect, useState } from "react"
 import { useInteraction } from "@/hooks/useInteractions"
 import { CommentInput } from "./CommentInput"
 import { LikeIcon } from "./LikeIcon"
+import { useLogin } from "@/hooks/useLogin"
+import { Spinner } from "phosphor-react"
 
 interface AnswerProps {
     answer: Answer
 }
 
 export function Answer({ answer }: AnswerProps): JSX.Element {
-    const { t } = useTranslation()
+
+    const { LikeAnswer, UnlikeAnswer, updateAnswer, deleteAnswer } = useInteraction()
     const [userLike, setUserLike] = useState<Like>(null)
     const [isUpdating, setIsUpdating] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const { setIsLoginModalOpen } = useLogin()
+    const { t } = useTranslation()
     const { user } = useUser()
-    const { LikeAnswer, UnlikeAnswer, updateAnswer, deleteAnswer } = useInteraction()
 
     useEffect(() => {
         const like = answer.likes.find(like => like.userId === user?.id)
         setUserLike(like)
-    }, [answer, user?.id])
+    }, [answer])
 
-    function handleLike() {
-        if (!user) return
-        if (userLike) UnlikeAnswer(userLike.id)
-        else LikeAnswer(answer.id)
+    async function handleLike() {
+        if (!user) {
+            setIsLoginModalOpen(true)
+            return
+        }
+        if (userLike) {
+            setIsLoading(true)
+            await UnlikeAnswer(userLike.id)
+            setIsLoading(false)
+        }
+        else {
+            setIsLoading(true)
+            await LikeAnswer(answer.id)
+            setIsLoading(false)
+        }
     }
 
     return (
@@ -51,7 +66,7 @@ export function Answer({ answer }: AnswerProps): JSX.Element {
             )}
 
             <div className="flex gap-2 items-center absolute right-2 dark:border-greenBrandDark bg-textLight dark:bg-backgroundDark z-10 -bottom-2 px-2 rounded border-2 border-grayBrand">
-                {answer.author.id === user.id ? (
+                {answer.author.id === user?.id ? (
                     <>
                         <button
                             className="text-sm mx-1 hover:underline"
@@ -69,10 +84,14 @@ export function Answer({ answer }: AnswerProps): JSX.Element {
                 ) : null}
                 <button
                     onClick={handleLike}
-                    className="flex gap-1 items-center text-lg"
+                    className={`flex gap-1 items-center text-lg ${isLoading ? 'cursor-default' : ''}`}
+                    disabled={isLoading}
                 >
                     <span className="sr-only">{t('common:likeThisComment')}</span>
-                    <LikeIcon isLiked={userLike ? true : false} />
+                    {isLoading
+                        ? <Spinner className="animate-spin text-backgroundDark dark:text-textLight" />
+                        : <LikeIcon isLiked={userLike ? true : false} />
+                    }
                     <span>{answer.likes.length}</span>
                 </button>
             </div>

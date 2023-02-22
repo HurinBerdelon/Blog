@@ -33,12 +33,12 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
                         height={post.data.banner.dimensions?.height}
                         src={post.data.banner.url as string}
                         alt={post.data.banner.alt as string}
-                        className="cover w-full"
+                        className="object-cover w-full"
                     />
                 </div>
                 <div className="px-3 flex gap-3 italic font-medium capitalize text-sm">
                     {post.tags.map(tag => (
-                        <span key={tag}>{tag}</span>
+                        <span key={tag}>{tag || null}</span>
                     ))}
                 </div>
                 <div className="py-2 px-3 text-justify">

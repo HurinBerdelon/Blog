@@ -27,20 +27,21 @@
           "thumbnails": []
         }
       },
-      "subjects": {
-        "type": "StructuredText",
+      "meta_description": {
+        "type": "Text",
         "config": {
-          "label": "subjects",
-          "placeholder": "Use each subject in a line",
-          "allowTargetBlank": true,
-          "multi": "list-item"
+          "label": "Meta Description",
+          "placeholder": "Description of the page, for SEO"
         }
       },
       "author": {
-        "type": "Text",
+        "type": "Link",
         "config": {
           "label": "Author",
-          "placeholder": ""
+          "select": "document",
+          "customtypes": [
+            "author"
+          ]
         }
       },
       "slices": {

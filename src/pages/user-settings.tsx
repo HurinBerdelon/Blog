@@ -9,6 +9,8 @@ import { parseCookies } from "nookies"
 import { useTranslation } from "next-i18next"
 import { Header } from "../components/Header"
 import { appKeys } from "../config/AppKeys"
+import { LoginModal } from "@/components/LoginModal"
+import { useLogin } from "@/hooks/useLogin"
 
 interface PageProps {
     sortedCategories: Category[]
@@ -17,15 +19,19 @@ interface PageProps {
 export default function UserSettings({ sortedCategories }: PageProps): JSX.Element {
 
     const { t } = useTranslation()
+    const { isLoginModalOpen, setIsLoginModalOpen } = useLogin()
 
     return (
         <>
             <Head>
                 <title>{`${t('common:profile')} | HurinBlog`}</title>
+                <meta name="description" content={t('common:userSettingsMetaDescription')} />
             </Head>
             <Header sortedCategories={sortedCategories} />
             <main className="flex-1 flex items-center justify-center">
                 <UpdateProfile />
+                <LoginModal isOpen={isLoginModalOpen} onRequestClose={() => setIsLoginModalOpen(false)} />
+
             </main>
             <Footer sortedCategories={sortedCategories} />
         </>

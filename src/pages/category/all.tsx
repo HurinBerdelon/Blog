@@ -13,6 +13,8 @@ import { fetchCategories } from "@/services/fetchCategories";
 import { languages } from "@/config/languages";
 import { Category } from "@/schema/Category";
 import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended";
+import { useLogin } from "@/hooks/useLogin";
+import { LoginModal } from "@/components/LoginModal";
 
 interface AllPostsProps {
     postsResponse: Query<AllDocumentTypesExtended>
@@ -22,11 +24,13 @@ interface AllPostsProps {
 export default function AllPosts({ postsResponse, sortedCategories }: AllPostsProps): JSX.Element {
 
     const { t } = useTranslation()
+    const { isLoginModalOpen, setIsLoginModalOpen } = useLogin()
 
     return (
         <>
             <Head>
                 <title>{`${t('common:allPosts')} | Hurin Blog`}</title>
+                <meta name="description" content={t('common:generalMetaDescription')} />
             </Head>
             <Header sortedCategories={sortedCategories} />
             <main className="flex-1">
@@ -35,6 +39,7 @@ export default function AllPosts({ postsResponse, sortedCategories }: AllPostsPr
                     posts={postsResponse}
                     showPagination={true}
                 />
+                <LoginModal isOpen={isLoginModalOpen} onRequestClose={() => setIsLoginModalOpen(false)} />
             </main>
             <Footer sortedCategories={sortedCategories} />
         </>
@@ -50,7 +55,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         {
             page: context.query.page ? Number(context.query.page) : 1,
             pageSize: pageSize,
-            lang: languages[context.locale].prismic_code
+            lang: languages[context.locale].prismic_code,
+            fetchLinks: [
+                'author.authorprofileimage',
+                'author.name'
+            ]
         })
 
     const locale = context.locale ?? 'en'

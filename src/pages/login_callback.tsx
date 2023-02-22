@@ -23,12 +23,13 @@ export default function LoginCallback({ sortedCategories }: Pagerops) {
         if (session && !isAuthenticating && !isAuthenticated) {
             authenticate(session)
         }
-    }, [session, isAuthenticating, authenticate, isAuthenticated])
+    }, [session, isAuthenticating])
 
     return (
         <>
             <Head>
                 <title>Redirect | HurinBlog</title>
+                <meta name="description" content={t('common:loginCallbackMetaDescription')} />
             </Head>
 
             <Header sortedCategories={sortedCategories} />

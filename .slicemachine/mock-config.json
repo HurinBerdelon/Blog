@@ -1,6 +1,7 @@
 {
   "_cts": {
-    "blog_post": {}
+    "blog_post": {},
+    "author": {}
   },
   "slices": {
     "TextAndImage": {

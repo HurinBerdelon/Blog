@@ -11,6 +11,9 @@ import { fetchCategories } from "@/services/fetchCategories";
 import { languages } from "@/config/languages";
 import { Category } from "@/schema/Category";
 import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended";
+import { useLogin } from "@/hooks/useLogin";
+import { LoginModal } from "@/components/LoginModal";
+import { useTranslation } from "next-i18next";
 
 interface CategoryProps {
     postsResponse: Query<AllDocumentTypesExtended>
@@ -20,10 +23,14 @@ interface CategoryProps {
 
 export default function CategoryPage({ postsResponse, category, sortedCategories }: CategoryProps): JSX.Element {
 
+    const { isLoginModalOpen, setIsLoginModalOpen } = useLogin()
+    const { t } = useTranslation()
+
     return (
         <>
             <Head>
                 <title>{`${category} | Hurin Blog`}</title>
+                <meta name="description" content={`${t('common:categoryMetaDescription')} ${category}.`} />
             </Head>
             <Header sortedCategories={sortedCategories} />
             <main className="flex-1 flex">
@@ -32,6 +39,8 @@ export default function CategoryPage({ postsResponse, category, sortedCategories
                     posts={postsResponse}
                     showPagination={true}
                 />
+                <LoginModal isOpen={isLoginModalOpen} onRequestClose={() => setIsLoginModalOpen(false)} />
+
             </main>
             <Footer sortedCategories={sortedCategories} />
         </>
@@ -48,7 +57,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const postsResponse = await client.getByTag(category, {
         page: context.query.page ? Number(context.query.page) : 1,
         pageSize: pageSize,
-        lang: languages[context.locale].prismic_code
+        lang: languages[context.locale].prismic_code,
+        fetchLinks: [
+            'author.authorprofileimage',
+            'author.name'
+        ]
     })
 
     const locale = context.locale ?? 'en'

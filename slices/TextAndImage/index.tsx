@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { PrismicImage } from '@prismicio/react'
 import type { Content } from '@prismicio/client'
 import type { SliceComponentProps } from '@prismicio/react'
@@ -17,7 +17,7 @@ const TextAndImage = ({ slice }: TextAndImageProps) => (
 			<PrismicImage
 				field={slice.primary.image}
 				width={slice.primary.image.dimensions.width}
-				className="cover mx-4 rounded-lg overflow-hidden"
+				className="object-cover mx-4 rounded-lg overflow-hidden"
 			/>
 		</div>
 	</section>

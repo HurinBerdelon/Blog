@@ -1,5 +1,4 @@
-import { AllDocumentTypes } from ".slicemachine/prismicio"
-import { formatDate } from "@/services/dayjs"
+import { BlogPostDocument } from ".slicemachine/prismicio"
 import { SliceZone } from "@prismicio/react"
 import Link from "next/link"
 import { components } from "slices"
@@ -8,25 +7,36 @@ import Image from 'next/image'
 import { CommentInput } from "../Comments/CommentInput"
 import { Comment } from "../Comments/Comment"
 import { useTranslation } from "next-i18next"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useInteraction } from "@/hooks/useInteractions"
 import { InteractiveLike } from "../Comments/InteractiveLike"
+import { useUser } from "@/hooks/useUser"
+import { useLogin } from "@/hooks/useLogin"
+import { AuthorCard } from "../AuthorCard"
+import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended"
 
 interface PostProps {
-    post: AllDocumentTypes
+    post: BlogPostDocument
 }
 
 export function Post({ post }: PostProps): JSX.Element {
-    const { t } = useTranslation()
     const { interactions, getInteractions } = useInteraction()
+    const [numberOfComments, setNumberOfComments] = useState(0)
+    const { setIsLoginModalOpen } = useLogin()
+    const { t } = useTranslation()
+    const { user } = useUser()
 
-    const numberOfComments = interactions?.comments.reduce((acc, comment) => {
-        return acc + comment.answers.length + 1
-    }, 0)
+    useEffect(() => {
+        setNumberOfComments(
+            interactions?.comments.reduce((acc, comment) => {
+                return acc + comment.answers.length + 1
+            }, 0)
+        )
+    }, [interactions])
 
     useEffect(() => {
         getInteractions(post.uid)
-    }, [post, getInteractions])
+    }, [post])
 
     return (
         <article className="flex flex-col mx-auto w-full md:w-[720px] xl:w-[1120px] text-backgroundDark dark:text-textLight">
@@ -39,7 +49,7 @@ export function Post({ post }: PostProps): JSX.Element {
                                 height={post.data.banner.dimensions.height}
                                 src={post.data.banner.url}
                                 alt={post.data.banner.alt as string}
-                                className="cover w-full"
+                                className="object-cover w-full"
                             />
                         </div>
                     )
@@ -57,8 +67,7 @@ export function Post({ post }: PostProps): JSX.Element {
             </div>
 
             <div className="py-2 px-4 flex gap-6 items-center mb-6">
-                <span>{post.data.author}</span>
-                <span className="italic text-sm">{formatDate(post.first_publication_date)}</span>
+                <AuthorCard post={post as AllDocumentTypesExtended} />
             </div>
 
             <div className="flex flex-col">
@@ -77,7 +86,14 @@ export function Post({ post }: PostProps): JSX.Element {
                     {t('common:comments')}
                     <span className="ml-2 text-sm">{`(${numberOfComments})`}</span>
                 </div>
-                <CommentInput />
+                {user ? <CommentInput /> : (
+                    <button
+                        onClick={() => setIsLoginModalOpen(true)}
+                        className="hover:underline w-fit"
+                    >
+                        {t('common:signInToCommnet')}
+                    </button>
+                )}
                 {interactions?.comments.map(comment => (
                     <Comment comment={comment} key={comment.id} />
                 ))}

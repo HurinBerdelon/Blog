@@ -6,6 +6,52 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = {
     [KeyType in keyof T]: T[KeyType];
 };
+/** Content for Author documents */
+interface AuthorDocumentData {
+    /**
+     * authorProfileImage field in *Author*
+     *
+     * - **Field Type**: Image
+     * - **Placeholder**: *None*
+     * - **API ID Path**: author.authorprofileimage
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/image
+     *
+     */
+    authorprofileimage: prismicT.ImageField<never>;
+    /**
+     * Name field in *Author*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: author.name
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
+     *
+     */
+    name: prismicT.KeyTextField;
+    /**
+     * Introduction field in *Author*
+     *
+     * - **Field Type**: Rich Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: author.introduction
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
+     *
+     */
+    introduction: prismicT.RichTextField;
+}
+/**
+ * Author document from Prismic
+ *
+ * - **API ID**: `author`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/core-concepts/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AuthorDocument<Lang extends string = string> = prismicT.PrismicDocumentWithoutUID<Simplify<AuthorDocumentData>, "author", Lang>;
 /** Content for BlogPost documents */
 interface BlogPostDocumentData {
     /**
@@ -31,27 +77,27 @@ interface BlogPostDocumentData {
      */
     banner: prismicT.ImageField<never>;
     /**
-     * subjects field in *BlogPost*
-     *
-     * - **Field Type**: Rich Text
-     * - **Placeholder**: Use each subject in a line
-     * - **API ID Path**: blog_post.subjects
-     * - **Tab**: Main
-     * - **Documentation**: https://prismic.io/docs/core-concepts/rich-text-title
-     *
-     */
-    subjects: prismicT.RichTextField;
-    /**
-     * Author field in *BlogPost*
+     * Meta Description field in *BlogPost*
      *
      * - **Field Type**: Text
-     * - **Placeholder**: *None*
-     * - **API ID Path**: blog_post.author
+     * - **Placeholder**: Description of the page, for SEO
+     * - **API ID Path**: blog_post.meta_description
      * - **Tab**: Main
      * - **Documentation**: https://prismic.io/docs/core-concepts/key-text
      *
      */
-    author: prismicT.KeyTextField;
+    meta_description: prismicT.KeyTextField;
+    /**
+     * Author field in *BlogPost*
+     *
+     * - **Field Type**: Content Relationship
+     * - **Placeholder**: *None*
+     * - **API ID Path**: blog_post.author
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/core-concepts/link-content-relationship
+     *
+     */
+    author: prismicT.RelationField<"author">;
     /**
      * Slice Zone field in *BlogPost*
      *
@@ -79,7 +125,7 @@ type BlogPostDocumentDataSlicesSlice = TextAndImageSlice | TextOnlySlice;
  * @typeParam Lang - Language API ID of the document.
  */
 export type BlogPostDocument<Lang extends string = string> = prismicT.PrismicDocumentWithUID<Simplify<BlogPostDocumentData>, "blog_post", Lang>;
-export type AllDocumentTypes = BlogPostDocument;
+export type AllDocumentTypes = AuthorDocument | BlogPostDocument;
 /**
  * Primary content in TextAndImage → Primary
  *
@@ -173,6 +219,6 @@ declare module "@prismicio/client" {
         (repositoryNameOrEndpoint: string, options?: prismic.ClientConfig): prismic.Client<AllDocumentTypes>;
     }
     namespace Content {
-        export type { BlogPostDocumentData, BlogPostDocumentDataSlicesSlice, BlogPostDocument, AllDocumentTypes, TextAndImageSliceDefaultPrimary, TextAndImageSliceDefault, TextAndImageSliceVariation, TextAndImageSlice, TextOnlySliceDefaultPrimary, TextOnlySliceDefault, TextOnlySliceVariation, TextOnlySlice };
+        export type { AuthorDocumentData, AuthorDocument, BlogPostDocumentData, BlogPostDocumentDataSlicesSlice, BlogPostDocument, AllDocumentTypes, TextAndImageSliceDefaultPrimary, TextAndImageSliceDefault, TextAndImageSliceVariation, TextAndImageSlice, TextOnlySliceDefaultPrimary, TextOnlySliceDefault, TextOnlySliceVariation, TextOnlySlice };
     }
 }

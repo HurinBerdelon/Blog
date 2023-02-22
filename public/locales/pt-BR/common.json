@@ -31,5 +31,13 @@
     "giveAComment": "Deixe um comentário",
     "edit": "Editar",
     "delete": "Deletar",
-    "reply": "Responder"
+    "reply": "Responder",
+    "blogLogo": "HurinBlog Logo",
+    "signInToCommnet": "Clique aqui para fazer login e deixar seu comentário.",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "categoryMetaDescription": "Blog do Fernando Cardozo. Página de de categorias, listando os conteúdos que falam sobre",
+    "generalMetaDescription": "Blog do Fernando Cardozo, trazendo conteúdo sobre tecnologia e programação, com foco em desenvolvimento frontend. Conteúdo sobre React, NextJS, Typescript e algumas outros assuntos de tecnologia.",
+    "loginCallbackMetaDescription": "Blog do Fernando Cardozo, página de callback de autenticação.",
+    "userSettingsMetaDescription": "Blog do Fernando Cardozo, página de configurações do usuário."
 }

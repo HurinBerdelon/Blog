@@ -1,6 +1,5 @@
 import { Comment, Like } from "@/schema/Interactions"
 import { formatDate } from "@/services/dayjs"
-import { Heart } from "phosphor-react"
 import { useEffect, useState } from "react"
 import { useTranslation } from "next-i18next"
 import { Answer } from "./Answer"
@@ -8,29 +7,53 @@ import { useUser } from "@/hooks/useUser"
 import { useInteraction } from "@/hooks/useInteractions"
 import { CommentInput } from "./CommentInput"
 import { LikeIcon } from "./LikeIcon"
+import { useLogin } from "@/hooks/useLogin"
+import { Spinner } from "phosphor-react"
 
 interface CommentProps {
     comment: Comment
 }
 
 export function Comment({ comment }: CommentProps): JSX.Element {
+
     const { LikeComment, UnlikeComment, updateComment, deleteComment, saveAnswer } = useInteraction()
+    const [showAnswerInput, setShowAnswerInput] = useState(false)
     const [userLike, setUserLike] = useState<Like>(null)
     const [showAnswer, setShowAnswer] = useState(false)
     const [isUpdating, setIsUpdating] = useState(false)
-    const [showAnswerInput, setShowAnswerInput] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const { setIsLoginModalOpen } = useLogin()
     const { t } = useTranslation()
     const { user } = useUser()
 
     useEffect(() => {
         const like = comment.likes.find(like => like.userId === user?.id)
         setUserLike(like)
-    }, [comment, user?.id])
+    }, [comment])
 
-    function handleLike() {
-        if (!user) return
-        if (userLike) UnlikeComment(userLike.id)
-        else LikeComment(comment.id)
+    async function handleLike() {
+        if (!user) {
+            setIsLoginModalOpen(true)
+            return
+        }
+        if (userLike) {
+            setIsLoading(true)
+            await UnlikeComment(userLike.id)
+            setIsLoading(false)
+        }
+        else {
+            setIsLoading(true)
+            await LikeComment(comment.id)
+            setIsLoading(false)
+        }
+    }
+
+    function handleReplyComment() {
+        if (!user) {
+            setIsLoginModalOpen(true)
+            return
+        }
+        setShowAnswerInput(state => !state)
     }
 
     return (
@@ -73,16 +96,20 @@ export function Comment({ comment }: CommentProps): JSX.Element {
                     ) : null}
                     <button
                         className="text-sm mx-1 hover:underline"
-                        onClick={() => setShowAnswerInput(state => !state)}
+                        onClick={handleReplyComment}
                     >
                         {t('common:reply')}
                     </button>
                     <button
-                        className="flex gap-1 items-center text-lg"
+                        className={`flex gap-1 items-center text-lg ${isLoading ? 'cursor-default' : ''}`}
+                        disabled={isLoading}
                         onClick={handleLike}
                     >
                         <span className="sr-only">Like this comment</span>
-                        <LikeIcon isLiked={userLike ? true : false} />
+                        {isLoading
+                            ? <Spinner className="animate-spin text-backgroundDark dark:text-textLight" />
+                            : <LikeIcon isLiked={userLike ? true : false} />
+                        }
                         <span>{comment.likes.length}</span>
                     </button>
                 </div>

@@ -14,25 +14,25 @@ export function Profile(): JSX.Element {
                 {user
                     ? user.avatarURL
                         ? <Image
-                            width={80}
-                            height={80}
+                            width={120}
+                            height={120}
                             referrerPolicy="no-referrer" src={user.avatarURL}
                             alt={`${user.name} ${t('common:profile')}`}
-                            className="p-1 rounded-full cover w-full"
+                            className="p-1 object-cover rounded-full h-full w-full"
                         />
                         : <Image
                             width={80}
                             height={80}
                             src="/avatar/user.png"
                             alt="profile template"
-                            className="p-1 rounded-full cover w-full"
+                            className="p-1 rounded-full object-cover w-full h-full"
                         />
                     : <Image
                         width={80}
                         height={80}
                         src="/avatar/user.png"
                         alt="profile template"
-                        className="p-1 rounded-full cover w-full"
+                        className="p-1 rounded-full object-cover w-full h-full"
                     />
                 }
             </div>
