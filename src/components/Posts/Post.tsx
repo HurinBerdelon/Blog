@@ -11,28 +11,30 @@ import { useTranslation } from "next-i18next"
 import { useEffect, useState } from "react"
 import { useInteraction } from "@/hooks/useInteractions"
 import { InteractiveLike } from "../Comments/InteractiveLike"
+import { useUser } from "@/hooks/useUser"
+import { useLogin } from "@/hooks/useLogin"
 
 interface PostProps {
     post: AllDocumentTypes
 }
 
 export function Post({ post }: PostProps): JSX.Element {
-    const { t } = useTranslation()
     const { interactions, getInteractions } = useInteraction()
-    const [numberOfComments, setNumberOfComments] = useState(
-        interactions?.comments.reduce((acc, comment) => {
-            return acc + comment.answers.length + 1
-        }, 0)
-    )
-
+    const [numberOfComments, setNumberOfComments] = useState(0)
+    const { setIsLoginModalOpen } = useLogin()
+    const { t } = useTranslation()
+    const { user } = useUser()
 
     useEffect(() => {
-        getInteractions(post.uid)
         setNumberOfComments(
             interactions?.comments.reduce((acc, comment) => {
                 return acc + comment.answers.length + 1
             }, 0)
         )
+    }, [interactions])
+
+    useEffect(() => {
+        getInteractions(post.uid)
     }, [post])
 
     return (
@@ -84,7 +86,14 @@ export function Post({ post }: PostProps): JSX.Element {
                     {t('common:comments')}
                     <span className="ml-2 text-sm">{`(${numberOfComments})`}</span>
                 </div>
-                <CommentInput />
+                {user ? <CommentInput /> : (
+                    <button
+                        onClick={() => setIsLoginModalOpen(true)}
+                        className="hover:underline w-fit"
+                    >
+                        {t('common:signInToCommnet')}
+                    </button>
+                )}
                 {interactions?.comments.map(comment => (
                     <Comment comment={comment} key={comment.id} />
                 ))}

@@ -8,6 +8,8 @@ import { createClient } from "prismicio";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { fetchCategories } from "@/services/fetchCategories";
 import { Category } from "@/schema/Category";
+import { useLogin } from "@/hooks/useLogin";
+import { LoginModal } from "@/components/LoginModal";
 
 interface PostPageProps {
     post: AllDocumentTypes
@@ -15,6 +17,8 @@ interface PostPageProps {
 }
 
 export default function PostPage({ post, sortedCategories }: PostPageProps): JSX.Element {
+
+    const { isLoginModalOpen, setIsLoginModalOpen } = useLogin()
 
     return (
         <>
@@ -24,6 +28,7 @@ export default function PostPage({ post, sortedCategories }: PostPageProps): JSX
             <Header sortedCategories={sortedCategories} />
             <main className="flex-1">
                 <Post post={post} />
+                <LoginModal isOpen={isLoginModalOpen} onRequestClose={() => setIsLoginModalOpen(false)} />
             </main>
             <Footer sortedCategories={sortedCategories} />
         </>

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Category } from "@/schema/Category";
 import { Profile } from "./Profile";
 import { useUser } from "@/hooks/useUser";
+import { useLogin } from "@/hooks/useLogin";
 
 interface PopoverMenuProps {
     sortedCategories: Category[]
@@ -15,12 +16,11 @@ interface PopoverMenuProps {
 export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element {
 
     const { t } = useTranslation()
-    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+    const { setIsLoginModalOpen } = useLogin()
     const { revokeAuthentication, user } = useUser()
 
     return (
         <menu>
-            <LoginModal isOpen={isLoginModalOpen} onRequestClose={() => setIsLoginModalOpen(false)} />
             <Popover className="relative flex">
                 <Popover.Button className="text-3xl">
                     <List className="text-backgroundDark hover:text-greenBrandDark dark:text-textLight dark:hover:text-grayBrand" />

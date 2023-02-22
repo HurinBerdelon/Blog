@@ -1,4 +1,5 @@
 import { InteractionProvider } from '@/hooks/useInteractions'
+import { LoginProvider } from '@/hooks/useLogin'
 import { ThemeProvider } from '@/hooks/useTheme'
 import { UserProvider } from '@/hooks/useUser'
 import { PrismicPreview } from '@prismicio/next'
@@ -18,14 +19,16 @@ function App({ Component, pageProps }: AppProps) {
 				<SessionProvider>
 					<UserProvider>
 						<InteractionProvider>
-							<ThemeProvider>
-								<Head>
-									<meta name="viewport" content="width=device-width, initial-scale=1" />
-								</Head>
-								<div className='min-h-screen flex flex-col bg-textLight dark:bg-backgroundDark'>
-									<Component {...pageProps} />
-								</div>
-							</ThemeProvider>
+							<LoginProvider>
+								<ThemeProvider>
+									<Head>
+										<meta name="viewport" content="width=device-width, initial-scale=1" />
+									</Head>
+									<div className='min-h-screen flex flex-col bg-textLight dark:bg-backgroundDark'>
+										<Component {...pageProps} />
+									</div>
+								</ThemeProvider>
+							</LoginProvider>
 						</InteractionProvider>
 					</UserProvider>
 				</SessionProvider>

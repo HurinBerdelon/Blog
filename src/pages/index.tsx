@@ -12,6 +12,8 @@ import { fetchCategories } from '@/services/fetchCategories'
 import { languages } from '@/config/languages'
 import { Category } from '@/schema/Category'
 import { AllDocumentTypesExtended } from '@/schema/AllDocumentTypesExtended'
+import { useLogin } from '@/hooks/useLogin'
+import { LoginModal } from '@/components/LoginModal'
 
 interface HomeProps {
 	lastFourPosts: Query<AllDocumentTypesExtended>
@@ -21,6 +23,7 @@ interface HomeProps {
 export default function Home({ lastFourPosts, sortedCategories }: HomeProps) {
 
 	const { t } = useTranslation()
+	const { isLoginModalOpen, setIsLoginModalOpen } = useLogin()
 
 	return (
 		<>
@@ -39,6 +42,7 @@ export default function Home({ lastFourPosts, sortedCategories }: HomeProps) {
 					posts={lastFourPosts}
 					seeAllPosts={true}
 				/>
+				<LoginModal isOpen={isLoginModalOpen} onRequestClose={() => setIsLoginModalOpen(false)} />
 			</main>
 			<Footer sortedCategories={sortedCategories} />
 		</>

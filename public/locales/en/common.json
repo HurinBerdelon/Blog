@@ -31,5 +31,9 @@
     "giveAComment": "Give a Comment",
     "edit": "Edit",
     "delete": "Delete",
-    "reply": "Reply"
+    "reply": "Reply",
+    "blogLogo": "HurinBlog Logo",
+    "signInToCommnet": "Click here to sign in and be able to comment.",
+    "save": "Save",
+    "cancel": "Cancel"
 }

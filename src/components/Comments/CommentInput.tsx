@@ -1,5 +1,6 @@
 import { useInteraction } from "@/hooks/useInteractions"
 import { useTranslation } from "next-i18next"
+import { Spinner } from "phosphor-react"
 import { useState } from "react"
 
 interface CommentInputProps {
@@ -21,10 +22,12 @@ export function CommentInput({
 }: CommentInputProps): JSX.Element {
 
     const [content, setContent] = useState(defaultComment)
+    const [isLoading, setIsLoading] = useState(false)
     const { saveComment } = useInteraction()
     const { t } = useTranslation()
 
     async function handleSubmit() {
+        setIsLoading(true)
         if (content) {
             if (update) {
                 await update(content, commentId)
@@ -38,6 +41,7 @@ export function CommentInput({
             }
             else saveComment(content)
         }
+        setIsLoading(false)
     }
 
     function handleCancel() {
@@ -62,16 +66,20 @@ export function CommentInput({
                 <div className={`self-end flex gap-4 mt-2 ${update ? 'mb-2' : ''}`}>
                     <button
                         type="button"
-                        className="underline"
+                        className="hover:underline"
                         onClick={handleCancel}
                     >
-                        Cancel
+                        {t('common:cancel')}
                     </button>
                     <button
                         type="submit"
-                        className="px-4 bg-greenBrand rounded text-textLight font-medium dark:bg-greenBrandDark"
+                        disabled={isLoading}
+                        className={`px-4 min-w-[78px] justify-center items-center flex bg-greenBrand rounded text-textLight font-medium dark:bg-greenBrandDark ${isLoading ? 'cursor-default' : 'hover:brightness-90'}`}
                     >
-                        Save
+                        {isLoading
+                            ? <Spinner className="animate-spin" />
+                            : t('common:save')
+                        }
                     </button>
                 </div>
             ) : null}

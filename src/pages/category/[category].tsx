@@ -11,6 +11,8 @@ import { fetchCategories } from "@/services/fetchCategories";
 import { languages } from "@/config/languages";
 import { Category } from "@/schema/Category";
 import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended";
+import { useLogin } from "@/hooks/useLogin";
+import { LoginModal } from "@/components/LoginModal";
 
 interface CategoryProps {
     postsResponse: Query<AllDocumentTypesExtended>
@@ -19,6 +21,8 @@ interface CategoryProps {
 }
 
 export default function CategoryPage({ postsResponse, category, sortedCategories }: CategoryProps): JSX.Element {
+
+    const { isLoginModalOpen, setIsLoginModalOpen } = useLogin()
 
     return (
         <>
@@ -32,6 +36,8 @@ export default function CategoryPage({ postsResponse, category, sortedCategories
                     posts={postsResponse}
                     showPagination={true}
                 />
+                <LoginModal isOpen={isLoginModalOpen} onRequestClose={() => setIsLoginModalOpen(false)} />
+
             </main>
             <Footer sortedCategories={sortedCategories} />
         </>
