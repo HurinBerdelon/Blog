@@ -22,7 +22,7 @@ export function Answer({ answer }: AnswerProps): JSX.Element {
     useEffect(() => {
         const like = answer.likes.find(like => like.userId === user?.id)
         setUserLike(like)
-    }, [answer, user?.id])
+    }, [answer])
 
     function handleLike() {
         if (!user) return

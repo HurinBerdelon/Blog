@@ -20,7 +20,7 @@ export function InteractiveLike({ likes, className = '' }: InteractiveLikeProps)
     useEffect(() => {
         const like = likes?.find(like => like.userId === user?.id)
         setUserLike(like)
-    }, [likes, user?.id])
+    }, [likes])
 
     function handleLike() {
         if (!user) return

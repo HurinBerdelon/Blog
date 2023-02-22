@@ -8,7 +8,7 @@ import Image from 'next/image'
 import { CommentInput } from "../Comments/CommentInput"
 import { Comment } from "../Comments/Comment"
 import { useTranslation } from "next-i18next"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useInteraction } from "@/hooks/useInteractions"
 import { InteractiveLike } from "../Comments/InteractiveLike"
 
@@ -19,14 +19,21 @@ interface PostProps {
 export function Post({ post }: PostProps): JSX.Element {
     const { t } = useTranslation()
     const { interactions, getInteractions } = useInteraction()
+    const [numberOfComments, setNumberOfComments] = useState(
+        interactions?.comments.reduce((acc, comment) => {
+            return acc + comment.answers.length + 1
+        }, 0)
+    )
 
-    const numberOfComments = interactions?.comments.reduce((acc, comment) => {
-        return acc + comment.answers.length + 1
-    }, 0)
 
     useEffect(() => {
         getInteractions(post.uid)
-    }, [post, getInteractions])
+        setNumberOfComments(
+            interactions?.comments.reduce((acc, comment) => {
+                return acc + comment.answers.length + 1
+            }, 0)
+        )
+    }, [post])
 
     return (
         <article className="flex flex-col mx-auto w-full md:w-[720px] xl:w-[1120px] text-backgroundDark dark:text-textLight">
