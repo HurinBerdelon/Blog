@@ -39,5 +39,7 @@
     "categoryMetaDescription": "Fernando Cardozo's blog category page listing all the posts talking about",
     "generalMetaDescription": "Fernando Cardozo's blog to talk about technology and programming, with focus on frontend development. Talking about React, NextJS, Typescript and some other tech subjects.",
     "loginCallbackMetaDescription": "Fernando Cardozo's blog callback page for authentication.",
-    "userSettingsMetaDescription": "Fernando Cardozo's blog user's settings page."
+    "userSettingsMetaDescription": "Fernando Cardozo's blog user's settings page.",
+    "notFoundText": "Page not Found! Would like to see all posts?",
+    "notFound": "Page not Found"
 }
