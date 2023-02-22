@@ -61,7 +61,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         fetchLinks: [
             'author.authorprofileimage',
             'author.name'
-        ]
+        ],
+        orderings: {
+            field: 'document.first_publication_date',
+            direction: 'desc'
+        },
     })
 
     const locale = context.locale ?? 'en'
