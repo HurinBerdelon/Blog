@@ -1,4 +1,4 @@
-import { AllDocumentTypes } from ".slicemachine/prismicio";
+import { BlogPostDocument } from ".slicemachine/prismicio";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Post } from "@/components/Posts/Post";
@@ -12,7 +12,7 @@ import { useLogin } from "@/hooks/useLogin";
 import { LoginModal } from "@/components/LoginModal";
 
 interface PostPageProps {
-    post: AllDocumentTypes
+    post: BlogPostDocument
     sortedCategories: Category[]
 }
 
@@ -20,10 +20,13 @@ export default function PostPage({ post, sortedCategories }: PostPageProps): JSX
 
     const { isLoginModalOpen, setIsLoginModalOpen } = useLogin()
 
+    console.log('>>', post)
+
     return (
         <>
             <Head>
                 <title>{`${post.data.title_of_the_post} | HurinBlog`}</title>
+                <meta name="description" content={post.data.meta_description} />
             </Head>
             <Header sortedCategories={sortedCategories} />
             <main className="flex-1">
@@ -48,7 +51,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const client = createClient({ previewData: context.previewData })
     const uid = context.params?.uid as string
 
-    const post = await client.getByUID('blog_post', uid)
+    const post = await client.getByUID('blog_post', uid, {
+        fetchLinks: [
+            'author.authorprofileimage',
+            'author.name'
+        ]
+    })
 
     const sortedCategories = await fetchCategories()
 

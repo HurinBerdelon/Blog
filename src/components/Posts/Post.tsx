@@ -1,5 +1,4 @@
-import { AllDocumentTypes } from ".slicemachine/prismicio"
-import { formatDate } from "@/services/dayjs"
+import { BlogPostDocument } from ".slicemachine/prismicio"
 import { SliceZone } from "@prismicio/react"
 import Link from "next/link"
 import { components } from "slices"
@@ -13,9 +12,11 @@ import { useInteraction } from "@/hooks/useInteractions"
 import { InteractiveLike } from "../Comments/InteractiveLike"
 import { useUser } from "@/hooks/useUser"
 import { useLogin } from "@/hooks/useLogin"
+import { AuthorCard } from "../AuthorCard"
+import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended"
 
 interface PostProps {
-    post: AllDocumentTypes
+    post: BlogPostDocument
 }
 
 export function Post({ post }: PostProps): JSX.Element {
@@ -48,7 +49,7 @@ export function Post({ post }: PostProps): JSX.Element {
                                 height={post.data.banner.dimensions.height}
                                 src={post.data.banner.url}
                                 alt={post.data.banner.alt as string}
-                                className="cover w-full"
+                                className="object-cover w-full"
                             />
                         </div>
                     )
@@ -66,8 +67,7 @@ export function Post({ post }: PostProps): JSX.Element {
             </div>
 
             <div className="py-2 px-4 flex gap-6 items-center mb-6">
-                <span>{post.data.author}</span>
-                <span className="italic text-sm">{formatDate(post.first_publication_date)}</span>
+                <AuthorCard post={post as AllDocumentTypesExtended} />
             </div>
 
             <div className="flex flex-col">

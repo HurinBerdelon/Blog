@@ -15,7 +15,7 @@ export function Banner({ image, text }: BannerProps): JSX.Element {
             {image.src
                 ? (
                     <div className="w-full">
-                        <Image width={1920} height={1920} src={image.src} alt={image.alt} className="cover w-full" />
+                        <Image width={1920} height={1920} src={image.src} alt={image.alt} className="object-cover w-full" />
                     </div>
                 )
                 : (

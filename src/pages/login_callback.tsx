@@ -29,6 +29,7 @@ export default function LoginCallback({ sortedCategories }: Pagerops) {
         <>
             <Head>
                 <title>Redirect | HurinBlog</title>
+                <meta name="description" content={t('common:loginCallbackMetaDescription')} />
             </Head>
 
             <Header sortedCategories={sortedCategories} />

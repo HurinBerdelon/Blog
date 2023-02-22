@@ -30,6 +30,7 @@ export default function AllPosts({ postsResponse, sortedCategories }: AllPostsPr
         <>
             <Head>
                 <title>{`${t('common:allPosts')} | Hurin Blog`}</title>
+                <meta name="description" content={t('common:generalMetaDescription')} />
             </Head>
             <Header sortedCategories={sortedCategories} />
             <main className="flex-1">
@@ -54,7 +55,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         {
             page: context.query.page ? Number(context.query.page) : 1,
             pageSize: pageSize,
-            lang: languages[context.locale].prismic_code
+            lang: languages[context.locale].prismic_code,
+            fetchLinks: [
+                'author.authorprofileimage',
+                'author.name'
+            ]
         })
 
     const locale = context.locale ?? 'en'

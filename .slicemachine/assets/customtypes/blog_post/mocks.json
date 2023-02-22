@@ -1,24 +1,24 @@
 {
   "uid": {
     "__TYPE__": "UIDContent",
-    "value": "ordinary"
+    "value": "control"
   },
   "title_of_the_post": {
     "__TYPE__": "FieldContent",
-    "value": "unhappy",
+    "value": "turn",
     "type": "Text"
   },
   "banner": {
     "__TYPE__": "ImageContent",
     "origin": {
       "id": "main",
-      "url": "https://images.unsplash.com/photo-1587653915936-5623ea0b949a",
-      "width": 4000,
-      "height": 4000
+      "url": "https://images.unsplash.com/photo-1571126770897-2d612d1f7b89",
+      "width": 3456,
+      "height": 3456
     },
-    "url": "https://images.unsplash.com/photo-1587653915936-5623ea0b949a",
-    "width": 4000,
-    "height": 4000,
+    "url": "https://images.unsplash.com/photo-1571126770897-2d612d1f7b89",
+    "width": 3456,
+    "height": 3456,
     "edit": {
       "zoom": 1,
       "crop": {
@@ -29,27 +29,23 @@
     },
     "thumbnails": {}
   },
-  "subjects": {
-    "__TYPE__": "StructuredTextContent",
-    "value": [
-      {
-        "type": "paragraph",
-        "content": {
-          "text": "Culpa magna pariatur officia minim anim qui. Proident eiusmod magna culpa ex laborum commodo reprehenderit consequat exercitation magna pariatur."
-        }
-      }
-    ]
+  "meta_description": {
+    "__TYPE__": "FieldContent",
+    "value": "shape",
+    "type": "Text"
   },
   "author": {
-    "__TYPE__": "FieldContent",
-    "value": "thread",
-    "type": "Text"
+    "__TYPE__": "LinkContent",
+    "value": {
+      "__TYPE__": "DocumentLink",
+      "id": "mock_document_id"
+    }
   },
   "slices": {
     "__TYPE__": "SliceContentType",
     "value": [
       {
-        "key": "text_and_image$f4745a31-be15-4884-a880-57d8d5937404",
+        "key": "text_and_image$ace8336a-6a5a-4cf7-a67f-e7e4a8dc7302",
         "name": "text_and_image",
         "widget": {
           "__TYPE__": "SharedSliceContent",
@@ -59,13 +55,13 @@
               "__TYPE__": "ImageContent",
               "origin": {
                 "id": "main",
-                "url": "https://images.unsplash.com/photo-1491975474562-1f4e30bc9468",
-                "width": 4000,
-                "height": 6000
+                "url": "https://images.unsplash.com/photo-1593642633279-1796119d5482",
+                "width": 4016,
+                "height": 6016
               },
-              "url": "https://images.unsplash.com/photo-1491975474562-1f4e30bc9468",
-              "width": 4000,
-              "height": 6000,
+              "url": "https://images.unsplash.com/photo-1593642633279-1796119d5482",
+              "width": 4016,
+              "height": 6016,
               "edit": {
                 "zoom": 1,
                 "crop": {
@@ -82,17 +78,10 @@
                 {
                   "type": "paragraph",
                   "content": {
-                    "text": "Laborum ullamco aliquip cupidatat mollit Lorem nostrud id mollit. Veniam in irure sit consectetur ipsum do ex consectetur minim laboris excepteur. Aliquip velit velit veniam nisi deserunt eu do."
+                    "text": "Cupidatat cillum id aute esse consectetur duis cupidatat."
                   }
                 }
               ]
-            },
-            "external_link": {
-              "__TYPE__": "LinkContent",
-              "value": {
-                "__TYPE__": "ExternalLink",
-                "url": "https://slicemachine.dev"
-              }
             }
           },
           "items": [
@@ -104,7 +93,7 @@
         }
       },
       {
-        "key": "text_only$9d2c4796-d206-42c5-a1e5-15c69879ffa8",
+        "key": "text_only$b88f1913-bc91-4d62-879a-ce587177e754",
         "name": "text_only",
         "widget": {
           "__TYPE__": "SharedSliceContent",
@@ -116,17 +105,10 @@
                 {
                   "type": "paragraph",
                   "content": {
-                    "text": "In elit aliqua sint. Laborum velit aute laborum fugiat consectetur consequat aliqua incididunt amet veniam in velit. Aute commodo fugiat nisi anim cillum proident dolor occaecat cupidatat aute laboris."
+                    "text": "Commodo qui exercitation elit pariatur incididunt aute aliquip deserunt mollit eiusmod amet pariatur culpa. Laboris eiusmod laboris consequat esse velit tempor."
                   }
                 }
               ]
-            },
-            "external_link": {
-              "__TYPE__": "LinkContent",
-              "value": {
-                "__TYPE__": "ExternalLink",
-                "url": "http://google.com"
-              }
             }
           },
           "items": [

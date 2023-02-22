@@ -17,7 +17,7 @@ const TextAndImage = ({ slice }: TextAndImageProps) => (
 			<PrismicImage
 				field={slice.primary.image}
 				width={slice.primary.image.dimensions.width}
-				className="cover mx-4 rounded-lg overflow-hidden"
+				className="object-cover mx-4 rounded-lg overflow-hidden"
 			/>
 		</div>
 	</section>

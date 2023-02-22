@@ -25,6 +25,7 @@ export default function UserSettings({ sortedCategories }: PageProps): JSX.Eleme
         <>
             <Head>
                 <title>{`${t('common:profile')} | HurinBlog`}</title>
+                <meta name="description" content={t('common:userSettingsMetaDescription')} />
             </Head>
             <Header sortedCategories={sortedCategories} />
             <main className="flex-1 flex items-center justify-center">

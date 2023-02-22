@@ -29,6 +29,7 @@ export default function Home({ lastFourPosts, sortedCategories }: HomeProps) {
 		<>
 			<Head>
 				<title>Home | Hurin Blog</title>
+				<meta name="description" content={t('common:generalMetaDescription')} />
 			</Head>
 			<Header sortedCategories={sortedCategories} />
 			<main className="flex-1">
@@ -52,7 +53,14 @@ export default function Home({ lastFourPosts, sortedCategories }: HomeProps) {
 export const getStaticProps: GetStaticProps = async ({ previewData, locale }) => {
 	const client = createClient({ previewData })
 
-	const lastFourPosts: Query<AllDocumentTypesExtended> = await client.getByType('blog_post', { pageSize: 4, lang: languages[locale].prismic_code })
+	const lastFourPosts: Query<AllDocumentTypesExtended> = await client.getByType('blog_post', {
+		pageSize: 4,
+		lang: languages[locale].prismic_code,
+		fetchLinks: [
+			'author.authorprofileimage',
+			'author.name'
+		]
+	})
 
 	const sortedCategories = await fetchCategories()
 

@@ -18,7 +18,7 @@ export function Header({ sortedCategories }: HeaderProps): JSX.Element {
         <header className="shadow-lg text-backgroundDark dark:text-textLight">
             <div className="flex justify-between p-2 mx-auto w-full md:w-[720px] xl:w-[1120px]">
                 <Link href='/' className="w-10">
-                    <Image width={50} height={50} src="/images/logo.svg" alt="blog logo" className="cover w-full" />
+                    <Image width={50} height={50} src="/images/fernandoCardozoLogo.svg" alt="blog logo" className="object-cover w-full" />
                     <span className="sr-only">{t('common:homeLink')}</span>
                 </Link>
                 <div className="flex items-center gap-3">

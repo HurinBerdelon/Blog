@@ -13,8 +13,8 @@ export async function fetchLikesAndComments(document: Query<AllDocumentTypesExte
             const post = data.find(post => post.uid === result.uid)
             return {
                 ...result,
-                comments: post.comment.reduce((acc, comment) => (acc + comment.answers.length + 1), 0),
-                likes: post.likes.length
+                comments: post.comment?.reduce((acc, comment) => (acc + comment.answers.length + 1), 0),
+                likes: post.likes?.length
             }
         })
     })

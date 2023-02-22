@@ -29,7 +29,7 @@ export function LoginModal({ isOpen, onRequestClose }: LoginModalProps): JSX.Ele
                 </button>
                 <div>
                     <Image
-                        src="/images/logo.svg"
+                        src="/images/fernandoCardozoLogo.svg"
                         alt={t('common:blogLogo')}
                         width={100}
                         height={100}
