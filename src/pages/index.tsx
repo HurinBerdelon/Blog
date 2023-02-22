@@ -61,7 +61,11 @@ export const getStaticProps: GetStaticProps = async ({ previewData, locale }) =>
 		fetchLinks: [
 			'author.authorprofileimage',
 			'author.name'
-		]
+		],
+		orderings: {
+			field: 'document.first_publication_date',
+			direction: 'desc'
+		},
 	})
 
 	const sortedCategories = await fetchCategories()
