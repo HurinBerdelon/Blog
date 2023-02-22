@@ -21,7 +21,7 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
                     <Image width={50} height={50} src="/images/fernandoCardozoLogo.svg" alt="blog logo" className="object-cover w-full" />
                 </div>
                 <div className="grid grid-cols-2 w-3/4">
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-left px-10">
                         <Link className="hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline transition-all" href={'/'}>Home</Link>
                         {user ? (
                             <Link className="hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline transition-all" href={'/user-settings'}>{t('common:profile')}</Link>
@@ -44,6 +44,7 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
                     <Link
                         className="hover:text-greenBrandDark dark:hover:text-grayBrand"
                         href='https://www.linkedin.com/in/fernando-henrique-p-cardozo/'
+                        target="_blank"
                     >
                         <span className="sr-only">LinkedIn</span>
                         <LinkedinLogo />

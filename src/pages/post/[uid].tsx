@@ -10,6 +10,7 @@ import { fetchCategories } from "@/services/fetchCategories";
 import { Category } from "@/schema/Category";
 import { useLogin } from "@/hooks/useLogin";
 import { LoginModal } from "@/components/LoginModal";
+import { languages } from "@/config/languages";
 
 interface PostPageProps {
     post: BlogPostDocument
@@ -19,8 +20,6 @@ interface PostPageProps {
 export default function PostPage({ post, sortedCategories }: PostPageProps): JSX.Element {
 
     const { isLoginModalOpen, setIsLoginModalOpen } = useLogin()
-
-    console.log('>>', post)
 
     return (
         <>
@@ -51,7 +50,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const client = createClient({ previewData: context.previewData })
     const uid = context.params?.uid as string
 
+    if (!context.locale) context.locale = 'en'
+
     const post = await client.getByUID('blog_post', uid, {
+        lang: languages[context.locale].prismic_code,
         fetchLinks: [
             'author.authorprofileimage',
             'author.name'

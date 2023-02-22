@@ -53,6 +53,8 @@ export default function Home({ lastFourPosts, sortedCategories }: HomeProps) {
 export const getStaticProps: GetStaticProps = async ({ previewData, locale }) => {
 	const client = createClient({ previewData })
 
+	if (!locale) locale = 'en'
+
 	const lastFourPosts: Query<AllDocumentTypesExtended> = await client.getByType('blog_post', {
 		pageSize: 4,
 		lang: languages[locale].prismic_code,
@@ -64,7 +66,6 @@ export const getStaticProps: GetStaticProps = async ({ previewData, locale }) =>
 
 	const sortedCategories = await fetchCategories()
 
-	if (!locale) locale = 'en'
 
 	return {
 		props: {
