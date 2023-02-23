@@ -26,7 +26,7 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
             }}
         >
             <Link href={`/post/${post.uid}`} className="flex flex-col gap-2">
-                <h3 className="self-center text-xl font-semibold py-2">{post.data.title_of_the_post}</h3>
+                <h3 className="self-center text-xl text-center px-2 font-semibold py-2">{post.data.title_of_the_post}</h3>
                 <div className="w-full h-[240px] flex items-center">
                     <Image
                         width={post.data.banner.dimensions?.width}
