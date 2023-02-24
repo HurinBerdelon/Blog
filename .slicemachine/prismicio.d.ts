@@ -132,16 +132,6 @@ export type AllDocumentTypes = AuthorDocument | BlogPostDocument;
  */
 interface TextAndImageSliceDefaultPrimary {
     /**
-     * Image field in *TextAndImage → Primary*
-     *
-     * - **Field Type**: Image
-     * - **Placeholder**: *None*
-     * - **API ID Path**: text_and_image.primary.image
-     * - **Documentation**: https://prismic.io/docs/core-concepts/image
-     *
-     */
-    image: prismicT.ImageField<never>;
-    /**
      * Text Content field in *TextAndImage → Primary*
      *
      * - **Field Type**: Rich Text
@@ -151,6 +141,16 @@ interface TextAndImageSliceDefaultPrimary {
      *
      */
     text_content: prismicT.RichTextField;
+    /**
+     * Image field in *TextAndImage → Primary*
+     *
+     * - **Field Type**: Image
+     * - **Placeholder**: *None*
+     * - **API ID Path**: text_and_image.primary.image
+     * - **Documentation**: https://prismic.io/docs/core-concepts/image
+     *
+     */
+    image: prismicT.ImageField<never>;
 }
 /**
  * Default variation for TextAndImage Slice

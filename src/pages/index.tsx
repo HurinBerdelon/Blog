@@ -70,7 +70,6 @@ export const getStaticProps: GetStaticProps = async ({ previewData, locale }) =>
 
 	const sortedCategories = await fetchCategories()
 
-
 	return {
 		props: {
 			lastFourPosts,
