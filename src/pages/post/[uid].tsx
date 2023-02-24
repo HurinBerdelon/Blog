@@ -50,25 +50,33 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const client = createClient({ previewData: context.previewData })
     const uid = context.params?.uid as string
 
-    if (!context.locale) context.locale = 'en'
-
-    const post = await client.getByUID('blog_post', uid, {
-        lang: languages[context.locale].prismic_code,
-        fetchLinks: [
-            'author.authorprofileimage',
-            'author.name'
-        ]
-    })
-
-    const sortedCategories = await fetchCategories()
-
     const locale = context.locale ?? 'en'
 
-    return {
-        props: {
-            post,
-            sortedCategories,
-            ...(await serverSideTranslations(locale, ['common']))
+    try {
+        const post = await client.getByUID('blog_post', uid, {
+            lang: languages[context.locale].prismic_code,
+            fetchLinks: [
+                'author.authorprofileimage',
+                'author.name'
+            ]
+        })
+
+        const sortedCategories = await fetchCategories()
+
+        return {
+            props: {
+                post,
+                sortedCategories,
+                ...(await serverSideTranslations(locale, ['common']))
+            }
+        }
+    } catch (error) {
+        console.log(error)
+        return {
+            redirect: {
+                destination: `/${locale}/404`,
+                permanent: false
+            }
         }
     }
 }
