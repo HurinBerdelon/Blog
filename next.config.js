@@ -6,7 +6,8 @@ const nextConfig = {
   images: {
     domains: [
       'images.prismic.io',
-      'hurin-blog.s3.sa-east-1.amazonaws.com'
+      'hurin-blog.s3.sa-east-1.amazonaws.com',
+      'lh3.googleusercontent.com'
     ]
   },
   i18n,

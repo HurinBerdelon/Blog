@@ -44,7 +44,7 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
     }, [])
 
     function setPath() {
-        localStorage.setItem(appKeys.currentPath, router.asPath)
+        localStorage.setItem(appKeys.currentPath, `/${router.locale}${router.asPath}`)
     }
 
     function authenticate(session: Session) {
