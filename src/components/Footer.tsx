@@ -31,11 +31,10 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
                         <div className="font-semibold capitalize italic">{t('common:categories')}</div>
                         <ul>
                             {sortedCategories.map(category => (
-                                <li className="list-disc ml-4">
+                                <li className="list-disc ml-4" key={category.tag}>
                                     <Link
                                         className="capitalize hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline transition-all"
                                         href={`/category/${category.tag}`}
-                                        key={category.tag}
                                     >
                                         {category.tag}
                                     </Link>
