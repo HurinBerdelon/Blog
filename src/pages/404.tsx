@@ -28,11 +28,11 @@ export default function NotFound({ sortedCategories }: NotFoundProps) {
 				<meta name="description" content={t('common:generalMetaDescription')} />
 			</Head>
 			<Header sortedCategories={sortedCategories} />
-			<main className="flex-1 flex items-center justify-center gap-10 flex-col">
+			<main className="flex-1 flex items-center justify-center gap-10 flex-col my-8">
 				<Image src="/images/404_notFound.png" alt="404 not found" width={640} height={640} />
 				<Link
 					href="/category/all"
-					className='hover:underline text-backgroundDark dark:text-textLight'
+					className='hover:underline text-backgroundDark dark:text-textLight px-4 text-center'
 				>
 					{t('common:notFoundText')}
 				</Link>
