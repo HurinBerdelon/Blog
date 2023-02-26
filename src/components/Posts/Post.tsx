@@ -58,7 +58,7 @@ export function Post({ post }: PostProps): JSX.Element {
                     )
                 }
             </div >
-            <h1 className="mt-6 self-center text-4xl font-medium">{post.data.title_of_the_post}</h1>
+            <h1 className="mt-6 self-center px-4 text-center text-4xl font-medium">{post.data.title_of_the_post}</h1>
 
             <div className="px-4 flex gap-3 italic font-medium capitalize text-sm">
                 {post.tags.map(tag => (
