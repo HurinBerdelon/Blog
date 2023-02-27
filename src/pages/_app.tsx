@@ -1,3 +1,4 @@
+import { GoogleAnalytic } from '@/components/GoogleAnalytics'
 import { InteractionProvider } from '@/hooks/useInteractions'
 import { LoginProvider } from '@/hooks/useLogin'
 import { ThemeProvider } from '@/hooks/useTheme'
@@ -9,6 +10,7 @@ import { appWithTranslation } from 'next-i18next'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Link from 'next/link'
+import Script from 'next/script'
 import { repositoryName } from 'prismicio'
 import '../styles/global.css'
 
@@ -24,6 +26,7 @@ function App({ Component, pageProps }: AppProps) {
 									<Head>
 										<meta name="viewport" content="width=device-width, initial-scale=1" />
 									</Head>
+									<GoogleAnalytic />
 									<div className='min-h-screen flex flex-col bg-textLight dark:bg-backgroundDark'>
 										<Component {...pageProps} />
 									</div>
