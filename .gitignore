@@ -38,6 +38,5 @@ next-env.d.ts
 # PrismicIO
 src/pages/slice-simulator.tsx
 
-
 # ImageMaker
 src/pages/imageMaker.tsx
