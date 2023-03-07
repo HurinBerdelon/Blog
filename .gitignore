@@ -40,4 +40,4 @@ src/pages/slice-simulator.tsx
 
 
 # ImageMaker
-./src/pages/imageMaker.tsx
+src/pages/imageMaker.tsx
