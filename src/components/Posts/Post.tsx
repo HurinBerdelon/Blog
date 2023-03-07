@@ -14,6 +14,7 @@ import { useUser } from "@/hooks/useUser"
 import { useLogin } from "@/hooks/useLogin"
 import { AuthorCard } from "../AuthorCard"
 import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended"
+import { useRouter } from "next/router"
 
 interface PostProps {
     post: BlogPostDocument
@@ -25,6 +26,7 @@ export function Post({ post }: PostProps): JSX.Element {
     const { setIsLoginModalOpen } = useLogin()
     const { t } = useTranslation()
     const { user } = useUser()
+    const router = useRouter()
 
     useEffect(() => {
         setNumberOfComments(
@@ -78,7 +80,10 @@ export function Post({ post }: PostProps): JSX.Element {
 
             <div className='px-4 my-8 flex justify-between'>
                 <InteractiveLike className="text-xl" likes={interactions?.likes} />
-                {/* <Share postLink={`${process.env.NEXT_PUBLIC_BLOG_URL}/post/${post.uid}`} /> */}
+                <Share
+                    title={post.data.title_of_the_post}
+                    postLink={`${process.env.NEXT_PUBLIC_BLOG_URL}/${router.locale}/post/${post.uid}`}
+                />
             </div>
 
             <div className="flex flex-col px-4 gap-5 mb-8">

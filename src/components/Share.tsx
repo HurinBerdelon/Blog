@@ -13,9 +13,11 @@ import {
 
 interface ShareProps {
     postLink: string
+    title: string
 }
 
-export function Share({ postLink }: ShareProps): JSX.Element {
+export function Share({ postLink, title }: ShareProps): JSX.Element {
+    console.log({ postLink })
 
     const { t } = useTranslation()
 
@@ -26,7 +28,7 @@ export function Share({ postLink }: ShareProps): JSX.Element {
                 <motion.li
                     whileHover={{ scale: 1.1 }}
                 >
-                    <FacebookShareButton url={postLink}>
+                    <FacebookShareButton url={postLink} quote={title}>
                         <FacebookIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>{`${t('common:shareOn')} Facebook`}</span>
                     </FacebookShareButton>
@@ -34,7 +36,7 @@ export function Share({ postLink }: ShareProps): JSX.Element {
                 <motion.li
                     whileHover={{ scale: 1.1 }}
                 >
-                    <TwitterShareButton url={postLink}>
+                    <TwitterShareButton url={postLink} title={title}>
                         <TwitterIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>{`${t('common:shareOn')} Twitter`}</span>
                     </TwitterShareButton>
@@ -42,7 +44,7 @@ export function Share({ postLink }: ShareProps): JSX.Element {
                 <motion.li
                     whileHover={{ scale: 1.1 }}
                 >
-                    <LinkedinShareButton url={postLink}>
+                    <LinkedinShareButton url={postLink} title={title} source={"blog.hurinberdelon.com"}>
                         <LinkedinIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>{`${t('common:shareOn')} LinkedIn`}</span>
                     </LinkedinShareButton>
@@ -50,7 +52,7 @@ export function Share({ postLink }: ShareProps): JSX.Element {
                 <motion.li
                     whileHover={{ scale: 1.1 }}
                 >
-                    <WhatsappShareButton url={postLink}>
+                    <WhatsappShareButton url={postLink} title={title}>
                         <WhatsappIcon className='w-8 h-8 rounded' />
                         <span className='sr-only'>{`${t('common:shareOn')} WhatsApp`}</span>
                     </WhatsappShareButton>
