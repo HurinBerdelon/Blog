@@ -78,7 +78,7 @@ export function Post({ post }: PostProps): JSX.Element {
 
             <div className='px-4 my-8 flex justify-between'>
                 <InteractiveLike className="text-xl" likes={interactions?.likes} />
-                <Share postLink={`${process.env.NEXT_PUBLIC_BLOG_URL}/post/${post.uid}`} />
+                {/* <Share postLink={`${process.env.NEXT_PUBLIC_BLOG_URL}/post/${post.uid}`} /> */}
             </div>
 
             <div className="flex flex-col px-4 gap-5 mb-8">
