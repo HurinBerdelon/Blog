@@ -10,7 +10,6 @@ import { appWithTranslation } from 'next-i18next'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Link from 'next/link'
-import Script from 'next/script'
 import { repositoryName } from 'prismicio'
 import '../styles/global.css'
 
