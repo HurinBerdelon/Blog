@@ -40,3 +40,5 @@ src/pages/slice-simulator.tsx
 
 # ImageMaker
 src/pages/imageMaker.tsx
+src/styles/creation.module.css
+public/imageMaker/

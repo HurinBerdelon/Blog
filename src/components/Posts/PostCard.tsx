@@ -14,13 +14,13 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
 
     const [textPreview] = useState(() => {
         const textPreview = post.data.slices[0]?.primary.text_content[0]?.text as string
-        if (textPreview?.length > 150) return `${textPreview.slice(0, 150)}...`
+        if (textPreview?.length > 150) return `${textPreview.slice(0, 145)}...`
         return textPreview
     })
 
     return (
         <motion.li
-            className="border-[1px] h-[460px] border-backgroundDark dark:border-textLight w-[80vw] self-center rounded max-w-xs hover:border-greenBrandDark hover:text-greenBrandDark dark:hover:text-grayBrand dark:hover:border-grayBrand"
+            className="border-[1px] h-[480px] border-backgroundDark dark:border-textLight w-[80vw] self-center rounded max-w-xs hover:border-greenBrandDark hover:text-greenBrandDark dark:hover:text-grayBrand dark:hover:border-grayBrand"
             whileHover={{
                 scale: 1.025
             }}
