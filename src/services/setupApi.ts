@@ -2,7 +2,7 @@ import { appKeys } from "@/config/AppKeys";
 import axios, { AxiosError } from "axios";
 import { GetServerSidePropsContext } from "next";
 import { signOut } from "next-auth/react";
-import { parseCookies, setCookie } from "nookies";
+import { parseCookies, setCookie, destroyCookie } from "nookies";
 import { AuthTokenError } from "./errors/errors";
 
 interface QueueObjectProps {
@@ -44,7 +44,6 @@ export function setupAPIClient(ctx: GetServerSidePropsContext | undefined = unde
                                 'x-refresh-token': refreshToken,
                             }
                         }).then(response => {
-
                             setCookie(ctx, appKeys.accessTokenKey, response.data.accessToken, {
                                 maxAge: 60 * 60 * 24 * 7, // 7 days
                                 path: '/'
@@ -75,13 +74,15 @@ export function setupAPIClient(ctx: GetServerSidePropsContext | undefined = unde
                                 resolve(api(originalConfig))
                             },
                             onFailure: (error: AxiosError) => {
+                                destroyCookie(ctx, appKeys.accessTokenKey)
+                                destroyCookie(ctx, appKeys.refreshTokenKey)
+                                signOut()
                                 reject(error)
                             }
                         })
                     })
                 } else {
                     if (typeof window !== 'undefined') {
-
                         signOut()
                     } else {
                         return Promise.reject(new AuthTokenError())
