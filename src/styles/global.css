@@ -1,14 +1,15 @@
-@import "tailwindcss";
-@config "../../tailwind.config.js";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
     html {
-        font-family: "Poppins", sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
-
+    
     .scrollbar-light::-webkit-scrollbar {
         width: 0.45rem;
-        background-color: #fff9f2;
+        background-color: #FFF9F2;
     }
 
     .scrollbar-dark::-webkit-scrollbar {
@@ -17,12 +18,12 @@
     }
 
     .scrollbar-light::-webkit-scrollbar-thumb {
-        background: #3d4d3e;
+        background: #3D4D3E;
         border-radius: 0.25rem;
     }
 
     .scrollbar-dark::-webkit-scrollbar-thumb {
-        background: #6d8b74;
+        background: #6D8B74;
         border-radius: 0.25rem;
     }
 }
