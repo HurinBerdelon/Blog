@@ -7,6 +7,7 @@ import { GetStaticProps } from "next"
 import { useSession } from "next-auth/react"
 import { useTranslation } from 'next-i18next/pages'
 import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations'
+import i18nConfig from '../../next-i18next.config'
 import Head from "next/head"
 import { useEffect } from "react"
 
@@ -49,7 +50,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     return {
         props: {
             sortedCategories,
-            ...(await serverSideTranslations(locale, ['common']))
+            ...(await serverSideTranslations(locale, ['common'], i18nConfig))
         }
     }
 }

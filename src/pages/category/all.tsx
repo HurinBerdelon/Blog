@@ -9,6 +9,7 @@ import Head from "next/head";
 import { createClient } from "prismicio";
 import { useTranslation } from 'next-i18next/pages';
 import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations'
+import i18nConfig from '../../../next-i18next.config'
 import { fetchCategories } from "@/services/fetchCategories";
 import { languages } from "@/config/languages";
 import { Category } from "@/schema/Category";
@@ -72,7 +73,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         props: {
             postsResponse,
             sortedCategories,
-            ...(await serverSideTranslations(locale, ['common']))
+            ...(await serverSideTranslations(locale, ['common'], i18nConfig))
         }
     }
 
