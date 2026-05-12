@@ -1,6 +1,6 @@
 import { useTheme } from "@/hooks/useTheme"
 import { Moon, Sun } from "phosphor-react"
-import { useTranslation } from "next-i18next"
+import { useTranslation } from 'next-i18next/pages'
 
 export function ThemeSwitcher(): JSX.Element {
 

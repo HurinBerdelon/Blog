@@ -2,7 +2,7 @@ import { useInteraction } from "@/hooks/useInteractions"
 import { useLogin } from "@/hooks/useLogin"
 import { useUser } from "@/hooks/useUser"
 import { Like } from "@/schema/Interactions"
-import { useTranslation } from "next-i18next"
+import { useTranslation } from 'next-i18next/pages'
 import { Spinner } from "phosphor-react"
 import { useEffect, useState } from "react"
 import { LikeIcon } from "./LikeIcon"

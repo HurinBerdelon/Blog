@@ -1,7 +1,7 @@
 import { Query } from "@prismicio/types"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useTranslation } from "next-i18next"
+import { useTranslation } from 'next-i18next/pages'
 import { Pagination } from "../Pagination"
 import { PostCard } from "./PostCard"
 import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended"

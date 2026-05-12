@@ -6,7 +6,7 @@ import { Share } from "../Share"
 import Image from 'next/image'
 import { CommentInput } from "../Comments/CommentInput"
 import { Comment } from "../Comments/Comment"
-import { useTranslation } from "next-i18next"
+import { useTranslation } from 'next-i18next/pages'
 import { useEffect, useState } from "react"
 import { useInteraction } from "@/hooks/useInteractions"
 import { InteractiveLike } from "../Comments/InteractiveLike"

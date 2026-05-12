@@ -1,6 +1,6 @@
 import { pageSize } from "@/config/pageSize";
 import { useState } from "react";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next/pages';
 import { PaginationItem } from "./PaginationItem";
 // import { PaginationItem } from "../PaginationItem";
 
