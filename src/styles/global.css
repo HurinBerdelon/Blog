@@ -6,11 +6,6 @@
         font-family: "Poppins", sans-serif;
     }
 
-    button,
-    [role="button"] {
-        cursor: pointer;
-    }
-
     .scrollbar-light::-webkit-scrollbar {
         width: 0.45rem;
         background-color: #fff9f2;
