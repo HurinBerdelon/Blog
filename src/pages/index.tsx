@@ -7,6 +7,7 @@ import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { createClient } from 'prismicio'
 import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations'
+import i18nConfig from '../../next-i18next.config'
 import { useTranslation } from 'next-i18next/pages'
 import { fetchCategories } from '@/services/fetchCategories'
 import { languages } from '@/config/languages'
@@ -74,7 +75,7 @@ export const getStaticProps: GetStaticProps = async ({ previewData, locale }) =>
 		props: {
 			lastFourPosts,
 			sortedCategories,
-			...(await serverSideTranslations(locale, ['common']))
+			...(await serverSideTranslations(locale, ['common'], i18nConfig))
 		}
 	}
 }

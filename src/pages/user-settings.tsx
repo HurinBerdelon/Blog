@@ -4,6 +4,7 @@ import { Category } from "@/schema/Category"
 import { fetchCategories } from "@/services/fetchCategories"
 import { GetServerSideProps } from "next"
 import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations'
+import i18nConfig from '../../next-i18next.config'
 import Head from "next/head"
 import { parseCookies } from "nookies"
 import { useTranslation } from 'next-i18next/pages'
@@ -59,7 +60,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
         props: {
             sortedCategories,
-            ...(await serverSideTranslations(ctx.locale, ['common']))
+            ...(await serverSideTranslations(ctx.locale, ['common'], i18nConfig))
         }
     }
 }
