@@ -1,7 +1,7 @@
 import { availableImageTypes } from "@/config/availableImageType";
 import { useUser } from "@/hooks/useUser";
 import { Form, Formik, FormikValues } from "formik";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next/pages';
 import { CircleNotch } from "phosphor-react";
 import { useEffect, useState } from "react";
 import * as yup from 'yup'
@@ -30,7 +30,7 @@ export function UpdateProfile(): JSX.Element {
         avatar: yup.mixed().test('fileFormat',
             t('common:imageOnly'), value => {
                 if (value) {
-                    return availableImageTypes.includes(value.type)
+                    return availableImageTypes.includes((value as File).type)
                 } else {
                     return false
                 }

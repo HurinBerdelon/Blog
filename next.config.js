@@ -4,10 +4,10 @@ const { i18n } = require('./next-i18next.config')
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [
-      'images.prismic.io',
-      'hurin-blog.s3.sa-east-1.amazonaws.com',
-      'lh3.googleusercontent.com'
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.prismic.io' },
+      { protocol: 'https', hostname: 'hurin-blog.s3.sa-east-1.amazonaws.com' },
+      { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
     ]
   },
   i18n,

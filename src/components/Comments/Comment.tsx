@@ -1,7 +1,7 @@
-import { Comment, Like } from "@/schema/Interactions"
+import type { Comment, Like } from "@/schema/Interactions"
 import { formatDate } from "@/services/dayjs"
 import { useEffect, useState } from "react"
-import { useTranslation } from "next-i18next"
+import { useTranslation } from 'next-i18next/pages'
 import { Answer } from "./Answer"
 import { useUser } from "@/hooks/useUser"
 import { useInteraction } from "@/hooks/useInteractions"
