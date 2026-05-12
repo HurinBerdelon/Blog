@@ -3,7 +3,7 @@ import type { Content } from '@prismicio/client'
 import { SliceComponentProps } from '@prismicio/react'
 import { RichTextComponent } from 'slices/RichTextComponents/RichTextComponent'
 
-export type TextOnlyProps = SliceComponentProps<Content.TextOnlySlice & { id: string }>
+export type TextOnlyProps = SliceComponentProps<Content.TextOnlySlice>
 
 const TextOnly = ({ slice }: TextOnlyProps) => {
 	return (
