@@ -1,7 +1,7 @@
 import { Popover } from "@headlessui/react";
 import Link from "next/link";
 import { List } from "phosphor-react";
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import { LoginModal } from "./LoginModal";
 import { useState } from "react";
 import { Category } from "@/schema/Category";

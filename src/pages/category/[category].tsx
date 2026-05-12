@@ -6,14 +6,14 @@ import { Query } from "@prismicio/types";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { createClient } from "prismicio";
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations'
 import { fetchCategories } from "@/services/fetchCategories";
 import { languages } from "@/config/languages";
 import { Category } from "@/schema/Category";
 import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended";
 import { useLogin } from "@/hooks/useLogin";
 import { LoginModal } from "@/components/LoginModal";
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 
 interface CategoryProps {
     postsResponse: Query<AllDocumentTypesExtended>

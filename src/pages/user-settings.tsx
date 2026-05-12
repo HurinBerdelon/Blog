@@ -3,10 +3,10 @@ import { UpdateProfile } from "@/components/UpdateProfile"
 import { Category } from "@/schema/Category"
 import { fetchCategories } from "@/services/fetchCategories"
 import { GetServerSideProps } from "next"
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations'
 import Head from "next/head"
 import { parseCookies } from "nookies"
-import { useTranslation } from 'next-i18next'
+import { useTranslation } from 'next-i18next/pages'
 import { Header } from "../components/Header"
 import { appKeys } from "../config/AppKeys"
 import { LoginModal } from "@/components/LoginModal"

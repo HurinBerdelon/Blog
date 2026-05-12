@@ -1,5 +1,5 @@
 import { useInteraction } from "@/hooks/useInteractions"
-import { useTranslation } from 'next-i18next'
+import { useTranslation } from 'next-i18next/pages'
 import { Spinner } from "phosphor-react"
 import { useState } from "react"
 

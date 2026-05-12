@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LinkedinLogo, EnvelopeSimple } from "phosphor-react";
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'next-i18next/pages';
 import { Category } from "@/schema/Category";
 import { useUser } from "@/hooks/useUser";
 
