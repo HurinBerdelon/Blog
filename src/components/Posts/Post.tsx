@@ -41,7 +41,7 @@ export function Post({ post }: PostProps): JSX.Element {
     }, [post]);
 
     return (
-        <article className="flex flex-col mx-auto w-full md:w-[720px] xl:w-[1120px] text-backgroundDark dark:text-textLight">
+        <article className="flex flex-col mx-auto w-full md:w-[720px] xl:w-[1120px] text-backgroundDark dark:text-textLight pt-8">
             <div>
                 {post.data.banner.url ? (
                     <div className="w-full">
@@ -51,6 +51,7 @@ export function Post({ post }: PostProps): JSX.Element {
                             src={post.data.banner.url}
                             alt={post.data.banner.alt as string}
                             className="object-cover w-full"
+                            priority
                         />
                     </div>
                 ) : (
