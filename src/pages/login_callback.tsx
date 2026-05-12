@@ -5,8 +5,8 @@ import { Category } from "@/schema/Category"
 import { fetchCategories } from "@/services/fetchCategories"
 import { GetStaticProps } from "next"
 import { useSession } from "next-auth/react"
-import { useTranslation } from 'next-i18next/pages'
-import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations'
+import { useTranslation } from "next-i18next"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import Head from "next/head"
 import { useEffect } from "react"
 
