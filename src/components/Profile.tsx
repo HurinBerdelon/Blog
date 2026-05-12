@@ -1,6 +1,6 @@
 import { useUser } from "@/hooks/useUser";
 import Link from "next/link";
-import { useTranslation } from 'next-i18next/pages';
+import { useTranslation } from 'next-i18next';
 import Image from "next/image";
 
 export function Profile(): JSX.Element {

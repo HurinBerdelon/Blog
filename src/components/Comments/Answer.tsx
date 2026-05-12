@@ -1,6 +1,6 @@
 import type { Answer, Like } from "@/schema/Interactions"
 import { formatDate } from "@/services/dayjs"
-import { useTranslation } from 'next-i18next/pages'
+import { useTranslation } from 'next-i18next'
 import { useUser } from "@/hooks/useUser"
 import { useEffect, useState } from "react"
 import { useInteraction } from "@/hooks/useInteractions"

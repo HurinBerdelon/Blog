@@ -5,7 +5,7 @@ import { Post } from "@/components/Posts/Post";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import { createClient } from "prismicio";
-import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { fetchCategories } from "@/services/fetchCategories";
 import { Category } from "@/schema/Category";
 import { useLogin } from "@/hooks/useLogin";

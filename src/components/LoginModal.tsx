@@ -2,7 +2,7 @@ import { Dialog } from "@headlessui/react";
 import { GoogleLogo, X } from 'phosphor-react'
 import { signIn } from 'next-auth/react'
 import { useUser } from "@/hooks/useUser";
-import { useTranslation } from 'next-i18next/pages';
+import { useTranslation } from 'next-i18next';
 import Image from "next/image";
 
 interface LoginModalProps {

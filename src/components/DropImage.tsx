@@ -5,7 +5,7 @@ import { FormikErrors } from "formik";
 import { useUser } from "@/hooks/useUser";
 import { availableImageTypes } from "@/config/availableImageType";
 import Image from "next/image";
-import { useTranslation } from 'next-i18next/pages';
+import { useTranslation } from 'next-i18next';
 
 interface DropImageProps {
     errors: FormikErrors<{
