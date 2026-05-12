@@ -1,39 +1,60 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LinkedinLogo, EnvelopeSimple } from "phosphor-react";
-import { useTranslation } from 'next-i18next/pages';
+import { useTranslation } from "next-i18next/pages";
 import { Category } from "@/schema/Category";
 import { useUser } from "@/hooks/useUser";
 
 interface FooterProps {
-    sortedCategories: Category[]
+    sortedCategories: Category[];
 }
 
 export function Footer({ sortedCategories }: FooterProps): JSX.Element {
-
-    const { t } = useTranslation()
-    const { user } = useUser()
+    const { t } = useTranslation();
+    const { user } = useUser();
 
     return (
-        <footer className="bg-greenBrand justify-self-end text-backgroundDark dark:bg-greenBrandDark dark:text-textLight">
+        <footer className="justify-self-end bg-greenBrand text-backgroundDark dark:bg-greenBrandDark dark:text-textLight">
             <div className="flex justify-between p-2 mx-auto w-full md:w-[720px] xl:w-[1120px]">
                 <div className="w-10">
-                    <Image width={50} height={50} src="/images/fernandoCardozoLogo.svg" alt="blog logo" className="object-cover w-full" />
+                    <Image
+                        width={50}
+                        height={50}
+                        src="/images/fernandoCardozoLogo.svg"
+                        alt="blog logo"
+                        className="object-cover w-full"
+                        loading="eager"
+                    />
                 </div>
                 <div className="grid grid-cols-2 w-3/4">
-                    <div className="flex flex-col items-left px-10 mt-4">
-                        <Link className="hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline transition-all" href={'/'}>Home</Link>
+                    <div className="flex flex-col px-10 mt-4 items-left">
+                        <Link
+                            className="transition-all hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline"
+                            href={"/"}
+                        >
+                            Home
+                        </Link>
                         {user ? (
-                            <Link className="hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline transition-all" href={'/user-settings'}>{t('common:profile')}</Link>
+                            <Link
+                                className="transition-all hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline"
+                                href={"/user-settings"}
+                            >
+                                {t("common:profile")}
+                            </Link>
                         ) : null}
                     </div>
                     <div className="flex flex-col">
-                        <div className="font-semibold capitalize italic">{t('common:categories')}</div>
+                        <div className="italic font-semibold capitalize">
+                            {t("common:categories")}
+                        </div>
                         <ul>
-                            {sortedCategories.map(category => (
-                                <li className="list-disc ml-4" key={category.tag}>
+                            {sortedCategories.map((category) => (
+                                <li
+                                    className="ml-4 list-disc"
+                                    key={category.tag}
+                                >
                                     <Link
-                                        className="capitalize hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline transition-all"
+                                        className="capitalize transition-all hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline"
                                         href={`/category/${category.tag}`}
                                     >
                                         {category.tag}
@@ -46,7 +67,7 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
                 <div className="flex flex-col gap-2 justify-center items-center text-3xl">
                     <Link
                         className="hover:text-greenBrandDark dark:hover:text-grayBrand"
-                        href='https://www.linkedin.com/in/fernando-henrique-p-cardozo/'
+                        href="https://www.linkedin.com/in/fernando-henrique-p-cardozo/"
                         target="_blank"
                     >
                         <span className="sr-only">LinkedIn</span>
@@ -54,7 +75,7 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
                     </Link>
                     <Link
                         className="hover:text-greenBrandDark dark:hover:text-grayBrand"
-                        href='mailto:fhpcardozo@gmail.com'
+                        href="mailto:fhpcardozo@gmail.com"
                     >
                         <span className="sr-only">Email</span>
                         <EnvelopeSimple />
@@ -62,5 +83,5 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
                 </div>
             </div>
         </footer>
-    )
+    );
 }
