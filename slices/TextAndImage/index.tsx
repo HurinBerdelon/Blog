@@ -5,7 +5,7 @@ import type { SliceComponentProps } from '@prismicio/react'
 import { RichTextComponent } from 'slices/RichTextComponents/RichTextComponent'
 
 
-export type TextAndImageProps = SliceComponentProps<Content.TextAndImageSlice>
+export type TextAndImageProps = SliceComponentProps<Content.TextAndImageSlice & { id: string }>
 
 const TextAndImage = ({ slice }: TextAndImageProps) => (
 

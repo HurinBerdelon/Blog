@@ -11,8 +11,6 @@ import { List } from 'slices/RichTextComponents/List'
 import { OrderList } from './OrderList';
 import { OrderListItem } from './OrderListItem';
 
-export type TextOnlyProps = SliceComponentProps<Content.TextOnlySlice | Content.TextAndImageSlice>
-
 export function RichTextComponent({ slice }: any): JSX.Element {
 
     return (

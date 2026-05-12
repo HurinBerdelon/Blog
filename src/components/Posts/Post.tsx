@@ -73,7 +73,7 @@ export function Post({ post }: PostProps): JSX.Element {
             </div>
 
             <div className="flex flex-col">
-                <SliceZone slices={post.data.slices} components={components} />
+                <SliceZone slices={post.data.slices as any} components={components} />
             </div>
 
             <div className="self-center mt-8 w-3/4 border-b-[1px] border-double border-greenBrandDark dark:border-textLight" />
