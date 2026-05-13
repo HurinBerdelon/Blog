@@ -1,14 +1,12 @@
-'use client'
+import { SliceSimulator, SliceSimulatorParams, getSlices } from '@prismicio/next'
 import { SliceZone } from '@prismicio/react'
-import { SliceSimulator } from '@prismicio/slice-simulator-react'
 import { components } from '../../../../slices'
 
-export default function SliceSimulatorPage() {
+export default async function SliceSimulatorPage({ searchParams }: SliceSimulatorParams) {
+    const { state } = await searchParams
     return (
-        <SliceSimulator
-            sliceZone={({ slices }) => (
-                <SliceZone slices={slices as any} components={components} />
-            )}
-        />
+        <SliceSimulator>
+            <SliceZone slices={getSlices(state)} components={components} />
+        </SliceSimulator>
     )
 }
