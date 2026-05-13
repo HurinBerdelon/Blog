@@ -48,7 +48,7 @@ export default function AllPosts({ postsResponse, sortedCategories }: AllPostsPr
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const client = createClient({ previewData: context.previewData })
+    const client = createClient()
 
     const sortedCategories = await fetchCategories()
 

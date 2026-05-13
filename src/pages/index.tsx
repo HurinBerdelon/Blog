@@ -51,8 +51,8 @@ export default function Home({ lastFourPosts, sortedCategories }: HomeProps) {
 	)
 }
 
-export const getStaticProps: GetStaticProps = async ({ previewData, locale }) => {
-	const client = createClient({ previewData })
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+	const client = createClient()
 
 	if (!locale) locale = 'en'
 

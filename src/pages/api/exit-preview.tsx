@@ -1,6 +1,6 @@
-import { exitPreview } from "@prismicio/next";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function Exit(req: NextApiRequest, res: NextApiResponse): Promise<void> {
-    await exitPreview({ res, req })
+// Preview routes are handled by @prismicio/next in the App Router (Phase 2).
+export default function ExitPreview(_req: NextApiRequest, res: NextApiResponse): void {
+    res.redirect('/')
 }

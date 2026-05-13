@@ -48,7 +48,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
 
-    const client = createClient({ previewData: context.previewData })
+    const client = createClient()
     const uid = context.params?.uid as string
 
     const locale = context.locale ?? 'en'

@@ -1,19 +1,21 @@
 import * as prismic from '@prismicio/client'
 import * as prismicNext from '@prismicio/next'
-import sm from './sm.json'
+import config from './slicemachine.config.json'
 
-export const repositoryName = prismic.getRepositoryName(sm.apiEndpoint)
+export const repositoryName = config.repositoryName
 
-export function createClient(config: prismicNext.CreateClientConfig = {}) {
-    const client = prismic.createClient(sm.apiEndpoint, {
-        ...config
+const routes: prismic.ClientConfig['routes'] = [
+    { type: 'blog_post', path: '/post/:uid' },
+]
+
+export const createClient = (clientConfig: prismicNext.CreateClientConfig = {}) => {
+    const client = prismic.createClient(repositoryName, {
+        routes,
+        fetchOptions: { next: { tags: ['prismic'] } },
+        ...clientConfig,
     })
 
-    prismicNext.enableAutoPreviews({
-        client,
-        previewData: config.previewData,
-        req: config.req
-    })
+    prismicNext.enableAutoPreviews({ client })
 
     return client
 }

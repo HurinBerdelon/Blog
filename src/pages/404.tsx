@@ -55,11 +55,8 @@ export default function NotFound({ sortedCategories }: NotFoundProps) {
     );
 }
 
-export const getStaticProps: GetStaticProps = async ({
-    previewData,
-    locale,
-}) => {
-    const client = createClient({ previewData });
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+    const client = createClient();
 
     if (!locale) locale = "en";
 
