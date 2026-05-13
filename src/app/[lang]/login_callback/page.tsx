@@ -9,7 +9,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const { lang } = await params
     const dict = await getDictionary(lang)
     return {
-        title: 'Redirect | HurinBlog',
+        title: 'Redirect',
         description: dict.loginCallbackMetaDescription,
     }
 }

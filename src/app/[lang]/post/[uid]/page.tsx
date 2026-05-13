@@ -15,12 +15,26 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         const post = await client.getByUID('blog_post', uid, {
             lang: languages[lang as Locale]?.prismic_code ?? 'en-us',
         })
+        const title = post.data.title_of_the_post as string
+        const description = (post.data.meta_description as string) ?? undefined
         return {
-            title: `${post.data.title_of_the_post} | HurinBlog`,
-            description: post.data.meta_description,
+            title,
+            description,
+            openGraph: {
+                title,
+                description,
+                url: `/${lang}/post/${uid}`,
+                type: 'article',
+                images: post.data.banner.url ? [{ url: post.data.banner.url }] : [],
+            },
+            twitter: {
+                card: 'summary_large_image',
+                title,
+                images: post.data.banner.url ? [post.data.banner.url] : [],
+            },
         }
     } catch {
-        return { title: 'Post | HurinBlog' }
+        return { title: 'Post' }
     }
 }
 

@@ -14,8 +14,13 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const { lang } = await params
     const dict = await getDictionary(lang)
     return {
-        title: `${dict.allPosts} | Hurin Blog`,
+        title: dict.allPosts,
         description: dict.generalMetaDescription,
+        openGraph: {
+            title: dict.allPosts,
+            description: dict.generalMetaDescription,
+            url: `/${lang}/category/all`,
+        },
     }
 }
 

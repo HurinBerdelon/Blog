@@ -3,7 +3,7 @@ import { FormikValues } from 'formik'
 import { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import { useParams, usePathname, useRouter } from 'next/navigation'
-import { destroyCookie, parseCookies, setCookie } from 'nookies'
+import { getCookie, setCookie, deleteCookie } from '@/services/cookies'
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { appKeys } from '../config/AppKeys'
 import { UserResponseProps } from '../schema/UserSchema'
@@ -35,8 +35,7 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
     const params = useParams()
 
     useEffect(() => {
-        const cookies = parseCookies()
-        const accessToken = cookies[appKeys.accessTokenKey]
+        const accessToken = getCookie(appKeys.accessTokenKey)
         if (accessToken) {
             api.get('/user/me').then(response => {
                 setUser(response.data)
@@ -57,14 +56,8 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
             imageUrl: session.user.image,
         })
             .then(response => {
-                setCookie(undefined, appKeys.accessTokenKey, response.data.accessToken, {
-                    maxAge: 60 * 60 * 24 * 7,
-                    path: '/',
-                })
-                setCookie(undefined, appKeys.refreshTokenKey, response.data.refreshToken.value, {
-                    maxAge: 60 * 60 * 24 * 7,
-                    path: '/',
-                })
+                setCookie(appKeys.accessTokenKey, response.data.accessToken, 60 * 60 * 24 * 7)
+                setCookie(appKeys.refreshTokenKey, response.data.refreshToken.value, 60 * 60 * 24 * 7)
                 api.defaults.headers['Authorization'] = `Bearer ${response.data.accessToken}`
                 setUser(response.data.user)
                 router.push(localStorage.getItem(appKeys.currentPath) || '/')
@@ -77,8 +70,8 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
 
     function revokeAuthentication() {
         setUser(undefined)
-        destroyCookie(undefined, appKeys.refreshTokenKey, { path: '/' })
-        destroyCookie(undefined, appKeys.accessTokenKey, { path: '/' })
+        deleteCookie(appKeys.refreshTokenKey)
+        deleteCookie(appKeys.accessTokenKey)
         signOut()
     }
 

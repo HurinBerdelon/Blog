@@ -13,9 +13,15 @@ import { createClient } from 'prismicio'
 export async function generateMetadata({ params }: { params: Promise<{ lang: string; category: string }> }): Promise<Metadata> {
     const { lang, category } = await params
     const dict = await getDictionary(lang)
+    const description = `${dict.categoryMetaDescription} ${category}.`
     return {
-        title: `${category} | Hurin Blog`,
-        description: `${dict.categoryMetaDescription} ${category}.`,
+        title: category,
+        description,
+        openGraph: {
+            title: category,
+            description,
+            url: `/${lang}/category/${category}`,
+        },
     }
 }
 
