@@ -1,3 +1,4 @@
+'use client'
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 interface ThemeContextData {
@@ -13,7 +14,7 @@ const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData)
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
 
-    const [theme, setTheme] = useState<string>()
+    const [theme, setTheme] = useState<string>('dark')
 
     useEffect(() => {
         setTheme(localStorage.getItem('hurinBlog-theme') || 'dark')

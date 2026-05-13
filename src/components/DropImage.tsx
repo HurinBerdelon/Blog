@@ -1,3 +1,4 @@
+'use client'
 import { createRef, useEffect, useState } from "react";
 import Dropzone, { DropzoneRef } from "react-dropzone";
 import { ArrowCounterClockwise, TrashSimple } from "phosphor-react";
@@ -5,7 +6,7 @@ import { FormikErrors } from "formik";
 import { useUser } from "@/hooks/useUser";
 import { availableImageTypes } from "@/config/availableImageType";
 import Image from "next/image";
-import { useTranslation } from "next-i18next/pages";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface DropImageProps {
     errors: FormikErrors<{

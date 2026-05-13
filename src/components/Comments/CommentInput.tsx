@@ -1,5 +1,6 @@
+'use client'
 import { useInteraction } from "@/hooks/useInteractions"
-import { useTranslation } from 'next-i18next/pages'
+import { useTranslation } from '@/hooks/useTranslation'
 import { Spinner } from "phosphor-react"
 import { useState } from "react"
 
@@ -15,10 +16,10 @@ interface CommentInputProps {
 export function CommentInput({
     defaultComment = '',
     commentId = '',
-    update = null,
-    setIsUpdating = null,
-    saveAnswer = null,
-    setShowAnswerInput = null
+    update = undefined,
+    setIsUpdating = undefined,
+    saveAnswer = undefined,
+    setShowAnswerInput = undefined
 }: CommentInputProps): JSX.Element {
 
     const [content, setContent] = useState(defaultComment)
@@ -32,12 +33,12 @@ export function CommentInput({
             if (update) {
                 await update(content, commentId)
                 setContent('')
-                setIsUpdating(false)
+                if (setIsUpdating) setIsUpdating(false)
             }
             else if (saveAnswer) {
                 await saveAnswer(content, commentId)
                 setContent('')
-                setShowAnswerInput(false)
+                if (setShowAnswerInput) setShowAnswerInput(false)
             }
             else saveComment(content)
         }

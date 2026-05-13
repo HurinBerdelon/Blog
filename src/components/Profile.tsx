@@ -1,11 +1,15 @@
+'use client'
 import { useUser } from "@/hooks/useUser";
 import Link from "next/link";
-import { useTranslation } from "next-i18next/pages";
+import { useTranslation } from "@/hooks/useTranslation";
+import { useParams } from "next/navigation";
 import Image from "next/image";
 
 export function Profile(): JSX.Element {
     const { user } = useUser();
     const { t } = useTranslation();
+    const params = useParams();
+    const lang = (params?.lang as string) ?? 'en';
 
     return (
         <div className="flex flex-col items-center">
@@ -46,7 +50,7 @@ export function Profile(): JSX.Element {
                 <>
                     <h4 className="font-medium text-center">{user.name}</h4>
                     <Link
-                        href="/user-settings"
+                        href={`/${lang}/user-settings`}
                         className="bg-greenBrandDark dark:bg-greenBrand hover:brightness-90 font-medium rounded py-[2px] px-3"
                     >
                         {t("common:profile")}

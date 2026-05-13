@@ -1,8 +1,9 @@
+'use client'
 import { useInteraction } from "@/hooks/useInteractions"
 import { useLogin } from "@/hooks/useLogin"
 import { useUser } from "@/hooks/useUser"
 import { Like } from "@/schema/Interactions"
-import { useTranslation } from 'next-i18next/pages'
+import { useTranslation } from '@/hooks/useTranslation'
 import { Spinner } from "phosphor-react"
 import { useEffect, useState } from "react"
 import { LikeIcon } from "./LikeIcon"
@@ -14,7 +15,7 @@ interface InteractiveLikeProps {
 
 export function InteractiveLike({ likes, className = '' }: InteractiveLikeProps): JSX.Element {
 
-    const [userLike, setUserLike] = useState<Like>(null)
+    const [userLike, setUserLike] = useState<Like | null>(null)
     const [isLoading, setIsLoading] = useState(false)
     const { likePost, unlikePost } = useInteraction()
     const { setIsLoginModalOpen } = useLogin()
@@ -23,7 +24,7 @@ export function InteractiveLike({ likes, className = '' }: InteractiveLikeProps)
 
     useEffect(() => {
         const like = likes?.find(like => like.userId === user?.id)
-        setUserLike(like)
+        setUserLike(like ?? null)
     }, [likes])
 
     async function handleLike() {

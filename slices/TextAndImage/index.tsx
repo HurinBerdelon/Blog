@@ -16,7 +16,7 @@ const TextAndImage = ({ slice }: TextAndImageProps) => (
 		<div className="flex self-center">
 			<PrismicImage
 				field={slice.primary.image}
-				width={slice.primary.image.dimensions.width}
+				width={slice.primary.image.dimensions?.width}
 				className="object-cover mx-4 rounded-lg overflow-hidden"
 			/>
 		</div>

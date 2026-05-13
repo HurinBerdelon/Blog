@@ -1,7 +1,7 @@
 import { Heart, Chat, Spinner } from "phosphor-react"
 
 interface LikesProps {
-    interactions: { likes: number, comments: number }
+    interactions: { likes?: number, comments?: number }
     className?: string
     showComments?: boolean
 }

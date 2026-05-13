@@ -1,12 +1,13 @@
-import { Query } from "@prismicio/types"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import { useTranslation } from 'next-i18next/pages'
-import { Pagination } from "../Pagination"
-import { PostCard } from "./PostCard"
-import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended"
-import { useEffect, useState } from "react"
-import { fetchLikesAndComments } from "@/services/fetchLikesAndComments"
+'use client'
+import { AllDocumentTypesExtended } from '@/schema/AllDocumentTypesExtended'
+import { fetchLikesAndComments } from '@/services/fetchLikesAndComments'
+import { Query } from '@prismicio/types'
+import Link from 'next/link'
+import { useParams, usePathname, useRouter } from 'next/navigation'
+import { useTranslation } from '@/hooks/useTranslation'
+import { Pagination } from '../Pagination'
+import { PostCard } from './PostCard'
+import { useEffect, useState } from 'react'
 
 interface ListOfPostsProps {
     title: string
@@ -16,9 +17,11 @@ interface ListOfPostsProps {
 }
 
 export function ListOfPosts({ posts, title, showPagination = false, seeAllPosts = false }: ListOfPostsProps): JSX.Element {
-
     const [recentPosts, setRecentPosts] = useState<Query<AllDocumentTypesExtended>>(posts)
     const router = useRouter()
+    const pathname = usePathname()
+    const params = useParams()
+    const lang = (params?.lang as string) ?? 'en'
     const { t } = useTranslation()
 
     useEffect(() => {
@@ -26,8 +29,7 @@ export function ListOfPosts({ posts, title, showPagination = false, seeAllPosts 
     }, [posts])
 
     function onPageChange(page: number) {
-        const path = router.asPath.split('?')[0]
-        router.push(`${path}?page=${page}`)
+        router.push(`${pathname}?page=${page}`)
     }
 
     return (
@@ -42,17 +44,27 @@ export function ListOfPosts({ posts, title, showPagination = false, seeAllPosts 
                     </ul>
                     {showPagination ? (
                         <div className="mt-6 flex flex-col items-center justify-self-end">
-                            <Pagination totalCountOfRegisters={recentPosts.total_results_size} currentPage={recentPosts.page} onPageChange={onPageChange} />
+                            <Pagination
+                                totalCountOfRegisters={recentPosts.total_results_size}
+                                currentPage={recentPosts.page}
+                                onPageChange={onPageChange}
+                            />
                         </div>
                     ) : null}
                     {seeAllPosts ? (
                         <div className="flex justify-center mt-4">
-                            <Link className="underline underline-offset-2 hover:text-greenBrandDark dark:hover:text-grayBrand" href="/category/all">{t('common:seeAllPosts')}</Link>
+                            <Link
+                                className="underline underline-offset-2 hover:text-greenBrandDark dark:hover:text-grayBrand"
+                                href={`/${lang}/category/all`}
+                            >
+                                {t('common:seeAllPosts')}
+                            </Link>
                         </div>
                     ) : null}
                 </>
-            ) : <div className="self-center justify-self-center">{t('common:noPostsHere')}</div>
-            }
+            ) : (
+                <div className="self-center justify-self-center">{t('common:noPostsHere')}</div>
+            )}
         </section>
     )
 }
