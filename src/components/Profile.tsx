@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useParams } from "next/navigation";
 import Image from "next/image";
+import { UserCircle } from "phosphor-react";
 
 export function Profile(): JSX.Element {
     const { user } = useUser();
@@ -14,36 +15,18 @@ export function Profile(): JSX.Element {
     return (
         <div className="flex flex-col items-center">
             <div className="overflow-hidden w-20 h-20 rounded-full border-2 border-textLight">
-                {user ? (
-                    user.avatarURL ? (
-                        <Image
-                            width={120}
-                            height={120}
-                            referrerPolicy="no-referrer"
-                            src={user.avatarURL}
-                            alt={`${user.name} ${t("common:profile")}`}
-                            className="object-cover p-1 w-full h-full rounded-full"
-                            loading="eager"
-                        />
-                    ) : (
-                        <Image
-                            width={80}
-                            height={80}
-                            src="/avatar/user.png"
-                            alt="profile template"
-                            className="object-cover p-1 w-full h-full rounded-full"
-                            loading="eager"
-                        />
-                    )
-                ) : (
+                {user?.avatarURL ? (
                     <Image
-                        width={80}
-                        height={80}
-                        src="/avatar/user.png"
-                        alt="profile template"
+                        width={120}
+                        height={120}
+                        referrerPolicy="no-referrer"
+                        src={user.avatarURL}
+                        alt={`${user.name} ${t("common:profile")}`}
                         className="object-cover p-1 w-full h-full rounded-full"
                         loading="eager"
                     />
+                ) : (
+                    <UserCircle className="w-full h-full text-textLight" weight="fill" />
                 )}
             </div>
             {user ? (
