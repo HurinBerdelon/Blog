@@ -1,9 +1,8 @@
-import { appKeys } from "@/config/AppKeys";
-import axios, { AxiosError } from "axios";
-import { GetServerSidePropsContext } from "next";
-import { signOut } from "next-auth/react";
-import { parseCookies, setCookie, destroyCookie } from "nookies";
-import { AuthTokenError } from "./errors/errors";
+import { appKeys } from '@/config/AppKeys'
+import axios, { AxiosError } from 'axios'
+import { signOut } from 'next-auth/react'
+import { getCookie, setCookie, deleteCookie } from './cookies'
+import { AuthTokenError } from './errors/errors'
 
 interface QueueObjectProps {
     onSucess: (token: string) => void
@@ -13,14 +12,11 @@ interface QueueObjectProps {
 let isRefreshing = false
 let failedRequestQueue: QueueObjectProps[] = []
 
-export function setupAPIClient(ctx: GetServerSidePropsContext | undefined = undefined) {
-
-    let cookies = parseCookies(ctx)
-
+export function setupAPIClient() {
     const api = axios.create({
         baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
         headers: {
-            Authorization: `Bearer ${cookies[appKeys.accessTokenKey]}`
+            Authorization: `Bearer ${getCookie(appKeys.accessTokenKey)}`
         }
     })
 
@@ -29,30 +25,17 @@ export function setupAPIClient(ctx: GetServerSidePropsContext | undefined = unde
         error => {
             if (error.response.status === 401) {
                 if (error.response.data?.message === 'Invalid Token!') {
-
                     const originalConfig = error.config
 
                     if (!isRefreshing) {
-
-                        cookies = parseCookies(ctx)
-                        const refreshToken = cookies[appKeys.refreshTokenKey]
-
+                        const refreshToken = getCookie(appKeys.refreshTokenKey)
                         isRefreshing = true
 
                         api.post('/refresh', {}, {
-                            headers: {
-                                'x-refresh-token': refreshToken,
-                            }
+                            headers: { 'x-refresh-token': refreshToken }
                         }).then(response => {
-                            setCookie(ctx, appKeys.accessTokenKey, response.data.accessToken, {
-                                maxAge: 60 * 60 * 24 * 7, // 7 days
-                                path: '/'
-                            })
-
-                            setCookie(ctx, appKeys.refreshTokenKey, response.data.refreshToken.value, {
-                                maxAge: 60 * 60 * 24 * 7, // 7 days
-                                path: '/'
-                            })
+                            setCookie(appKeys.accessTokenKey, response.data.accessToken, 60 * 60 * 24 * 7)
+                            setCookie(appKeys.refreshTokenKey, response.data.refreshToken.value, 60 * 60 * 24 * 7)
 
                             api.defaults.headers['Authorization'] = `Bearer ${response.data.accessToken}`
 
@@ -70,12 +53,11 @@ export function setupAPIClient(ctx: GetServerSidePropsContext | undefined = unde
                         failedRequestQueue.push({
                             onSucess: (token: string) => {
                                 originalConfig.headers['Authorization'] = `Bearer ${token}`
-
                                 resolve(api(originalConfig))
                             },
                             onFailure: (error: AxiosError) => {
-                                destroyCookie(ctx, appKeys.accessTokenKey)
-                                destroyCookie(ctx, appKeys.refreshTokenKey)
+                                deleteCookie(appKeys.accessTokenKey)
+                                deleteCookie(appKeys.refreshTokenKey)
                                 signOut()
                                 reject(error)
                             }
