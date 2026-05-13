@@ -1,23 +1,26 @@
-import { Popover } from "@headlessui/react";
-import Link from "next/link";
-import { List } from "phosphor-react";
-import { useTranslation } from 'next-i18next/pages';
-import { LoginModal } from "./LoginModal";
-import { useState } from "react";
-import { Category } from "@/schema/Category";
-import { Profile } from "./Profile";
-import { useUser } from "@/hooks/useUser";
-import { useLogin } from "@/hooks/useLogin";
+'use client'
+import { Popover } from '@headlessui/react'
+import Link from 'next/link'
+import { List } from 'phosphor-react'
+import { useTranslation } from '@/hooks/useTranslation'
+import { useParams } from 'next/navigation'
+import { LoginModal } from './LoginModal'
+import { useState } from 'react'
+import { Category } from '@/schema/Category'
+import { Profile } from './Profile'
+import { useUser } from '@/hooks/useUser'
+import { useLogin } from '@/hooks/useLogin'
 
 interface PopoverMenuProps {
     sortedCategories: Category[]
 }
 
 export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element {
-
     const { t } = useTranslation()
     const { setIsLoginModalOpen } = useLogin()
     const { revokeAuthentication, user } = useUser()
+    const params = useParams()
+    const lang = (params?.lang as string) ?? 'en'
 
     return (
         <menu>
@@ -33,7 +36,7 @@ export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element
                     <nav className="flex flex-col gap-1 pl-1 font-medium">
                         <Link
                             className="hover:text-white hover:underline transition-all dark:hover:text-grayBrand"
-                            href='/'
+                            href={`/${lang}`}
                         >
                             Home
                         </Link>
@@ -42,14 +45,14 @@ export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element
                             <Link
                                 key={category.tag}
                                 className="capitalize hover:text-white dark:hover:text-grayBrand hover:underline transition-all"
-                                href={`/category/${category.tag}`}
+                                href={`/${lang}/category/${category.tag}`}
                             >
                                 {category.tag}
                             </Link>
                         ))}
                         <Link
                             className="capitalize hover:text-white dark:hover:text-grayBrand hover:underline transition-all"
-                            href={`/category/all`}
+                            href={`/${lang}/category/all`}
                         >
                             {t('common:all')}
                         </Link>

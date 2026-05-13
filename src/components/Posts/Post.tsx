@@ -1,44 +1,46 @@
-import { BlogPostDocument } from ".slicemachine/prismicio";
-import { SliceZone } from "@prismicio/react";
-import Link from "next/link";
-import { components } from "slices";
-import { Share } from "../Share";
-import Image from "next/image";
-import { CommentInput } from "../Comments/CommentInput";
-import { Comment } from "../Comments/Comment";
-import { useTranslation } from "next-i18next/pages";
-import { useEffect, useState } from "react";
-import { useInteraction } from "@/hooks/useInteractions";
-import { InteractiveLike } from "../Comments/InteractiveLike";
-import { useUser } from "@/hooks/useUser";
-import { useLogin } from "@/hooks/useLogin";
-import { AuthorCard } from "../AuthorCard";
-import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended";
-import { useRouter } from "next/router";
+'use client'
+import { BlogPostDocument } from '.slicemachine/prismicio'
+import { SliceZone } from '@prismicio/react'
+import Link from 'next/link'
+import { components } from 'slices'
+import { Share } from '../Share'
+import Image from 'next/image'
+import { CommentInput } from '../Comments/CommentInput'
+import { Comment } from '../Comments/Comment'
+import { useTranslation } from '@/hooks/useTranslation'
+import { useEffect, useState } from 'react'
+import { useInteraction } from '@/hooks/useInteractions'
+import { InteractiveLike } from '../Comments/InteractiveLike'
+import { useUser } from '@/hooks/useUser'
+import { useLogin } from '@/hooks/useLogin'
+import { AuthorCard } from '../AuthorCard'
+import { AllDocumentTypesExtended } from '@/schema/AllDocumentTypesExtended'
+import { useParams } from 'next/navigation'
 
 interface PostProps {
-    post: BlogPostDocument;
+    post: BlogPostDocument
 }
 
 export function Post({ post }: PostProps): JSX.Element {
-    const { interactions, getInteractions } = useInteraction();
-    const [numberOfComments, setNumberOfComments] = useState(0);
-    const { setIsLoginModalOpen } = useLogin();
-    const { t } = useTranslation();
-    const { user } = useUser();
-    const router = useRouter();
+    const { interactions, getInteractions } = useInteraction()
+    const [numberOfComments, setNumberOfComments] = useState(0)
+    const { setIsLoginModalOpen } = useLogin()
+    const { t } = useTranslation()
+    const { user } = useUser()
+    const params = useParams()
+    const lang = (params?.lang as string) ?? 'en'
 
     useEffect(() => {
         setNumberOfComments(
             interactions?.comments?.reduce((acc, comment) => {
-                return acc + comment.answers.length + 1;
+                return acc + comment.answers.length + 1
             }, 0),
-        );
-    }, [interactions]);
+        )
+    }, [interactions])
 
     useEffect(() => {
-        getInteractions(post.uid);
-    }, [post]);
+        getInteractions(post.uid)
+    }, [post])
 
     return (
         <article className="flex flex-col pt-8 mx-auto w-full md:w-[720px] xl:w-[1120px] text-backgroundDark dark:text-textLight">
@@ -63,11 +65,11 @@ export function Post({ post }: PostProps): JSX.Element {
             </h1>
 
             <div className="flex gap-3 px-4 text-sm italic font-medium capitalize">
-                {post.tags.map((tag) => (
+                {post.tags.map(tag => (
                     <Link
                         key={tag}
                         className="hover:text-greenBrandDark dark:hover:text-grayBrand"
-                        href={`/list/${tag}`}
+                        href={`/${lang}/category/${tag}`}
                     >
                         {tag}
                     </Link>
@@ -79,44 +81,35 @@ export function Post({ post }: PostProps): JSX.Element {
             </div>
 
             <div className="flex flex-col">
-                <SliceZone
-                    slices={post.data.slices as any}
-                    components={components}
-                />
+                <SliceZone slices={post.data.slices as any} components={components} />
             </div>
 
             <div className="self-center mt-8 w-3/4 border-b-[1px] border-double border-greenBrandDark dark:border-textLight" />
 
             <div className="flex justify-between px-4 my-8">
-                <InteractiveLike
-                    className="text-xl"
-                    likes={interactions?.likes}
-                />
+                <InteractiveLike className="text-xl" likes={interactions?.likes} />
                 <Share
-                    title={post.data.title_of_the_post}
-                    postLink={`${process.env.NEXT_PUBLIC_BLOG_URL}/${router.locale}/post/${post.uid}`}
+                    title={post.data.title_of_the_post as string}
+                    postLink={`${process.env.NEXT_PUBLIC_BLOG_URL}/${lang}/post/${post.uid}`}
                 />
             </div>
 
             <div className="flex flex-col gap-5 px-4 mb-8">
                 <div className="font-medium">
-                    {t("common:comments")}
+                    {t('common:comments')}
                     <span className="ml-2 text-sm">{`(${numberOfComments})`}</span>
                 </div>
                 {user ? (
                     <CommentInput />
                 ) : (
-                    <button
-                        onClick={() => setIsLoginModalOpen(true)}
-                        className="hover:underline w-fit"
-                    >
-                        {t("common:signInToCommnet")}
+                    <button onClick={() => setIsLoginModalOpen(true)} className="hover:underline w-fit">
+                        {t('common:signInToCommnet')}
                     </button>
                 )}
-                {interactions?.comments?.map((comment) => (
+                {interactions?.comments?.map(comment => (
                     <Comment comment={comment} key={comment.id} />
                 ))}
             </div>
         </article>
-    );
+    )
 }

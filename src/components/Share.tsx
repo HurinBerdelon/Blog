@@ -1,5 +1,6 @@
+'use client'
 import { motion } from "framer-motion";
-import { useTranslation } from "next-i18next/pages";
+import { useTranslation } from "@/hooks/useTranslation";
 import {
     FacebookShareButton,
     FacebookIcon,

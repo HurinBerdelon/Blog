@@ -1,3 +1,4 @@
+'use client'
 import { createRef, useEffect, useState } from "react";
 import Dropzone, { DropzoneRef } from "react-dropzone";
 import { ArrowCounterClockwise, TrashSimple } from "phosphor-react";

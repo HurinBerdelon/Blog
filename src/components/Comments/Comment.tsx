@@ -1,7 +1,8 @@
+'use client'
 import type { Comment, Like } from "@/schema/Interactions"
 import { formatDate } from "@/services/dayjs"
 import { useEffect, useState } from "react"
-import { useTranslation } from 'next-i18next/pages'
+import { useTranslation } from '@/hooks/useTranslation'
 import { Answer } from "./Answer"
 import { useUser } from "@/hooks/useUser"
 import { useInteraction } from "@/hooks/useInteractions"
@@ -18,7 +19,7 @@ export function Comment({ comment }: CommentProps): JSX.Element {
 
     const { LikeComment, UnlikeComment, updateComment, deleteComment, saveAnswer } = useInteraction()
     const [showAnswerInput, setShowAnswerInput] = useState(false)
-    const [userLike, setUserLike] = useState<Like>(null)
+    const [userLike, setUserLike] = useState<Like | null>(null)
     const [showAnswer, setShowAnswer] = useState(false)
     const [isUpdating, setIsUpdating] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -28,7 +29,7 @@ export function Comment({ comment }: CommentProps): JSX.Element {
 
     useEffect(() => {
         const like = comment.likes.find(like => like.userId === user?.id)
-        setUserLike(like)
+        setUserLike(like ?? null)
     }, [comment])
 
     async function handleLike() {

@@ -1,17 +1,21 @@
-import Image from "next/image";
-import Link from "next/link";
-import { LinkedinLogo, EnvelopeSimple } from "phosphor-react";
-import { useTranslation } from "next-i18next/pages";
-import { Category } from "@/schema/Category";
-import { useUser } from "@/hooks/useUser";
+'use client'
+import Image from 'next/image'
+import Link from 'next/link'
+import { LinkedinLogo, EnvelopeSimple } from 'phosphor-react'
+import { useTranslation } from '@/hooks/useTranslation'
+import { useParams } from 'next/navigation'
+import { useUser } from '@/hooks/useUser'
+import { Category } from '@/schema/Category'
 
 interface FooterProps {
-    sortedCategories: Category[];
+    sortedCategories: Category[]
 }
 
 export function Footer({ sortedCategories }: FooterProps): JSX.Element {
-    const { t } = useTranslation();
-    const { user } = useUser();
+    const { t } = useTranslation()
+    const { user } = useUser()
+    const params = useParams()
+    const lang = (params?.lang as string) ?? 'en'
 
     return (
         <footer className="justify-self-end bg-greenBrand text-backgroundDark dark:bg-greenBrandDark dark:text-textLight">
@@ -30,32 +34,27 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
                     <div className="flex flex-col px-10 mt-4 items-left">
                         <Link
                             className="transition-all hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline"
-                            href={"/"}
+                            href={`/${lang}`}
                         >
                             Home
                         </Link>
                         {user ? (
                             <Link
                                 className="transition-all hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline"
-                                href={"/user-settings"}
+                                href={`/${lang}/user-settings`}
                             >
-                                {t("common:profile")}
+                                {t('common:profile')}
                             </Link>
                         ) : null}
                     </div>
                     <div className="flex flex-col">
-                        <div className="italic font-semibold capitalize">
-                            {t("common:categories")}
-                        </div>
+                        <div className="italic font-semibold capitalize">{t('common:categories')}</div>
                         <ul>
-                            {sortedCategories.map((category) => (
-                                <li
-                                    className="ml-4 list-disc"
-                                    key={category.tag}
-                                >
+                            {sortedCategories.map(category => (
+                                <li className="ml-4 list-disc" key={category.tag}>
                                     <Link
                                         className="capitalize transition-all hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline"
-                                        href={`/category/${category.tag}`}
+                                        href={`/${lang}/category/${category.tag}`}
                                     >
                                         {category.tag}
                                     </Link>
@@ -83,5 +82,5 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
                 </div>
             </div>
         </footer>
-    );
+    )
 }

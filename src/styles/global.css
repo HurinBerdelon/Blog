@@ -3,7 +3,7 @@
 
 @layer base {
     html {
-        font-family: "Poppins", sans-serif;
+        font-family: var(--font-poppins), "Poppins", sans-serif;
     }
 
     button,

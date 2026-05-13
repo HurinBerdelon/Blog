@@ -11,7 +11,7 @@ export function HyperLink({ children, node }: Props) {
     return (
         <Link
             className='underline hover:text-greenBrandDark italic dark:hover:text-grayBrand'
-            href={node.data.url}
+            href={node.data.url ?? ''}
         >
             {children}
         </Link>

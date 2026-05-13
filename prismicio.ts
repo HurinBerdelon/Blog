@@ -5,7 +5,8 @@ import config from './slicemachine.config.json'
 export const repositoryName = config.repositoryName
 
 const routes: prismic.ClientConfig['routes'] = [
-    { type: 'blog_post', path: '/post/:uid' },
+    { type: 'blog_post', path: '/en/post/:uid', lang: 'en-us' },
+    { type: 'blog_post', path: '/pt-BR/post/:uid', lang: 'pt-br' },
 ]
 
 export const createClient = (clientConfig: prismicNext.CreateClientConfig = {}) => {

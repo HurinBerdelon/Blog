@@ -1,6 +1,7 @@
+'use client'
 import type { Answer, Like } from "@/schema/Interactions"
 import { formatDate } from "@/services/dayjs"
-import { useTranslation } from 'next-i18next/pages'
+import { useTranslation } from '@/hooks/useTranslation'
 import { useUser } from "@/hooks/useUser"
 import { useEffect, useState } from "react"
 import { useInteraction } from "@/hooks/useInteractions"
@@ -16,7 +17,7 @@ interface AnswerProps {
 export function Answer({ answer }: AnswerProps): JSX.Element {
 
     const { LikeAnswer, UnlikeAnswer, updateAnswer, deleteAnswer } = useInteraction()
-    const [userLike, setUserLike] = useState<Like>(null)
+    const [userLike, setUserLike] = useState<Like | null>(null)
     const [isUpdating, setIsUpdating] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const { setIsLoginModalOpen } = useLogin()
@@ -25,7 +26,7 @@ export function Answer({ answer }: AnswerProps): JSX.Element {
 
     useEffect(() => {
         const like = answer.likes.find(like => like.userId === user?.id)
-        setUserLike(like)
+        setUserLike(like ?? null)
     }, [answer])
 
     async function handleLike() {
