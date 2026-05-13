@@ -1,5 +1,6 @@
 import { PrismicPreview } from '@prismicio/next'
 import { Poppins } from 'next/font/google'
+import type { Metadata } from 'next'
 import { repositoryName } from '../../prismicio'
 import '../styles/global.css'
 
@@ -11,12 +12,26 @@ const poppins = Poppins({
     display: 'swap',
 })
 
+export const metadata: Metadata = {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BLOG_URL ?? 'http://localhost:3000'),
+    title: {
+        default: 'HurinBlog',
+        template: '%s | HurinBlog',
+    },
+    description: 'A personal blog about software development.',
+    icons: { icon: '/images/fernandoCardozoLogo.svg' },
+    openGraph: {
+        type: 'website',
+        siteName: 'HurinBlog',
+    },
+    twitter: {
+        card: 'summary_large_image',
+    },
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en" className={poppins.variable}>
-            <head>
-                <link rel="icon" href="/images/fernandoCardozoLogo.svg" />
-            </head>
             <body>
                 {children}
                 <PrismicPreview repositoryName={repositoryName} />

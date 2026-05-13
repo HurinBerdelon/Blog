@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const { lang } = await params
     const dict = await getDictionary(lang)
     return {
-        title: `${dict.profile} | HurinBlog`,
+        title: dict.profile,
         description: dict.userSettingsMetaDescription,
     }
 }
