@@ -1,7 +1,9 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Question } from 'phosphor-react'
 import { useTranslation } from '@/hooks/useTranslation'
+import { useNavHint } from '@/hooks/useNavHint'
 import { useParams } from 'next/navigation'
 import { IdiomSwitcher } from './IdiomSwitcher'
 import { PopoverMenu } from './PopoverMenu'
@@ -15,6 +17,7 @@ interface HeaderProps {
 
 export function Header({ sortedCategories }: HeaderProps): JSX.Element {
     const { t } = useTranslation()
+    const { setIsNavHintOpen } = useNavHint()
     const params = useParams()
     const lang = (params?.lang as string) ?? 'en'
     const subject = (params?.subject as string) ?? ''
@@ -48,6 +51,12 @@ export function Header({ sortedCategories }: HeaderProps): JSX.Element {
                     <ThemeSwitcher />
                     <SubjectSwitcher />
                     <IdiomSwitcher />
+                    {subject ? (
+                        <button className="text-3xl" onClick={() => setIsNavHintOpen(true)}>
+                            <Question className="text-backgroundDark hover:text-greenBrandDark dark:text-textLight dark:hover:text-grayBrand" />
+                            <span className="sr-only">{t('common:helpButton')}</span>
+                        </button>
+                    ) : null}
                     <PopoverMenu sortedCategories={sortedCategories} />
                 </div>
             </div>

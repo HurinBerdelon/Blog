@@ -44,5 +44,11 @@
     "notFound": "Página não encontrada",
     "chooseSubject": "Sobre o que você gostaria de ler?",
     "tech": "Tecnologia",
-    "humanities": "Humanidades"
+    "humanities": "Humanidades",
+    "navHintTitle": "Como navegar pelo blog",
+    "navHintSubjectText": "Use esse ícone para trocar o assunto que você está lendo.",
+    "navHintLangText": "Use esse ícone para trocar o idioma.",
+    "navHintReopenText": "Você pode abrir essa ajuda novamente pelo ícone de ajuda no cabeçalho.",
+    "gotIt": "Entendi",
+    "helpButton": "Abrir ajuda de navegação"
 }

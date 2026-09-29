@@ -1,6 +1,7 @@
 import { Banner } from '@/components/Banner'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
+import { NavHintAutoShow } from '@/components/NavHintAutoShow'
 import { ListOfPosts } from '@/components/Posts/ListOfPosts'
 import { RememberSubject } from '@/components/RememberSubject'
 import { languages } from '@/config/languages'
@@ -45,6 +46,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string;
     return (
         <>
             <RememberSubject subject={subject} />
+            <NavHintAutoShow />
             <Header sortedCategories={sortedCategories} />
             <main className="flex-1">
                 <Banner image={{ alt: 'homeBanner', src: '' }} text="Hurin Blog" />

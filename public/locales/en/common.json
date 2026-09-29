@@ -44,5 +44,11 @@
     "notFound": "Page not Found",
     "chooseSubject": "What would you like to read about?",
     "tech": "Tech",
-    "humanities": "Humanities"
+    "humanities": "Humanities",
+    "navHintTitle": "Get around the blog",
+    "navHintSubjectText": "Use this icon to switch what you're reading about.",
+    "navHintLangText": "Use this icon to switch the language.",
+    "navHintReopenText": "You can reopen this anytime from the help icon in the header.",
+    "gotIt": "Got it",
+    "helpButton": "Open navigation help"
 }

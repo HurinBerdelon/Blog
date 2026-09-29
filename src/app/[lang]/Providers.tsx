@@ -1,9 +1,11 @@
 'use client'
 import { GoogleAnalytic } from '@/components/GoogleAnalytics'
 import { LoginModal } from '@/components/LoginModal'
+import { NavHintModal } from '@/components/NavHintModal'
 import { InteractionProvider } from '@/hooks/useInteractions'
 import { LoginProvider } from '@/hooks/useLogin'
 import { useLogin } from '@/hooks/useLogin'
+import { NavHintProvider } from '@/hooks/useNavHint'
 import { ThemeProvider } from '@/hooks/useTheme'
 import { UserProvider } from '@/hooks/useUser'
 import { DictionaryProvider } from '@/hooks/useTranslation'
@@ -30,11 +32,14 @@ export function Providers({ children, dictionary }: {
                 <UserProvider>
                     <InteractionProvider>
                         <LoginProvider>
-                            <ThemeProvider>
-                                <GoogleAnalytic />
-                                {children}
-                                <LoginModalWrapper />
-                            </ThemeProvider>
+                            <NavHintProvider>
+                                <ThemeProvider>
+                                    <GoogleAnalytic />
+                                    {children}
+                                    <LoginModalWrapper />
+                                    <NavHintModal />
+                                </ThemeProvider>
+                            </NavHintProvider>
                         </LoginProvider>
                     </InteractionProvider>
                 </UserProvider>
