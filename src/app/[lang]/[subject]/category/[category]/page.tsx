@@ -15,7 +15,7 @@ import { createClient } from 'prismicio'
 export async function generateMetadata({ params }: { params: Promise<{ lang: string; subject: Subject; category: string }> }): Promise<Metadata> {
     const { lang, subject, category } = await params
     const dict = await getDictionary(lang)
-    const description = `${dict.categoryMetaDescription} ${category}.`
+    const description = `${dict.categoryMetaDescription} ${category} (${dict[subject] ?? subject}).`
     return {
         title: category,
         description,
