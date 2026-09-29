@@ -5,6 +5,7 @@ import { useTranslation } from '@/hooks/useTranslation'
 import { useParams } from 'next/navigation'
 import { IdiomSwitcher } from './IdiomSwitcher'
 import { PopoverMenu } from './PopoverMenu'
+import { SubjectSwitcher } from './SubjectSwitcher'
 import { ThemeSwitcher } from './ThemeSwitcher'
 import { Category } from '@/schema/Category'
 
@@ -45,6 +46,7 @@ export function Header({ sortedCategories }: HeaderProps): JSX.Element {
                         ))}
                     </div>
                     <ThemeSwitcher />
+                    <SubjectSwitcher />
                     <IdiomSwitcher />
                     <PopoverMenu sortedCategories={sortedCategories} />
                 </div>
