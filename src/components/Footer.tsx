@@ -16,6 +16,7 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
     const { user } = useUser()
     const params = useParams()
     const lang = (params?.lang as string) ?? 'en'
+    const subject = (params?.subject as string) ?? ''
 
     return (
         <footer className="justify-self-end bg-greenBrand text-backgroundDark dark:bg-greenBrandDark dark:text-textLight">
@@ -34,7 +35,7 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
                     <div className="flex flex-col px-10 mt-4 items-left">
                         <Link
                             className="transition-all hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline"
-                            href={`/${lang}`}
+                            href={subject ? `/${lang}/${subject}` : `/${lang}`}
                         >
                             Home
                         </Link>
@@ -54,7 +55,7 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
                                 <li className="ml-4 list-disc" key={category.tag}>
                                     <Link
                                         className="capitalize transition-all hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline"
-                                        href={`/${lang}/category/${category.tag}`}
+                                        href={`/${lang}/${subject}/category/${category.tag}`}
                                     >
                                         {category.tag}
                                     </Link>

@@ -22,6 +22,7 @@ export function ListOfPosts({ posts, title, showPagination = false, seeAllPosts 
     const pathname = usePathname()
     const params = useParams()
     const lang = (params?.lang as string) ?? 'en'
+    const subject = (params?.subject as string) ?? ''
     const { t } = useTranslation()
 
     useEffect(() => {
@@ -59,7 +60,7 @@ export function ListOfPosts({ posts, title, showPagination = false, seeAllPosts 
                         <div className="flex justify-center mt-4">
                             <Link
                                 className="underline underline-offset-2 hover:text-greenBrandDark dark:hover:text-grayBrand"
-                                href={`/${lang}/category/all`}
+                                href={`/${lang}/${subject}/category/all`}
                             >
                                 {t('common:seeAllPosts')}
                             </Link>

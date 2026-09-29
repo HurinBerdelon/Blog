@@ -7,7 +7,8 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "slicemachine": "start-slicemachine"
+        "slicemachine": "start-slicemachine",
+        "generate-types": "prismic-ts-codegen -c ./prismicCodegen.config.ts"
     },
     "dependencies": {
         "@headlessui/react": "^1.7.10",
@@ -44,6 +45,7 @@
         "@types/yup": "^0.29.14",
         "autoprefixer": "^10.4.13",
         "postcss": "^8.4.31",
+        "prismic-ts-codegen": "0.1.27",
         "slice-machine-ui": "^2.21.2",
         "tailwindcss": "^4.3.0",
         "typescript": "^5"

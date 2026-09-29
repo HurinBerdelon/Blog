@@ -1,63 +1,70 @@
 {
-  "id": "blog_post",
-  "label": "BlogPost",
-  "repeatable": true,
-  "status": true,
-  "json": {
-    "Main": {
-      "uid": {
-        "type": "UID",
-        "config": {
-          "label": "UID",
-          "placeholder": ""
-        }
-      },
-      "title_of_the_post": {
-        "type": "Text",
-        "config": {
-          "label": "Title of the Post",
-          "placeholder": ""
-        }
-      },
-      "banner": {
-        "type": "Image",
-        "config": {
-          "label": "Banner",
-          "constraint": {},
-          "thumbnails": []
-        }
-      },
-      "meta_description": {
-        "type": "Text",
-        "config": {
-          "label": "Meta Description",
-          "placeholder": "Description of the page, for SEO"
-        }
-      },
-      "author": {
-        "type": "Link",
-        "config": {
-          "label": "Author",
-          "select": "document",
-          "customtypes": [
-            "author"
-          ]
-        }
-      },
-      "slices": {
-        "type": "Slices",
-        "fieldset": "Slice Zone",
-        "config": {
-          "choices": {
-            "text_and_image": {
-              "type": "SharedSlice"
+    "id": "blog_post",
+    "label": "BlogPost",
+    "repeatable": true,
+    "status": true,
+    "json": {
+        "Main": {
+            "uid": {
+                "type": "UID",
+                "config": {
+                    "label": "UID",
+                    "placeholder": ""
+                }
             },
-            "text_only": {
-              "type": "SharedSlice"
+            "title_of_the_post": {
+                "type": "Text",
+                "config": {
+                    "label": "Title of the Post",
+                    "placeholder": ""
+                }
+            },
+            "banner": {
+                "type": "Image",
+                "config": {
+                    "label": "Banner",
+                    "constraint": {},
+                    "thumbnails": []
+                }
+            },
+            "meta_description": {
+                "type": "Text",
+                "config": {
+                    "label": "Meta Description",
+                    "placeholder": "Description of the page, for SEO"
+                }
+            },
+            "author": {
+                "type": "Link",
+                "config": {
+                    "label": "Author",
+                    "select": "document",
+                    "customtypes": ["author"]
+                }
+            },
+            "subject": {
+                "type": "Select",
+                "config": {
+                    "label": "Subject",
+                    "placeholder": "",
+                    "options": ["tech", "humanities"],
+                    "default_value": "humanities"
+                }
+            },
+            "slices": {
+                "type": "Slices",
+                "fieldset": "Slice Zone",
+                "config": {
+                    "choices": {
+                        "text_and_image": {
+                            "type": "SharedSlice"
+                        },
+                        "text_only": {
+                            "type": "SharedSlice"
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     }
-  }
 }
