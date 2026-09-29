@@ -14,7 +14,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' data: blob: https://images.prismic.io https://hurin-blog.s3.sa-east-1.amazonaws.com https://lh3.googleusercontent.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "connect-src 'self' https://*.prismic.io https://prismic.io",
+      `connect-src 'self' https://*.prismic.io https://prismic.io ${process.env.NEXT_PUBLIC_BACKEND_URL ?? ''}`,
       "frame-src 'none'",
       "frame-ancestors 'none'",
       "base-uri 'self'",
