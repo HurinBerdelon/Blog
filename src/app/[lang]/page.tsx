@@ -29,8 +29,8 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
     const client = createClient()
     const dict = await getDictionary(lang)
 
-    const lastFourPosts: Query<AllDocumentTypesExtended> = await client.getByType('blog_post', {
-        pageSize: 4,
+    const latestPosts: Query<AllDocumentTypesExtended> = await client.getByType('blog_post', {
+        pageSize: 6,
         lang: languages[lang as Locale]?.prismic_code ?? 'en-us',
         fetchLinks: ['author.authorprofileimage', 'author.name'],
         orderings: { field: 'document.first_publication_date', direction: 'desc' },
@@ -45,7 +45,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
                 <Banner image={{ alt: 'homeBanner', src: '' }} text="Hurin Blog" />
                 <ListOfPosts
                     title={dict.recentPosts}
-                    posts={lastFourPosts}
+                    posts={latestPosts}
                     seeAllPosts={true}
                 />
             </main>
