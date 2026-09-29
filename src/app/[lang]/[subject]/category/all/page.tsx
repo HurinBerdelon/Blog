@@ -3,55 +3,58 @@ import { Header } from '@/components/Header'
 import { ListOfPosts } from '@/components/Posts/ListOfPosts'
 import { pageSize } from '@/config/pageSize'
 import { languages } from '@/config/languages'
+import type { Subject } from '@/config/subjects'
 import { getDictionary, type Locale } from '@/i18n'
 import { AllDocumentTypesExtended } from '@/schema/AllDocumentTypesExtended'
 import { fetchCategories } from '@/services/fetchCategories'
+import { filter } from '@prismicio/client'
 import { Query } from '@prismicio/types'
 import type { Metadata } from 'next'
 import { createClient } from 'prismicio'
 
-export async function generateMetadata({ params }: { params: Promise<{ lang: string; category: string }> }): Promise<Metadata> {
-    const { lang, category } = await params
+export async function generateMetadata({ params }: { params: Promise<{ lang: string; subject: Subject }> }): Promise<Metadata> {
+    const { lang, subject } = await params
     const dict = await getDictionary(lang)
-    const description = `${dict.categoryMetaDescription} ${category}.`
     return {
-        title: category,
-        description,
+        title: dict.allPosts,
+        description: dict.generalMetaDescription,
         openGraph: {
-            title: category,
-            description,
-            url: `/${lang}/category/${category}`,
+            title: dict.allPosts,
+            description: dict.generalMetaDescription,
+            url: `/${lang}/${subject}/category/all`,
         },
     }
 }
 
-export default async function CategoryPage({
+export default async function AllPosts({
     params,
     searchParams,
 }: {
-    params: Promise<{ lang: string; category: string }>
+    params: Promise<{ lang: string; subject: Subject }>
     searchParams: Promise<{ page?: string }>
 }) {
-    const { lang, category } = await params
+    const { lang, subject } = await params
     const { page } = await searchParams
+    const dict = await getDictionary(lang)
     const client = createClient()
 
-    const postsResponse: Query<AllDocumentTypesExtended> = await client.getByTag(category, {
+    const postsResponse: Query<AllDocumentTypesExtended> = await client.getByType('blog_post', {
         page: page ? Number(page) : 1,
         pageSize,
         lang: languages[lang as Locale]?.prismic_code ?? 'en-us',
+        filters: [filter.at('my.blog_post.subject', subject)],
         fetchLinks: ['author.authorprofileimage', 'author.name'],
         orderings: { field: 'document.first_publication_date', direction: 'desc' },
     })
 
-    const sortedCategories = await fetchCategories()
+    const sortedCategories = await fetchCategories(subject)
 
     return (
         <>
             <Header sortedCategories={sortedCategories} />
-            <main className="flex-1 flex">
+            <main className="flex-1">
                 <ListOfPosts
-                    title={category}
+                    title={dict.allPosts}
                     posts={postsResponse}
                     showPagination={true}
                 />

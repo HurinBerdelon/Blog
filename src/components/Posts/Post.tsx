@@ -29,6 +29,7 @@ export function Post({ post }: PostProps): JSX.Element {
     const { user } = useUser()
     const params = useParams()
     const lang = (params?.lang as string) ?? 'en'
+    const subject = (params?.subject as string) ?? ''
 
     useEffect(() => {
         setNumberOfComments(
@@ -69,7 +70,7 @@ export function Post({ post }: PostProps): JSX.Element {
                     <Link
                         key={tag}
                         className="hover:text-greenBrandDark dark:hover:text-grayBrand"
-                        href={`/${lang}/category/${tag}`}
+                        href={`/${lang}/${subject}/category/${tag}`}
                     >
                         {tag}
                     </Link>
@@ -90,7 +91,7 @@ export function Post({ post }: PostProps): JSX.Element {
                 <InteractiveLike className="text-xl" likes={interactions?.likes} />
                 <Share
                     title={post.data.title_of_the_post as string}
-                    postLink={`${process.env.NEXT_PUBLIC_BLOG_URL}/${lang}/post/${post.uid}`}
+                    postLink={`${process.env.NEXT_PUBLIC_BLOG_URL}/${lang}/${subject}/post/${post.uid}`}
                 />
             </div>
 

@@ -12,6 +12,7 @@ export default function PostError({
 }) {
     const params = useParams()
     const lang = (params?.lang as string) ?? 'en'
+    const subject = (params?.subject as string) ?? ''
 
     useEffect(() => {
         console.error(error)
@@ -28,7 +29,7 @@ export default function PostError({
                     Try again
                 </button>
                 <Link
-                    href={`/${lang}`}
+                    href={`/${lang}/${subject}`}
                     className="px-6 py-2 border-2 border-grayBrand dark:border-greenBrandDark rounded hover:underline"
                 >
                     Go home

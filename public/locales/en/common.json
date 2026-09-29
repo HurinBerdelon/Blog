@@ -41,5 +41,8 @@
     "loginCallbackMetaDescription": "Fernando Cardozo's blog callback page for authentication.",
     "userSettingsMetaDescription": "Fernando Cardozo's blog user's settings page.",
     "notFoundText": "Page not Found! Would like to see all posts?",
-    "notFound": "Page not Found"
+    "notFound": "Page not Found",
+    "chooseSubject": "What would you like to read about?",
+    "tech": "Tech",
+    "humanities": "Humanities"
 }

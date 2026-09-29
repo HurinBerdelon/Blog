@@ -3,7 +3,6 @@ import { Header } from '@/components/Header'
 import { UpdateProfile } from '@/components/UpdateProfile'
 import { appKeys } from '@/config/AppKeys'
 import { getDictionary } from '@/i18n'
-import { fetchCategories } from '@/services/fetchCategories'
 import type { Metadata } from 'next'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
@@ -25,15 +24,13 @@ export default async function UserSettings({ params }: { params: Promise<{ lang:
         redirect(`/${lang}`)
     }
 
-    const sortedCategories = await fetchCategories()
-
     return (
         <>
-            <Header sortedCategories={sortedCategories} />
+            <Header sortedCategories={[]} />
             <main className="flex-1 flex items-center justify-center">
                 <UpdateProfile />
             </main>
-            <Footer sortedCategories={sortedCategories} />
+            <Footer sortedCategories={[]} />
         </>
     )
 }

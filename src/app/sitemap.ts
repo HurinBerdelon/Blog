@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next'
 import { createClient } from 'prismicio'
 import { locales } from '@/i18n'
 import { languages } from '@/config/languages'
+import { subjectList } from '@/config/subjects'
 import type { Locale } from '@/i18n'
 
 const prismicToUrlLang = Object.fromEntries(
@@ -21,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             const urlLang = prismicToUrlLang[post.lang]
             if (!urlLang) return null
             return {
-                url: `${base}/${urlLang}/post/${post.uid}`,
+                url: `${base}/${urlLang}/${post.data.subject}/post/${post.uid}`,
                 lastModified: new Date(post.last_publication_date),
             }
         })
@@ -29,7 +30,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const staticUrls: MetadataRoute.Sitemap = locales.flatMap(lang => [
         { url: `${base}/${lang}`, lastModified: new Date() },
-        { url: `${base}/${lang}/category/all`, lastModified: new Date() },
+        ...subjectList.flatMap(subject => [
+            { url: `${base}/${lang}/${subject}`, lastModified: new Date() },
+            { url: `${base}/${lang}/${subject}/category/all`, lastModified: new Date() },
+        ]),
     ])
 
     return [...staticUrls, ...postUrls]
