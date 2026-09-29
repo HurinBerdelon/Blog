@@ -1,4 +1,4 @@
-import { BlogPostDocument } from '.slicemachine/prismicio'
+import { BlogPostDocument } from 'prismicio-types'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { Post } from '@/components/Posts/Post'

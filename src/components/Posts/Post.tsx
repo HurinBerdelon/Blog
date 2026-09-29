@@ -1,5 +1,5 @@
 'use client'
-import { BlogPostDocument } from '.slicemachine/prismicio'
+import { BlogPostDocument } from 'prismicio-types'
 import { SliceZone } from '@prismicio/react'
 import Link from 'next/link'
 import { components } from 'slices'
