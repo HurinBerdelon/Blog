@@ -1,0 +1,42 @@
+[
+  {
+    "authorprofileimage": {
+      "__TYPE__": "ImageContent",
+      "origin": {
+        "id": "main",
+        "url": "https://images.unsplash.com/photo-1493119508027-2b584f234d6c",
+        "width": 3424,
+        "height": 3424
+      },
+      "url": "https://images.unsplash.com/photo-1493119508027-2b584f234d6c",
+      "width": 3424,
+      "height": 3424,
+      "edit": {
+        "zoom": 1,
+        "crop": {
+          "x": 0,
+          "y": 0
+        },
+        "background": "transparent"
+      },
+      "alt": "detail",
+      "thumbnails": {}
+    },
+    "name": {
+      "__TYPE__": "FieldContent",
+      "value": "wing",
+      "type": "Text"
+    },
+    "introduction": {
+      "__TYPE__": "StructuredTextContent",
+      "value": [
+        {
+          "type": "paragraph",
+          "content": {
+            "text": "Officia excepteur elit sint exercitation velit ex. Sit ut irure reprehenderit sit consequat incididunt do non non aliqua minim deserunt."
+          }
+        }
+      ]
+    }
+  }
+]

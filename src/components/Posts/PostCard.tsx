@@ -15,6 +15,7 @@ interface PostCardProps {
 export function PostCard({ post }: PostCardProps): JSX.Element {
     const params = useParams()
     const lang = (params?.lang as string) ?? 'en'
+    const subject = (params?.subject as string) ?? ''
 
     const [textPreview] = useState(() => {
         const textPreview = post.data.slices[0]?.primary.text_content[0]?.text as string
@@ -28,7 +29,7 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
             whileHover={{ scale: 1.025 }}
         >
             <Link
-                href={`/${lang}/post/${post.uid}`}
+                href={`/${lang}/${subject}/post/${post.uid}`}
                 className="flex flex-col flex-1 gap-2 justify-between h-full"
             >
                 <h3 className="self-center px-2 py-2 text-xl font-semibold text-center">
