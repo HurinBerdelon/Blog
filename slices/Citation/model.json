@@ -1,0 +1,28 @@
+{
+  "id": "citation",
+  "type": "SharedSlice",
+  "name": "Citation",
+  "description": "Citation",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Citation",
+      "primary": {
+        "text_content": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Citation Text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,strong,em,hyperlink"
+          }
+        }
+      },
+      "items": {},
+      "imageUrl": ""
+    }
+  ]
+}
