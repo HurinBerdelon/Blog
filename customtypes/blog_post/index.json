@@ -54,6 +54,12 @@
             },
             "text_only": {
               "type": "SharedSlice"
+            },
+            "references": {
+              "type": "SharedSlice"
+            },
+            "citation": {
+              "type": "SharedSlice"
             }
           }
         }

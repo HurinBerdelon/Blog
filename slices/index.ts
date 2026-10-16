@@ -5,4 +5,6 @@ import dynamic from 'next/dynamic'
 export const components = {
     text_and_image: dynamic(() => import('./TextAndImage')),
     text_only: dynamic(() => import('./TextOnly')),
+    references: dynamic(() => import('./References')),
+    citation: dynamic(() => import('./Citation')),
 }
