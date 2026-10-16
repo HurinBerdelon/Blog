@@ -1,0 +1,28 @@
+{
+  "id": "references",
+  "type": "SharedSlice",
+  "name": "References",
+  "description": "References",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "References",
+      "primary": {},
+      "items": {
+        "reference_text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Reference Text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,strong,em,hyperlink"
+          }
+        }
+      },
+      "imageUrl": ""
+    }
+  ]
+}

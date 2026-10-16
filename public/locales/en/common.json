@@ -53,5 +53,6 @@
     "navHintLangText": "Use this icon to switch the language.",
     "navHintReopenText": "You can reopen this anytime from the help icon in the header.",
     "gotIt": "Got it",
-    "helpButton": "Open navigation help"
+    "helpButton": "Open navigation help",
+    "references": "References"
 }

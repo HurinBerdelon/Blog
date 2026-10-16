@@ -97,7 +97,7 @@ interface AuthorDocumentData {
  */
 export type AuthorDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<AuthorDocumentData>, "author", Lang>;
 
-type BlogPostDocumentDataSlicesSlice = TextAndImageSlice | TextOnlySlice
+type BlogPostDocumentDataSlicesSlice = TextAndImageSlice | TextOnlySlice | ReferencesSlice | CitationSlice
 
 /**
  * Content for BlogPost documents
@@ -183,6 +183,82 @@ interface BlogPostDocumentData {
 export type BlogPostDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<Simplify<BlogPostDocumentData>, "blog_post", Lang>;
 
 export type AllDocumentTypes = AuthorDocument | BlogPostDocument;
+
+/**
+ * Primary content in *Citation → Default → Primary*
+ */
+export interface CitationSliceDefaultPrimary {
+	/**
+	 * Citation Text field in *Citation → Default → Primary*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: citation.default.primary.text_content
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	text_content: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Citation Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Citation
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CitationSliceDefault = prismic.SharedSliceVariation<"default", Simplify<CitationSliceDefaultPrimary>, never>;
+
+/**
+ * Slice variation for *Citation*
+ */
+type CitationSliceVariation = CitationSliceDefault
+
+/**
+ * Citation Shared Slice
+ *
+ * - **API ID**: `citation`
+ * - **Description**: Citation
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CitationSlice = prismic.SharedSlice<"citation", CitationSliceVariation>;
+
+/**
+ * Primary content in *References → Items*
+ */
+export interface ReferencesSliceDefaultItem {
+	/**
+	 * Reference Text field in *References → Items*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: references.items[].reference_text
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	reference_text: prismic.RichTextField;
+}
+
+/**
+ * Default variation for References Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: References
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ReferencesSliceDefault = prismic.SharedSliceVariation<"default", Record<string, never>, Simplify<ReferencesSliceDefaultItem>>;
+
+/**
+ * Slice variation for *References*
+ */
+type ReferencesSliceVariation = ReferencesSliceDefault
+
+/**
+ * References Shared Slice
+ *
+ * - **API ID**: `references`
+ * - **Description**: References
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ReferencesSlice = prismic.SharedSlice<"references", ReferencesSliceVariation>;
 
 /**
  * Primary content in *TextAndImage → Default → Primary*
@@ -291,6 +367,14 @@ declare module "@prismicio/client" {
 			BlogPostDocumentData,
 			BlogPostDocumentDataSlicesSlice,
 			AllDocumentTypes,
+			CitationSlice,
+			CitationSliceDefaultPrimary,
+			CitationSliceVariation,
+			CitationSliceDefault,
+			ReferencesSlice,
+			ReferencesSliceDefaultItem,
+			ReferencesSliceVariation,
+			ReferencesSliceDefault,
 			TextAndImageSlice,
 			TextAndImageSliceDefaultPrimary,
 			TextAndImageSliceVariation,
