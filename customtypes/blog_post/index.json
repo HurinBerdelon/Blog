@@ -67,6 +67,9 @@
                         },
                         "citation": {
                             "type": "SharedSlice"
+                        },
+                        "bibliography": {
+                            "type": "SharedSlice"
                         }
                     }
                 }

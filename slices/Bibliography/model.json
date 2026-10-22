@@ -1,0 +1,28 @@
+{
+  "id": "bibliography",
+  "type": "SharedSlice",
+  "name": "Bibliography",
+  "description": "Bibliography",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Bibliography",
+      "primary": {},
+      "items": {
+        "entry_text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Entry Text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "paragraph,strong,em,hyperlink"
+          }
+        }
+      },
+      "imageUrl": ""
+    }
+  ]
+}

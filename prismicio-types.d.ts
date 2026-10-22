@@ -97,7 +97,7 @@ interface AuthorDocumentData {
  */
 export type AuthorDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<Simplify<AuthorDocumentData>, "author", Lang>;
 
-type BlogPostDocumentDataSlicesSlice = TextAndImageSlice | TextOnlySlice | ReferencesSlice | CitationSlice
+type BlogPostDocumentDataSlicesSlice = TextAndImageSlice | TextOnlySlice | ReferencesSlice | CitationSlice | BibliographySlice
 
 /**
  * Content for BlogPost documents
@@ -183,6 +183,44 @@ interface BlogPostDocumentData {
 export type BlogPostDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<Simplify<BlogPostDocumentData>, "blog_post", Lang>;
 
 export type AllDocumentTypes = AuthorDocument | BlogPostDocument;
+
+/**
+ * Primary content in *Bibliography → Items*
+ */
+export interface BibliographySliceDefaultItem {
+	/**
+	 * Entry Text field in *Bibliography → Items*
+	 *
+	 * - **Field Type**: Rich Text
+	 * - **Placeholder**: *None*
+	 * - **API ID Path**: bibliography.items[].entry_text
+	 * - **Documentation**: https://prismic.io/docs/fields/rich-text
+	 */
+	entry_text: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Bibliography Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Bibliography
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type BibliographySliceDefault = prismic.SharedSliceVariation<"default", Record<string, never>, Simplify<BibliographySliceDefaultItem>>;
+
+/**
+ * Slice variation for *Bibliography*
+ */
+type BibliographySliceVariation = BibliographySliceDefault
+
+/**
+ * Bibliography Shared Slice
+ *
+ * - **API ID**: `bibliography`
+ * - **Description**: Bibliography
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type BibliographySlice = prismic.SharedSlice<"bibliography", BibliographySliceVariation>;
 
 /**
  * Primary content in *Citation → Default → Primary*
@@ -367,6 +405,10 @@ declare module "@prismicio/client" {
 			BlogPostDocumentData,
 			BlogPostDocumentDataSlicesSlice,
 			AllDocumentTypes,
+			BibliographySlice,
+			BibliographySliceDefaultItem,
+			BibliographySliceVariation,
+			BibliographySliceDefault,
 			CitationSlice,
 			CitationSliceDefaultPrimary,
 			CitationSliceVariation,
