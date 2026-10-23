@@ -43,7 +43,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string;
         orderings: { field: 'document.first_publication_date', direction: 'desc' },
     })
 
-    const sortedCategories = await fetchCategories(subject)
+    const sortedCategories = await fetchCategories(subject, lang)
 
     return (
         <>

@@ -57,7 +57,7 @@ export default async function PostPage({ params }: { params: Promise<{ lang: str
 
     if (post.data.subject !== subject) notFound()
 
-    const sortedCategories = await fetchCategories(subject)
+    const sortedCategories = await fetchCategories(subject, lang)
 
     return (
         <>
