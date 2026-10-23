@@ -4,18 +4,17 @@ import { subjectList, type Subject } from '@/config/subjects'
 import { setSubjectCookie } from '@/utils/subjectCookie'
 import { useTranslation } from '@/hooks/useTranslation'
 import Link from 'next/link'
-import { useParams, usePathname } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { Books } from 'phosphor-react'
 
 export function SubjectSwitcher(): JSX.Element | null {
     const { t } = useTranslation()
     const params = useParams()
-    const pathname = usePathname()
     const currentLang = (params?.lang as string) ?? 'en'
     const currentSubject = params?.subject as string | undefined
 
     function getSubjectHref(targetSubject: Subject): string {
-        return (pathname ?? '/').replace(`/${currentLang}/${currentSubject}`, `/${currentLang}/${targetSubject}`)
+        return `/${currentLang}/${targetSubject}`
     }
 
     if (!currentSubject) return null
