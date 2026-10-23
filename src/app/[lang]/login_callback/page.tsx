@@ -2,7 +2,6 @@ import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { LoginCallbackClient } from './LoginCallbackClient'
 import { getDictionary } from '@/i18n'
-import { fetchCategories } from '@/services/fetchCategories'
 import type { Metadata } from 'next'
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
@@ -15,13 +14,11 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 }
 
 export default async function LoginCallback({ params }: { params: Promise<{ lang: string }> }) {
-    const sortedCategories = await fetchCategories()
-
     return (
         <>
-            <Header sortedCategories={sortedCategories} />
+            <Header sortedCategories={[]} />
             <LoginCallbackClient />
-            <Footer sortedCategories={sortedCategories} />
+            <Footer sortedCategories={[]} />
         </>
     )
 }

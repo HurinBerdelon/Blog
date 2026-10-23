@@ -1,4 +1,4 @@
-import { BlogPostDocument } from ".slicemachine/prismicio";
+import { BlogPostDocument } from "prismicio-types";
 
 export interface AllDocumentTypesExtended extends BlogPostDocument {
     comments?: number

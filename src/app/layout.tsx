@@ -18,7 +18,7 @@ export const metadata: Metadata = {
         default: 'HurinBlog',
         template: '%s | HurinBlog',
     },
-    description: 'A personal blog about software development.',
+    description: 'A personal blog about technology and humanities.',
     icons: { icon: '/images/fernandoCardozoLogo.svg' },
     openGraph: {
         type: 'website',

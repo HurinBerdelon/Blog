@@ -7,4 +7,5 @@ export const components = {
     text_only: dynamic(() => import('./TextOnly')),
     references: dynamic(() => import('./References')),
     citation: dynamic(() => import('./Citation')),
+    bibliography: dynamic(() => import('./Bibliography')),
 }

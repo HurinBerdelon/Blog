@@ -21,6 +21,7 @@ export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element
     const { revokeAuthentication, user } = useUser()
     const params = useParams()
     const lang = (params?.lang as string) ?? 'en'
+    const subject = (params?.subject as string) ?? ''
 
     return (
         <menu>
@@ -36,26 +37,30 @@ export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element
                     <nav className="flex flex-col gap-1 pl-1 font-medium">
                         <Link
                             className="hover:text-white hover:underline transition-all dark:hover:text-grayBrand"
-                            href={`/${lang}`}
+                            href={subject ? `/${lang}/${subject}` : `/${lang}`}
                         >
                             Home
                         </Link>
-                        <div className="text-sm italic pl-2 capitalize">{t('common:categories')}</div>
-                        {sortedCategories.map(category => (
-                            <Link
-                                key={category.tag}
-                                className="capitalize hover:text-white dark:hover:text-grayBrand hover:underline transition-all"
-                                href={`/${lang}/category/${category.tag}`}
-                            >
-                                {category.tag}
-                            </Link>
-                        ))}
-                        <Link
-                            className="capitalize hover:text-white dark:hover:text-grayBrand hover:underline transition-all"
-                            href={`/${lang}/category/all`}
-                        >
-                            {t('common:all')}
-                        </Link>
+                        {subject ? (
+                            <>
+                                <div className="text-sm italic pl-2 capitalize">{t('common:categories')}</div>
+                                {sortedCategories.map(category => (
+                                    <Link
+                                        key={category.tag}
+                                        className="capitalize hover:text-white dark:hover:text-grayBrand hover:underline transition-all"
+                                        href={`/${lang}/${subject}/category/${category.tag}`}
+                                    >
+                                        {category.tag}
+                                    </Link>
+                                ))}
+                                <Link
+                                    className="capitalize hover:text-white dark:hover:text-grayBrand hover:underline transition-all"
+                                    href={`/${lang}/${subject}/category/all`}
+                                >
+                                    {t('common:all')}
+                                </Link>
+                            </>
+                        ) : null}
                     </nav>
                     <div className="border-t-[1px] border-textLight mt-2 pt-2 flex justify-center">
                         {user ? (
