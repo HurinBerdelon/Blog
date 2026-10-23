@@ -1,27 +1,37 @@
-'use client'
-import { AllDocumentTypesExtended } from '@/schema/AllDocumentTypesExtended'
-import { motion } from 'framer-motion'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useParams } from 'next/navigation'
-import { useState } from 'react'
-import { AuthorCard } from '../AuthorCard'
-import { Likes } from '../Likes'
+"use client";
+import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useState } from "react";
+import { AuthorCard } from "../AuthorCard";
+import { Likes } from "../Likes";
 
 interface PostCardProps {
-    post: AllDocumentTypesExtended
+    post: AllDocumentTypesExtended;
 }
 
 export function PostCard({ post }: PostCardProps): JSX.Element {
-    const params = useParams()
-    const lang = (params?.lang as string) ?? 'en'
-    const subject = (params?.subject as string) ?? ''
+    const params = useParams();
+    const lang = (params?.lang as string) ?? "en";
+    const subject = (params?.subject as string) ?? "";
 
     const [textPreview] = useState(() => {
-        const textPreview = post.data.slices[0]?.primary.text_content[0]?.text as string
-        if (textPreview?.length > 150) return `${textPreview.slice(0, 145)}...`
-        return textPreview
-    })
+        const blocks = post.data.slices.flatMap(
+            (slice): { type?: string; text?: string }[] => slice.primary?.text_content ?? [],
+        );
+        const startIndex = blocks[0]?.type?.startsWith("heading") ? 1 : 0;
+
+        const combinedText = blocks.slice(startIndex).reduce((text: string, block) => {
+            if (text.length >= 150) return text;
+            const blockText = block.text ?? "";
+            return text ? `${text} ${blockText}` : blockText;
+        }, "");
+
+        if (combinedText.length > 150) return `${combinedText.slice(0, 145)}...`;
+        return combinedText;
+    });
 
     return (
         <motion.li
@@ -35,18 +45,17 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
                 <h3 className="self-center px-2 py-2 text-xl font-semibold text-center">
                     {post.data.title_of_the_post}
                 </h3>
-                <div className="flex items-center w-full">
+                <div className="overflow-hidden relative w-full aspect-5/2">
                     <Image
-                        width={post.data.banner.dimensions?.width}
-                        height={post.data.banner.dimensions?.height}
+                        fill
                         src={post.data.banner.url as string}
-                        alt={(post.data.banner.alt as string) ?? 'banner'}
-                        className="object-cover flex-1 w-full"
+                        alt={(post.data.banner.alt as string) ?? "banner"}
+                        className="object-contain"
                         loading="eager"
                     />
                 </div>
                 <div className="flex gap-3 px-3 text-sm italic font-medium capitalize">
-                    {post.tags.map(tag => (
+                    {post.tags.map((tag) => (
                         <span key={tag}>{tag || null}</span>
                     ))}
                 </div>
@@ -55,10 +64,13 @@ export function PostCard({ post }: PostCardProps): JSX.Element {
                     <AuthorCard post={post} />
                     <Likes
                         showComments={true}
-                        interactions={{ likes: post.likes, comments: post.comments }}
+                        interactions={{
+                            likes: post.likes,
+                            comments: post.comments,
+                        }}
                     />
                 </div>
             </Link>
         </motion.li>
-    )
+    );
 }
