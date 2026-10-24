@@ -4,13 +4,12 @@ import { Header } from '@/components/Header'
 import { NavHintAutoShow } from '@/components/NavHintAutoShow'
 import { ListOfPosts } from '@/components/Posts/ListOfPosts'
 import { RememberSubject } from '@/components/RememberSubject'
-import { languages } from '@/config/languages'
 import type { Subject } from '@/config/subjects'
-import { getDictionary, type Locale } from '@/i18n'
+import { getDictionary } from '@/i18n'
 import { AllDocumentTypesExtended } from '@/schema/AllDocumentTypesExtended'
 import { fetchCategories } from '@/services/fetchCategories'
+import { fetchWithLocaleFallback } from '@/services/fetchWithLocaleFallback'
 import { filter } from '@prismicio/client'
-import { Query } from '@prismicio/types'
 import type { Metadata } from 'next'
 import { createClient } from 'prismicio'
 
@@ -35,15 +34,17 @@ export default async function Home({ params }: { params: Promise<{ lang: string;
     const client = createClient()
     const dict = await getDictionary(lang)
 
-    const latestPosts: Query<AllDocumentTypesExtended> = await client.getByType('blog_post', {
-        pageSize: 6,
-        lang: languages[lang as Locale]?.prismic_code ?? 'en-us',
-        filters: [filter.at('my.blog_post.subject', subject)],
-        fetchLinks: ['author.authorprofileimage', 'author.name'],
-        orderings: { field: 'document.first_publication_date', direction: 'desc' },
-    })
+    const { data: latestPosts, resolvedLang, usedFallback } = await fetchWithLocaleFallback<AllDocumentTypesExtended>(lang, prismicLang =>
+        client.getByType('blog_post', {
+            pageSize: 6,
+            lang: prismicLang,
+            filters: [filter.at('my.blog_post.subject', subject)],
+            fetchLinks: ['author.authorprofileimage', 'author.name'],
+            orderings: { field: 'document.first_publication_date', direction: 'desc' },
+        })
+    )
 
-    const sortedCategories = await fetchCategories(subject, lang)
+    const sortedCategories = await fetchCategories(subject, resolvedLang)
 
     return (
         <>
@@ -56,6 +57,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string;
                     title={dict.recentPosts}
                     posts={latestPosts}
                     seeAllPosts={true}
+                    fallbackNotice={usedFallback ? dict.showingOtherLanguagePosts : undefined}
                 />
             </main>
             <Footer sortedCategories={sortedCategories} />

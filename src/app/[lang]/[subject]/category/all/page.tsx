@@ -2,13 +2,12 @@ import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { ListOfPosts } from '@/components/Posts/ListOfPosts'
 import { pageSize } from '@/config/pageSize'
-import { languages } from '@/config/languages'
 import type { Subject } from '@/config/subjects'
-import { getDictionary, type Locale } from '@/i18n'
+import { getDictionary } from '@/i18n'
 import { AllDocumentTypesExtended } from '@/schema/AllDocumentTypesExtended'
 import { fetchCategories } from '@/services/fetchCategories'
+import { fetchWithLocaleFallback } from '@/services/fetchWithLocaleFallback'
 import { filter } from '@prismicio/client'
-import { Query } from '@prismicio/types'
 import type { Metadata } from 'next'
 import { createClient } from 'prismicio'
 
@@ -40,16 +39,18 @@ export default async function AllPosts({
     const dict = await getDictionary(lang)
     const client = createClient()
 
-    const postsResponse: Query<AllDocumentTypesExtended> = await client.getByType('blog_post', {
-        page: page ? Number(page) : 1,
-        pageSize,
-        lang: languages[lang as Locale]?.prismic_code ?? 'en-us',
-        filters: [filter.at('my.blog_post.subject', subject)],
-        fetchLinks: ['author.authorprofileimage', 'author.name'],
-        orderings: { field: 'document.first_publication_date', direction: 'desc' },
-    })
+    const { data: postsResponse, resolvedLang, usedFallback } = await fetchWithLocaleFallback<AllDocumentTypesExtended>(lang, prismicLang =>
+        client.getByType('blog_post', {
+            page: page ? Number(page) : 1,
+            pageSize,
+            lang: prismicLang,
+            filters: [filter.at('my.blog_post.subject', subject)],
+            fetchLinks: ['author.authorprofileimage', 'author.name'],
+            orderings: { field: 'document.first_publication_date', direction: 'desc' },
+        })
+    )
 
-    const sortedCategories = await fetchCategories(subject, lang)
+    const sortedCategories = await fetchCategories(subject, resolvedLang)
 
     return (
         <>
@@ -59,6 +60,7 @@ export default async function AllPosts({
                     title={dict.allPosts}
                     posts={postsResponse}
                     showPagination={true}
+                    fallbackNotice={usedFallback ? dict.showingOtherLanguagePosts : undefined}
                 />
             </main>
             <Footer sortedCategories={sortedCategories} />
