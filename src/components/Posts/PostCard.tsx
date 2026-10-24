@@ -1,4 +1,5 @@
 "use client";
+import { localeFromPrismicCode } from "@/config/languages";
 import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -14,7 +15,8 @@ interface PostCardProps {
 
 export function PostCard({ post }: PostCardProps): JSX.Element {
     const params = useParams();
-    const lang = (params?.lang as string) ?? "en";
+    const pageLang = (params?.lang as string) ?? "en";
+    const lang = localeFromPrismicCode(post.lang) ?? pageLang;
     const subject = (params?.subject as string) ?? "";
 
     const [textPreview] = useState(() => {

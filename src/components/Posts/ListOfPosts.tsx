@@ -14,9 +14,10 @@ interface ListOfPostsProps {
     posts: Query<AllDocumentTypesExtended>
     showPagination?: boolean
     seeAllPosts?: boolean
+    fallbackNotice?: string
 }
 
-export function ListOfPosts({ posts, title, showPagination = false, seeAllPosts = false }: ListOfPostsProps): JSX.Element {
+export function ListOfPosts({ posts, title, showPagination = false, seeAllPosts = false, fallbackNotice }: ListOfPostsProps): JSX.Element {
     const [recentPosts, setRecentPosts] = useState<Query<AllDocumentTypesExtended>>(posts)
     const router = useRouter()
     const pathname = usePathname()
@@ -38,6 +39,9 @@ export function ListOfPosts({ posts, title, showPagination = false, seeAllPosts 
             <h2 className="text-2xl my-4 capitalize self-center font-semibold">{title}</h2>
             {recentPosts.results.length > 0 ? (
                 <>
+                    {fallbackNotice ? (
+                        <div className="self-center justify-self-center text-sm italic mb-2">{fallbackNotice}</div>
+                    ) : null}
                     <ul
                         className={`list-none flex flex-col gap-4 md:flex-row md:flex-wrap md:gap-16 md:justify-center flex-1 ${
                             showPagination ? '' : '[&>li:nth-child(n+5)]:hidden xl:[&>li:nth-child(n+5)]:block'
