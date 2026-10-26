@@ -3,6 +3,7 @@ import { IdiomSwitcher } from "@/components/IdiomSwitcher";
 import { SubjectLinks } from "@/components/SubjectLinks";
 import { SubjectRedirect } from "@/components/SubjectRedirect";
 import { getDictionary, type Locale } from "@/i18n";
+import { buildAlternates } from "@/utils/seo";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -15,6 +16,7 @@ export async function generateMetadata({
     return {
         title: dict.chooseSubject,
         description: dict.generalMetaDescription,
+        alternates: buildAlternates(lang, ""),
         openGraph: {
             title: dict.chooseSubject,
             description: dict.generalMetaDescription,
