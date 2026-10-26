@@ -34,9 +34,9 @@ export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element
                     <div className="pb-2 mb-2 border-b-[1px] border-textLight flex flex-col items-center">
                         <Profile />
                     </div>
-                    <nav className="flex flex-col gap-1 pl-1 font-medium">
+                    <nav className="flex flex-col gap-2 sm:gap-1 pl-1 font-medium">
                         <Link
-                            className="hover:text-white hover:underline transition-all dark:hover:text-grayBrand"
+                            className="py-1 sm:py-0 hover:text-white hover:underline transition-all dark:hover:text-grayBrand"
                             href={subject ? `/${lang}/${subject}` : `/${lang}`}
                         >
                             Home
@@ -47,14 +47,14 @@ export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element
                                 {sortedCategories.map(category => (
                                     <Link
                                         key={category.tag}
-                                        className="capitalize hover:text-white dark:hover:text-grayBrand hover:underline transition-all"
+                                        className="py-1 sm:py-0 capitalize hover:text-white dark:hover:text-grayBrand hover:underline transition-all"
                                         href={`/${lang}/${subject}/category/${category.tag}`}
                                     >
                                         {category.tag}
                                     </Link>
                                 ))}
                                 <Link
-                                    className="capitalize hover:text-white dark:hover:text-grayBrand hover:underline transition-all"
+                                    className="py-1 sm:py-0 capitalize hover:text-white dark:hover:text-grayBrand hover:underline transition-all"
                                     href={`/${lang}/${subject}/category/all`}
                                 >
                                     {t('common:all')}
