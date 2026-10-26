@@ -13,7 +13,7 @@ test.describe('Subject chooser (homepage)', () => {
     test('switching locale updates the URL and translates the page', async ({ page }) => {
         await page.goto('/en')
 
-        await page.getByRole('button').click()
+        await page.getByRole('button', { name: /switch language/i }).click()
         await page.getByRole('link', { name: /português/i }).click()
 
         await expect(page).toHaveURL(/\/pt-BR\/?$/)

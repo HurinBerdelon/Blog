@@ -5,8 +5,10 @@ import { locales } from '@/i18n'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
 import { Globe } from 'phosphor-react'
+import { useTranslation } from '@/hooks/useTranslation'
 
 export function IdiomSwitcher(): JSX.Element {
+    const { t } = useTranslation()
     const params = useParams()
     const pathname = usePathname()
     const currentLang = (params?.lang as string) ?? 'en'
@@ -19,6 +21,7 @@ export function IdiomSwitcher(): JSX.Element {
         <Popover className="relative flex">
             <Popover.Button className="text-3xl">
                 <Globe className="text-backgroundDark hover:text-greenBrandDark dark:text-textLight dark:hover:text-grayBrand" />
+                <span className="sr-only">{t('common:languageButton')}</span>
             </Popover.Button>
             <Popover.Panel className="absolute right-0 top-10 rounded bg-greenBrand p-4 md:text-lg dark:bg-greenBrandDark">
                 <ul className="flex flex-col text-textLight font-medium gap-2 sm:gap-1">
