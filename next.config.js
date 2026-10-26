@@ -10,11 +10,11 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       // Next.js requires unsafe-inline for styles and unsafe-eval in dev
-      "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
+      "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://static.cdn.prismic.io",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' data: blob: https://images.prismic.io https://hurin-blog.s3.sa-east-1.amazonaws.com https://lh3.googleusercontent.com",
       "font-src 'self' https://fonts.gstatic.com",
-      `connect-src 'self' https://*.prismic.io https://prismic.io ${process.env.NEXT_PUBLIC_BACKEND_URL ?? ''}`,
+      `connect-src 'self' https://*.prismic.io https://prismic.io https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com ${process.env.NEXT_PUBLIC_BACKEND_URL ?? ''}`,
       "frame-src 'none'",
       "frame-ancestors 'none'",
       "base-uri 'self'",
