@@ -13,7 +13,7 @@ export function LoginCallbackClient() {
         if (session && !isAuthenticating && !isAuthenticated) {
             authenticate(session)
         }
-    }, [session, isAuthenticating])
+    }, [session, isAuthenticating, isAuthenticated, authenticate])
 
     return <h1 className="m-auto text-lg">{t('common:redirecting')}</h1>
 }

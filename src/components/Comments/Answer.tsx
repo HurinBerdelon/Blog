@@ -1,9 +1,9 @@
 'use client'
-import type { Answer, Like } from "@/schema/Interactions"
+import type { Answer } from "@/schema/Interactions"
 import { formatDate } from "@/services/dayjs"
 import { useTranslation } from '@/hooks/useTranslation'
 import { useUser } from "@/hooks/useUser"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useInteraction } from "@/hooks/useInteractions"
 import { CommentInput } from "./CommentInput"
 import { LikeIcon } from "./LikeIcon"
@@ -17,17 +17,13 @@ interface AnswerProps {
 export function Answer({ answer }: AnswerProps): JSX.Element {
 
     const { LikeAnswer, UnlikeAnswer, updateAnswer, deleteAnswer } = useInteraction()
-    const [userLike, setUserLike] = useState<Like | null>(null)
     const [isUpdating, setIsUpdating] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const { setIsLoginModalOpen } = useLogin()
     const { t } = useTranslation()
     const { user } = useUser()
 
-    useEffect(() => {
-        const like = answer.likes.find(like => like.userId === user?.id)
-        setUserLike(like ?? null)
-    }, [answer])
+    const userLike = answer.likes.find(like => like.userId === user?.id) ?? null
 
     async function handleLike() {
         if (!user) {

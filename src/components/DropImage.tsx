@@ -1,5 +1,5 @@
 'use client'
-import { createRef, useEffect, useState } from "react";
+import { createRef, useState } from "react";
 import Dropzone, { DropzoneRef } from "react-dropzone";
 import { ArrowCounterClockwise, TrashSimple } from "phosphor-react";
 import { FormikErrors } from "formik";
@@ -19,14 +19,16 @@ export function DropImage({
     errors,
     setFieldValue,
 }: DropImageProps): JSX.Element {
+    const { user } = useUser();
     const [preview, setPreview] = useState("");
+    const [lastSyncedUser, setLastSyncedUser] = useState(user);
     const dropzoneRef = createRef<DropzoneRef>();
     const { t } = useTranslation();
-    const { user } = useUser();
 
-    useEffect(() => {
+    if (user !== lastSyncedUser) {
+        setLastSyncedUser(user);
         setPreview(user?.avatarURL as string);
-    }, [user]);
+    }
 
     return (
         <Dropzone

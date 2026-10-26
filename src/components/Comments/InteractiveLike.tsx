@@ -5,7 +5,7 @@ import { useUser } from "@/hooks/useUser"
 import { Like } from "@/schema/Interactions"
 import { useTranslation } from '@/hooks/useTranslation'
 import { Spinner } from "phosphor-react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { LikeIcon } from "./LikeIcon"
 
 interface InteractiveLikeProps {
@@ -15,17 +15,13 @@ interface InteractiveLikeProps {
 
 export function InteractiveLike({ likes, className = '' }: InteractiveLikeProps): JSX.Element {
 
-    const [userLike, setUserLike] = useState<Like | null>(null)
     const [isLoading, setIsLoading] = useState(false)
     const { likePost, unlikePost } = useInteraction()
     const { setIsLoginModalOpen } = useLogin()
     const { t } = useTranslation()
     const { user } = useUser()
 
-    useEffect(() => {
-        const like = likes?.find(like => like.userId === user?.id)
-        setUserLike(like ?? null)
-    }, [likes])
+    const userLike = likes?.find(like => like.userId === user?.id) ?? null
 
     async function handleLike() {
         if (!user) {
