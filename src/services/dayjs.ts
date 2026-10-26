@@ -1,6 +1,8 @@
 import dayjs from "dayjs";
-// dayjs().format()
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 export function formatDate(date: string) {
-    return dayjs(date).format('DD/MM/YYYY')
+    return dayjs.utc(date).format('DD/MM/YYYY')
 }
