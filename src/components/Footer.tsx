@@ -5,6 +5,7 @@ import { LinkedinLogo, EnvelopeSimple } from 'phosphor-react'
 import { useTranslation } from '@/hooks/useTranslation'
 import { useParams } from 'next/navigation'
 import { useUser } from '@/hooks/useUser'
+import { useCookieConsent } from '@/hooks/useCookieConsent'
 import { Category } from '@/schema/Category'
 
 interface FooterProps {
@@ -14,6 +15,7 @@ interface FooterProps {
 export function Footer({ sortedCategories }: FooterProps): JSX.Element {
     const { t } = useTranslation()
     const { user } = useUser()
+    const { resetConsent } = useCookieConsent()
     const params = useParams()
     const lang = (params?.lang as string) ?? 'en'
     const subject = (params?.subject as string) ?? ''
@@ -47,6 +49,12 @@ export function Footer({ sortedCategories }: FooterProps): JSX.Element {
                                 {t('common:profile')}
                             </Link>
                         ) : null}
+                        <button
+                            className="text-left transition-all hover:text-greenBrandDark dark:hover:text-grayBrand hover:underline"
+                            onClick={resetConsent}
+                        >
+                            {t('common:cookiePreferences')}
+                        </button>
                     </div>
                     <div className="flex flex-col">
                         <div className="italic font-semibold capitalize">{t('common:categories')}</div>

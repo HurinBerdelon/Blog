@@ -2,6 +2,7 @@ import { PrismicPreview } from '@prismicio/next'
 import { Poppins } from 'next/font/google'
 import type { Metadata } from 'next'
 import { repositoryName } from '../../prismicio'
+import { buildWebsiteJsonLd } from '@/utils/jsonLd'
 import '../styles/global.css'
 
 const poppins = Poppins({
@@ -33,6 +34,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en" className={poppins.variable}>
             <body>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(buildWebsiteJsonLd()) }}
+                />
                 {children}
                 <PrismicPreview repositoryName={repositoryName} />
             </body>

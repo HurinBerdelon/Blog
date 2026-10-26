@@ -4,6 +4,7 @@ export const test = base.extend({
     page: async ({ page }, use) => {
         await page.addInitScript(() => {
             window.localStorage.setItem('hasSeenNavHint', 'true')
+            window.localStorage.setItem('hurinBlog-cookie-consent', 'accepted')
         })
         await use(page)
     },

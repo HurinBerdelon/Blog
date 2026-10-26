@@ -9,6 +9,7 @@ import { getDictionary } from '@/i18n'
 import { AllDocumentTypesExtended } from '@/schema/AllDocumentTypesExtended'
 import { fetchCategories } from '@/services/fetchCategories'
 import { fetchWithLocaleFallback } from '@/services/fetchWithLocaleFallback'
+import { buildAlternates } from '@/utils/seo'
 import { filter } from '@prismicio/client'
 import type { Metadata } from 'next'
 import { createClient } from 'prismicio'
@@ -21,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     return {
         title,
         description,
+        alternates: buildAlternates(lang, `/${subject}`),
         openGraph: {
             title,
             description,
