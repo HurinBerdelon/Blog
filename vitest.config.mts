@@ -4,6 +4,7 @@ export default defineConfig({
     resolve: { tsconfigPaths: true },
     test: {
         environment: 'happy-dom',
+        setupFiles: ['./vitest.setup.ts'],
         include: ['src/**/__tests__/**/*.test.ts', 'src/**/__tests__/**/*.test.tsx'],
         coverage: {
             provider: 'v8',
