@@ -1,7 +1,7 @@
 'use client'
-import type { Comment, Like } from "@/schema/Interactions"
+import type { Comment } from "@/schema/Interactions"
 import { formatDate } from "@/services/dayjs"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useTranslation } from '@/hooks/useTranslation'
 import { Answer } from "./Answer"
 import { useUser } from "@/hooks/useUser"
@@ -19,7 +19,6 @@ export function Comment({ comment }: CommentProps): JSX.Element {
 
     const { LikeComment, UnlikeComment, updateComment, deleteComment, saveAnswer } = useInteraction()
     const [showAnswerInput, setShowAnswerInput] = useState(false)
-    const [userLike, setUserLike] = useState<Like | null>(null)
     const [showAnswer, setShowAnswer] = useState(false)
     const [isUpdating, setIsUpdating] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -27,10 +26,7 @@ export function Comment({ comment }: CommentProps): JSX.Element {
     const { t } = useTranslation()
     const { user } = useUser()
 
-    useEffect(() => {
-        const like = comment.likes.find(like => like.userId === user?.id)
-        setUserLike(like ?? null)
-    }, [comment])
+    const userLike = comment.likes.find(like => like.userId === user?.id) ?? null
 
     async function handleLike() {
         if (!user) {

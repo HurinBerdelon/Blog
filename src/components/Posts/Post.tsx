@@ -8,7 +8,7 @@ import Image from 'next/image'
 import { CommentInput } from '../Comments/CommentInput'
 import { Comment } from '../Comments/Comment'
 import { useTranslation } from '@/hooks/useTranslation'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useInteraction } from '@/hooks/useInteractions'
 import { InteractiveLike } from '../Comments/InteractiveLike'
 import { useUser } from '@/hooks/useUser'
@@ -23,7 +23,6 @@ interface PostProps {
 
 export function Post({ post }: PostProps): JSX.Element {
     const { interactions, getInteractions } = useInteraction()
-    const [numberOfComments, setNumberOfComments] = useState(0)
     const { setIsLoginModalOpen } = useLogin()
     const { t } = useTranslation()
     const { user } = useUser()
@@ -31,17 +30,13 @@ export function Post({ post }: PostProps): JSX.Element {
     const lang = (params?.lang as string) ?? 'en'
     const subject = (params?.subject as string) ?? ''
 
-    useEffect(() => {
-        setNumberOfComments(
-            interactions?.comments?.reduce((acc, comment) => {
-                return acc + comment.answers.length + 1
-            }, 0),
-        )
-    }, [interactions])
+    const numberOfComments = interactions?.comments?.reduce((acc, comment) => {
+        return acc + comment.answers.length + 1
+    }, 0) ?? 0
 
     useEffect(() => {
         getInteractions(post.uid)
-    }, [post])
+    }, [post, getInteractions])
 
     return (
         <article className="flex flex-col pt-8 mx-auto w-full md:w-[720px] xl:w-[1120px] text-backgroundDark dark:text-textLight">
