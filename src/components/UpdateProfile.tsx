@@ -4,7 +4,7 @@ import { useUser } from "@/hooks/useUser";
 import { Form, Formik, FormikValues } from "formik";
 import { useTranslation } from '@/hooks/useTranslation';
 import { CircleNotch } from "phosphor-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as yup from 'yup'
 import { DropImage } from "./DropImage";
 
@@ -14,13 +14,10 @@ export function UpdateProfile(): JSX.Element {
     const [isLoading, setIsLoading] = useState(false)
     const { t } = useTranslation()
 
-    useEffect(() => {
-        setIsLoading(false)
-    }, [user])
-
     async function handleSubmit(values: FormikValues): Promise<void> {
         setIsLoading(true)
-        updateUserImage(values)
+        await updateUserImage(values)
+        setIsLoading(false)
     }
 
     const initialValues = {

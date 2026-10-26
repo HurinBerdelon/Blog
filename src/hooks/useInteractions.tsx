@@ -2,7 +2,7 @@
 import { Interaction } from "@/schema/Interactions"
 import { PostType } from "@/schema/Post"
 import { api } from "@/services/api"
-import { createContext, ReactNode, useContext, useState } from "react"
+import { createContext, ReactNode, useCallback, useContext, useState } from "react"
 
 interface InteractionProviderProps {
     children: ReactNode
@@ -32,14 +32,14 @@ export function InteractionProvider({ children }: InteractionProviderProps): JSX
     const [interactions, setInteractions] = useState<Interaction>()
     const [post, setPost] = useState<PostType>()
 
-    async function getInteractions(uid: string): Promise<void> {
+    const getInteractions = useCallback(async (uid: string): Promise<void> => {
         const { data } = await api.get<PostType>(`/post/single/${uid}`)
         setPost(data)
         setInteractions({
             comments: data.comment,
             likes: data.likes
         })
-    }
+    }, [])
 
     async function likePost() {
         await api.post('/post/like', {

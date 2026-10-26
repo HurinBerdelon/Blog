@@ -1,8 +1,8 @@
 'use client'
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ShareNetwork } from "phosphor-react";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useHasMounted } from "@/hooks/useHasMounted";
 import {
     FacebookShareButton,
     FacebookIcon,
@@ -21,11 +21,8 @@ interface ShareProps {
 
 export function Share({ postLink, title }: ShareProps): JSX.Element {
     const { t } = useTranslation();
-    const [canUseNativeShare, setCanUseNativeShare] = useState(false);
-
-    useEffect(() => {
-        setCanUseNativeShare(typeof navigator !== "undefined" && !!navigator.share);
-    }, []);
+    const hasMounted = useHasMounted();
+    const canUseNativeShare = hasMounted && typeof navigator !== "undefined" && !!navigator.share;
 
     async function handleNativeShare() {
         try {

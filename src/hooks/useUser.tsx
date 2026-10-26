@@ -4,7 +4,7 @@ import { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 import { getCookie, setCookie, deleteCookie } from '@/services/cookies'
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react'
 import { appKeys } from '../config/AppKeys'
 import { UserResponseProps } from '../schema/UserSchema'
 import { api } from '../services/api'
@@ -19,7 +19,7 @@ interface UserContextData {
     isAuthenticating: boolean
     authenticate: (session: Session) => void
     revokeAuthentication: () => void
-    updateUserImage: (values: FormikValues) => void
+    updateUserImage: (values: FormikValues) => Promise<void>
     deleteUserAccount: () => void
     setPath: () => void
 }
@@ -48,7 +48,7 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
         localStorage.setItem(appKeys.currentPath, `/${lang}${pathname}`)
     }
 
-    function authenticate(session: Session) {
+    const authenticate = useCallback((session: Session) => {
         setIsAuthenticating(true)
         api.post('session', {
             name: session.user.name,
@@ -66,7 +66,7 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
                 router.push(localStorage.getItem(appKeys.currentPath) || '/')
             })
             .finally(() => setIsAuthenticating(false))
-    }
+    }, [router])
 
     function revokeAuthentication() {
         setUser(undefined)

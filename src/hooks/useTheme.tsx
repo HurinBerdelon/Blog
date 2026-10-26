@@ -1,5 +1,5 @@
 'use client'
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useSyncExternalStore } from "react";
 
 interface ThemeContextData {
     theme: string
@@ -10,21 +10,38 @@ interface ThemeProviderProps {
     children: ReactNode
 }
 
+const THEME_STORAGE_KEY = 'hurinBlog-theme'
+const THEME_CHANGE_EVENT = 'hurinBlog-theme-change'
+
+function subscribe(callback: () => void) {
+    window.addEventListener(THEME_CHANGE_EVENT, callback)
+    return () => window.removeEventListener(THEME_CHANGE_EVENT, callback)
+}
+
+function getSnapshot(): string {
+    return localStorage.getItem(THEME_STORAGE_KEY) || 'dark'
+}
+
+function getServerSnapshot(): string {
+    return 'dark'
+}
+
 const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData)
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
 
-    const [theme, setTheme] = useState<string>('dark')
+    const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
-    useEffect(() => {
-        setTheme(localStorage.getItem('hurinBlog-theme') || 'dark')
-    }, [])
+    function setTheme(nextTheme: string) {
+        localStorage.setItem(THEME_STORAGE_KEY, nextTheme)
+        window.dispatchEvent(new Event(THEME_CHANGE_EVENT))
+    }
 
     useEffect(() => {
 
         const root = window.document.documentElement
 
-        localStorage.setItem('hurinBlog-theme', theme)
+        localStorage.setItem(THEME_STORAGE_KEY, theme)
         if (theme === 'dark') {
             root.classList.add(theme)
         } else {
