@@ -20,6 +20,7 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     useEffect(() => {
         const stored = localStorage.getItem(STORAGE_KEY)
         if (stored === 'accepted' || stored === 'declined') {
+            // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage is only available client-side, so it must be read after mount
             setConsent(stored)
         }
     }, [])
