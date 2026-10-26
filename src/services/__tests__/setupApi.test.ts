@@ -187,12 +187,10 @@ describe('setupAPIClient', () => {
             setupAPIClient()
             const error = { response: { status: 401, data: { message: 'Unauthorized' } } }
 
-            const rejection: Error = await mocks
-                .getErrorHandler()(error)
-                .then(
-                    () => { throw new Error('expected the promise to reject') },
-                    (reason: Error) => reason
-                )
+            const rejection: Error = await (mocks.getErrorHandler()(error) as Promise<unknown>).then(
+                () => { throw new Error('expected the promise to reject') },
+                (reason: Error) => reason
+            )
 
             expect(rejection.constructor.name).toBe('AuthTokenError')
             expect(rejection.message).toBe('Error with authentication token')

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeAll } from 'vitest'
 
-const NextAuth = vi.fn(() => ({
+const NextAuth = vi.fn((_config: unknown) => ({
     handlers: {},
     auth: vi.fn(),
     signIn: vi.fn(),
@@ -8,7 +8,7 @@ const NextAuth = vi.fn(() => ({
 }))
 
 vi.mock('next-auth', () => ({
-    default: (...args: unknown[]) => NextAuth(...args),
+    default: (config: unknown) => NextAuth(config),
 }))
 
 vi.mock('next-auth/providers/google', () => ({
@@ -25,7 +25,7 @@ describe('auth config', () => {
 
     beforeAll(async () => {
         await import('../auth')
-        config = NextAuth.mock.calls[0][0] as AuthConfig
+        config = NextAuth.mock.calls[0][0] as unknown as AuthConfig
     })
 
     it('registers a Google provider', () => {
