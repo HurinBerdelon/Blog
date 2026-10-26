@@ -1,5 +1,7 @@
 'use client'
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { ShareNetwork } from "phosphor-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import {
     FacebookShareButton,
@@ -19,6 +21,21 @@ interface ShareProps {
 
 export function Share({ postLink, title }: ShareProps): JSX.Element {
     const { t } = useTranslation();
+    const [canUseNativeShare, setCanUseNativeShare] = useState(false);
+
+    useEffect(() => {
+        setCanUseNativeShare(typeof navigator !== "undefined" && !!navigator.share);
+    }, []);
+
+    async function handleNativeShare() {
+        try {
+            await navigator.share({ title, url: postLink });
+        } catch (error) {
+            if ((error as DOMException)?.name !== "AbortError") {
+                console.error(error);
+            }
+        }
+    }
 
     return (
         <section>
@@ -54,6 +71,14 @@ export function Share({ postLink, title }: ShareProps): JSX.Element {
                         <span className="sr-only">{`${t("common:shareOn")} WhatsApp`}</span>
                     </WhatsappShareButton>
                 </motion.li>
+                {canUseNativeShare && (
+                    <motion.li whileHover={{ scale: 1.1 }}>
+                        <button type="button" onClick={handleNativeShare}>
+                            <ShareNetwork className="w-8 h-8 p-1 rounded" />
+                            <span className="sr-only">{t("common:shareMore")}</span>
+                        </button>
+                    </motion.li>
+                )}
             </ul>
         </section>
     );
