@@ -57,5 +57,9 @@
     "helpButton": "Abrir ajuda de navegação",
     "references": "Referências",
     "bibliography": "Bibliografia",
-    "showingOtherLanguagePosts": "Ainda não há posts em português — mostrando posts em inglês."
+    "showingOtherLanguagePosts": "Ainda não há posts em português — mostrando posts em inglês.",
+    "cookieConsentMessage": "Usamos cookies para medir o tráfego do site através do Google Analytics. Você pode aceitar ou recusar esse rastreamento.",
+    "acceptCookies": "Aceitar",
+    "declineCookies": "Recusar",
+    "cookiePreferences": "Preferências de Cookies"
 }

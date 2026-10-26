@@ -6,6 +6,8 @@ import { languages } from '@/config/languages'
 import type { Subject } from '@/config/subjects'
 import { getDictionary, type Locale } from '@/i18n'
 import { fetchCategories } from '@/services/fetchCategories'
+import { buildAlternates } from '@/utils/seo'
+import { buildBlogPostingJsonLd } from '@/utils/jsonLd'
 import { filter } from '@prismicio/client'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
@@ -23,6 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         return {
             title,
             description,
+            alternates: buildAlternates(lang, `/${subject}/post/${uid}`),
             openGraph: {
                 title,
                 description,
@@ -58,9 +61,16 @@ export default async function PostPage({ params }: { params: Promise<{ lang: str
     if (post.data.subject !== subject) notFound()
 
     const sortedCategories = await fetchCategories(subject, lang)
+    const canonicalUrl = `${process.env.NEXT_PUBLIC_BLOG_URL ?? ''}/${lang}/${subject}/post/${uid}`
 
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify(buildBlogPostingJsonLd({ post, url: canonicalUrl })),
+                }}
+            />
             <Header sortedCategories={sortedCategories} />
             <main className="flex-1">
                 <Post post={post} />

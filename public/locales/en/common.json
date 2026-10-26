@@ -57,5 +57,9 @@
     "helpButton": "Open navigation help",
     "references": "References",
     "bibliography": "Bibliography",
-    "showingOtherLanguagePosts": "No posts in English yet — showing posts in Portuguese."
+    "showingOtherLanguagePosts": "No posts in English yet — showing posts in Portuguese.",
+    "cookieConsentMessage": "We use cookies to measure site traffic through Google Analytics. You can accept or decline this tracking.",
+    "acceptCookies": "Accept",
+    "declineCookies": "Decline",
+    "cookiePreferences": "Cookie Preferences"
 }
