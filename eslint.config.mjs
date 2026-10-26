@@ -1,3 +1,8 @@
 import nextConfig from "eslint-config-next/core-web-vitals";
 
-export default nextConfig;
+const config = [
+    { ignores: ["e2e/**"] },
+    ...nextConfig,
+];
+
+export default config;
