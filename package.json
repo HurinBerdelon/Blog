@@ -24,6 +24,9 @@
         "build": "next build",
         "start": "next start",
         "lint": "eslint .",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "test:coverage": "vitest run --coverage",
         "slicemachine": "start-slicemachine",
         "generate-types": "prismic-ts-codegen -c ./prismicCodegen.config.ts"
     },
@@ -58,11 +61,15 @@
         "@types/react-dom": "18.0.10",
         "@types/react-dropzone": "^5.1.0",
         "@types/yup": "^0.29.14",
+        "@vitest/coverage-v8": "^5.0.5",
         "autoprefixer": "^10.4.13",
+        "happy-dom": "^21.0.4",
         "postcss": "^8.5.23",
         "prismic-ts-codegen": "0.1.27",
         "slice-machine-ui": "^2.21.2",
         "tailwindcss": "^4.3.0",
-        "typescript": "^5"
+        "typescript": "^5",
+        "vite": "^8.3.5",
+        "vitest": "^5.0.5"
     }
 }
