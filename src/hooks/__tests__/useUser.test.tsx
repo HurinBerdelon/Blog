@@ -39,8 +39,7 @@ const push = vi.fn()
 
 vi.mock('next/navigation', () => ({
     useRouter: () => ({ push }),
-    usePathname: () => '/some/path',
-    useParams: () => ({ lang: 'en' }),
+    usePathname: () => '/en/some/path',
 }))
 
 function Consumer() {
