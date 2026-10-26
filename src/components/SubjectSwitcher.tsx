@@ -25,11 +25,11 @@ export function SubjectSwitcher(): JSX.Element | null {
                 <Books className="text-backgroundDark hover:text-greenBrandDark dark:text-textLight dark:hover:text-grayBrand" />
             </Popover.Button>
             <Popover.Panel className="absolute right-0 top-10 rounded bg-greenBrand p-4 md:text-lg dark:bg-greenBrandDark">
-                <ul className="flex flex-col text-textLight font-medium gap-1">
+                <ul className="flex flex-col text-textLight font-medium gap-2 sm:gap-1">
                     {subjectList.map(subject => (
                         <li key={subject}>
                             <Link
-                                className="capitalize flex gap-2 items-center hover:text-white transition-all dark:hover:text-grayBrand"
+                                className="capitalize flex gap-2 py-1 sm:py-0 items-center hover:text-white transition-all dark:hover:text-grayBrand"
                                 href={getSubjectHref(subject)}
                                 onClick={() => setSubjectCookie(subject)}
                             >

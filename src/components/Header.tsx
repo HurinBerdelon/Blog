@@ -36,8 +36,8 @@ export function Header({ sortedCategories }: HeaderProps): JSX.Element {
                     />
                     <span className="sr-only">{t('common:homeLink')}</span>
                 </Link>
-                <div className="flex gap-3 items-center">
-                    <div className="flex gap-3">
+                <div className="flex gap-4 sm:gap-3 items-center">
+                    <div className="hidden sm:flex gap-3">
                         {sortedCategories.slice(0, 3).map(category => (
                             <Link
                                 key={category.tag}
