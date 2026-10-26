@@ -2,7 +2,7 @@
 import { FormikValues } from 'formik'
 import { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
-import { useParams, usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { getCookie, setCookie, deleteCookie } from '@/services/cookies'
 import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from 'react'
 import { appKeys } from '../config/AppKeys'
@@ -32,7 +32,6 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
     const [isAuthenticating, setIsAuthenticating] = useState(false)
     const router = useRouter()
     const pathname = usePathname()
-    const params = useParams()
 
     useEffect(() => {
         const accessToken = getCookie(appKeys.accessTokenKey)
@@ -44,8 +43,7 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
     }, [])
 
     function setPath() {
-        const lang = (params?.lang as string) ?? 'en'
-        localStorage.setItem(appKeys.currentPath, `/${lang}${pathname}`)
+        localStorage.setItem(appKeys.currentPath, pathname)
     }
 
     const authenticate = useCallback((session: Session) => {
