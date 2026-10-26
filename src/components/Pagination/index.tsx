@@ -1,6 +1,6 @@
 'use client'
 import { pageSize } from "@/config/pageSize";
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import { useTranslation } from '@/hooks/useTranslation';
 import { PaginationItem } from "./PaginationItem";
 // import { PaginationItem } from "../PaginationItem";

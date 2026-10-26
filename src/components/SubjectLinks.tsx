@@ -1,4 +1,5 @@
 'use client'
+import type { JSX } from 'react'
 import Link from 'next/link'
 import { Book, Code } from 'phosphor-react'
 import { subjectList } from '@/config/subjects'

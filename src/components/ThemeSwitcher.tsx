@@ -1,4 +1,5 @@
 'use client'
+import type { JSX } from "react"
 import { useTheme } from "@/hooks/useTheme"
 import { Moon, Sun } from "phosphor-react"
 import { useTranslation } from '@/hooks/useTranslation'

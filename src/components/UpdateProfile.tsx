@@ -4,7 +4,7 @@ import { useUser } from "@/hooks/useUser";
 import { Form, Formik, FormikValues } from "formik";
 import { useTranslation } from '@/hooks/useTranslation';
 import { CircleNotch } from "phosphor-react";
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import * as yup from 'yup'
 import { DropImage } from "./DropImage";
 

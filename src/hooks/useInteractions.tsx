@@ -2,7 +2,7 @@
 import { Interaction } from "@/schema/Interactions"
 import { PostType } from "@/schema/Post"
 import { api } from "@/services/api"
-import { createContext, ReactNode, useCallback, useContext, useState } from "react"
+import { createContext, ReactNode, useCallback, useContext, useState, type JSX } from "react"
 
 interface InteractionProviderProps {
     children: ReactNode

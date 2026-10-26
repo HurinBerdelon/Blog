@@ -1,4 +1,5 @@
 'use client'
+import type { JSX } from "react"
 import { useUser } from "@/hooks/useUser";
 import Link from "next/link";
 import { useTranslation } from "@/hooks/useTranslation";

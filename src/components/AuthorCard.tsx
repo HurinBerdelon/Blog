@@ -1,4 +1,5 @@
 'use client'
+import type { JSX } from "react"
 import { AllDocumentTypesExtended } from "@/schema/AllDocumentTypesExtended";
 import { PrismicAuthor } from "@/schema/Author";
 import { formatDate } from "@/services/dayjs";

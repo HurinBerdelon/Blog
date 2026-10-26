@@ -1,3 +1,4 @@
+import type { JSX } from "react"
 import Script from "next/script"
 
 export function GoogleAnalytic(): JSX.Element {

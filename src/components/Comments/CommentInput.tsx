@@ -2,7 +2,7 @@
 import { useInteraction } from "@/hooks/useInteractions"
 import { useTranslation } from '@/hooks/useTranslation'
 import { Spinner } from "phosphor-react"
-import { useState } from "react"
+import { useState, type JSX } from "react"
 
 interface CommentInputProps {
     defaultComment?: string

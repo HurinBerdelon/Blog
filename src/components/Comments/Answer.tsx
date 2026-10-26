@@ -3,7 +3,7 @@ import type { Answer } from "@/schema/Interactions"
 import { formatDate } from "@/services/dayjs"
 import { useTranslation } from '@/hooks/useTranslation'
 import { useUser } from "@/hooks/useUser"
-import { useState } from "react"
+import { useState, type JSX } from "react"
 import { useInteraction } from "@/hooks/useInteractions"
 import { CommentInput } from "./CommentInput"
 import { LikeIcon } from "./LikeIcon"

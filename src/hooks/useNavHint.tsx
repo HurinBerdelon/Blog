@@ -1,5 +1,5 @@
 'use client'
-import { createContext, ReactNode, useContext, useState } from "react"
+import { createContext, ReactNode, useContext, useState, type JSX } from "react"
 
 interface NavHintProviderProps {
     children: ReactNode

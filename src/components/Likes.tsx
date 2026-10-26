@@ -1,3 +1,4 @@
+import type { JSX } from "react"
 import { Heart, Chat, Spinner } from "phosphor-react"
 
 interface LikesProps {
