@@ -48,7 +48,7 @@ function Consumer() {
         <div>
             <span data-testid="authenticated">{String(isAuthenticated)}</span>
             <span data-testid="user-name">{user?.name ?? ''}</span>
-            <button onClick={() => authenticate({ user: { name: 'Jane', providerId: 'g-1', image: 'pic.png' } } as unknown as Session)}>
+            <button onClick={() => authenticate({ user: { name: 'Jane', email: 'jane@example.com', image: 'pic.png' } } as unknown as Session)}>
                 authenticate
             </button>
             <button onClick={revokeAuthentication}>revoke</button>
@@ -98,6 +98,11 @@ describe('useUser', () => {
         await user.click(screen.getByText('authenticate'))
 
         await waitFor(() => expect(screen.getByTestId('authenticated')).toHaveTextContent('true'))
+        expect(apiPost).toHaveBeenCalledWith('session', {
+            name: 'Jane',
+            email: 'jane@example.com',
+            imageUrl: 'pic.png',
+        })
         expect(setCookie).toHaveBeenCalledWith(appKeys.accessTokenKey, 'access-1', 60 * 60 * 24 * 7)
         expect(setCookie).toHaveBeenCalledWith(appKeys.refreshTokenKey, 'refresh-1', 60 * 60 * 24 * 7)
         expect(push).toHaveBeenCalledWith('/en/saved-path')

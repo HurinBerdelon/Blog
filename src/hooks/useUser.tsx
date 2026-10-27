@@ -49,9 +49,9 @@ export function UserProvider({ children }: UserProviderProps): JSX.Element {
     const authenticate = useCallback((session: Session) => {
         setIsAuthenticating(true)
         api.post('session', {
-            name: session.user.name,
-            providerId: session.user.providerId,
-            imageUrl: session.user.image,
+            name: session.user?.name,
+            email: session.user?.email,
+            imageUrl: session.user?.image,
         })
             .then(response => {
                 setCookie(appKeys.accessTokenKey, response.data.accessToken, 60 * 60 * 24 * 7)
