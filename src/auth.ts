@@ -9,10 +9,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
     ],
-    callbacks: {
-        session({ session, token }) {
-            session.user.providerId = token.sub as string
-            return session
-        },
-    },
 })
