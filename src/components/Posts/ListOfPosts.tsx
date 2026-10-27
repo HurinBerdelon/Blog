@@ -7,7 +7,7 @@ import { useParams, usePathname, useRouter } from 'next/navigation'
 import { useTranslation } from '@/hooks/useTranslation'
 import { Pagination } from '../Pagination'
 import { PostCard } from './PostCard'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type JSX } from 'react'
 
 interface ListOfPostsProps {
     title: string

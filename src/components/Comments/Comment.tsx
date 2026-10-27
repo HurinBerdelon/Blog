@@ -1,7 +1,7 @@
 'use client'
 import type { Comment } from "@/schema/Interactions"
 import { formatDate } from "@/services/dayjs"
-import { useState } from "react"
+import { useState, type JSX } from "react"
 import { useTranslation } from '@/hooks/useTranslation'
 import { Answer } from "./Answer"
 import { useUser } from "@/hooks/useUser"

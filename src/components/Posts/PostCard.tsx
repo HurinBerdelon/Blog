@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import { AuthorCard } from "../AuthorCard";
 import { Likes } from "../Likes";
 

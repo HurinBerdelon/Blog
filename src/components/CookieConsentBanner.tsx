@@ -1,4 +1,5 @@
 'use client'
+import type { JSX } from 'react'
 import { useTranslation } from '@/hooks/useTranslation'
 import { useCookieConsent } from '@/hooks/useCookieConsent'
 

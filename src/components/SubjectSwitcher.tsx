@@ -1,5 +1,6 @@
 'use client'
-import { Popover } from '@headlessui/react'
+import type { JSX } from 'react'
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { subjectList, type Subject } from '@/config/subjects'
 import { setSubjectCookie } from '@/utils/subjectCookie'
 import { useTranslation } from '@/hooks/useTranslation'
@@ -21,10 +22,10 @@ export function SubjectSwitcher(): JSX.Element | null {
 
     return (
         <Popover className="relative flex">
-            <Popover.Button className="text-3xl">
+            <PopoverButton className="text-3xl">
                 <Books className="text-backgroundDark hover:text-greenBrandDark dark:text-textLight dark:hover:text-grayBrand" />
-            </Popover.Button>
-            <Popover.Panel className="absolute right-0 top-10 rounded bg-greenBrand p-4 md:text-lg dark:bg-greenBrandDark">
+            </PopoverButton>
+            <PopoverPanel className="absolute right-0 top-10 rounded bg-greenBrand p-4 md:text-lg dark:bg-greenBrandDark">
                 <ul className="flex flex-col text-textLight font-medium gap-2 sm:gap-1">
                     {subjectList.map(subject => (
                         <li key={subject}>
@@ -40,7 +41,7 @@ export function SubjectSwitcher(): JSX.Element | null {
                         </li>
                     ))}
                 </ul>
-            </Popover.Panel>
+            </PopoverPanel>
         </Popover>
     )
 }

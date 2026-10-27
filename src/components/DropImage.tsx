@@ -1,5 +1,5 @@
 'use client'
-import { createRef, useState } from "react";
+import { createRef, useState, type JSX } from "react";
 import Dropzone, { DropzoneRef } from "react-dropzone";
 import { ArrowCounterClockwise, TrashSimple } from "phosphor-react";
 import { FormikErrors } from "formik";

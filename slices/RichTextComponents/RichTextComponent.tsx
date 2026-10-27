@@ -1,3 +1,4 @@
+import type { JSX } from "react"
 import type { Content } from '@prismicio/client'
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { HyperLink } from 'slices/RichTextComponents/HyperLink'

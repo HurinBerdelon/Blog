@@ -1,5 +1,6 @@
 'use client'
-import { Popover } from '@headlessui/react'
+import type { JSX } from 'react'
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { languages } from '@/config/languages'
 import { locales } from '@/i18n'
 import Link from 'next/link'
@@ -19,11 +20,11 @@ export function IdiomSwitcher(): JSX.Element {
 
     return (
         <Popover className="relative flex">
-            <Popover.Button className="text-3xl">
+            <PopoverButton className="text-3xl">
                 <Globe className="text-backgroundDark hover:text-greenBrandDark dark:text-textLight dark:hover:text-grayBrand" />
                 <span className="sr-only">{t('common:languageButton')}</span>
-            </Popover.Button>
-            <Popover.Panel className="absolute right-0 top-10 rounded bg-greenBrand p-4 md:text-lg dark:bg-greenBrandDark">
+            </PopoverButton>
+            <PopoverPanel className="absolute right-0 top-10 rounded bg-greenBrand p-4 md:text-lg dark:bg-greenBrandDark">
                 <ul className="flex flex-col text-textLight font-medium gap-2 sm:gap-1">
                     {locales.map(locale => (
                         <li key={locale}>
@@ -41,7 +42,7 @@ export function IdiomSwitcher(): JSX.Element {
                         </li>
                     ))}
                 </ul>
-            </Popover.Panel>
+            </PopoverPanel>
         </Popover>
     )
 }

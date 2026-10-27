@@ -5,7 +5,7 @@ import { useUser } from "@/hooks/useUser"
 import { Like } from "@/schema/Interactions"
 import { useTranslation } from '@/hooks/useTranslation'
 import { Spinner } from "phosphor-react"
-import { useState } from "react"
+import { useState, type JSX } from "react"
 import { LikeIcon } from "./LikeIcon"
 
 interface InteractiveLikeProps {

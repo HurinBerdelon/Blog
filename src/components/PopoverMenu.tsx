@@ -1,11 +1,11 @@
 'use client'
-import { Popover } from '@headlessui/react'
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import Link from 'next/link'
 import { List } from 'phosphor-react'
 import { useTranslation } from '@/hooks/useTranslation'
 import { useParams } from 'next/navigation'
 import { LoginModal } from './LoginModal'
-import { useState } from 'react'
+import { useState, type JSX } from 'react'
 import { Category } from '@/schema/Category'
 import { Profile } from './Profile'
 import { useUser } from '@/hooks/useUser'
@@ -26,11 +26,11 @@ export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element
     return (
         <menu>
             <Popover className="relative flex">
-                <Popover.Button className="text-3xl">
+                <PopoverButton className="text-3xl">
                     <List className="text-backgroundDark hover:text-greenBrandDark dark:text-textLight dark:hover:text-grayBrand" />
                     <span className="sr-only">{t('common:menuButton')}</span>
-                </Popover.Button>
-                <Popover.Panel className="absolute top-10 right-0 rounded bg-greenBrand dark:bg-greenBrandDark p-4 min-w-[160px] md:text-lg text-textLight z-10">
+                </PopoverButton>
+                <PopoverPanel className="absolute top-10 right-0 rounded bg-greenBrand dark:bg-greenBrandDark p-4 min-w-[160px] md:text-lg text-textLight z-10">
                     <div className="pb-2 mb-2 border-b-[1px] border-textLight flex flex-col items-center">
                         <Profile />
                     </div>
@@ -79,7 +79,7 @@ export function PopoverMenu({ sortedCategories }: PopoverMenuProps): JSX.Element
                             </button>
                         )}
                     </div>
-                </Popover.Panel>
+                </PopoverPanel>
             </Popover>
         </menu>
     )
